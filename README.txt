@@ -1,5 +1,13 @@
-This is a readMe File
-It is responsible for providing an introduction to the repository.
-Here we will see important installation information and other data.
+README
 
-Author MTaylor
+
+Stocks N Stuff Repository
+
+Authors:	Paul F.	Frank F. Mitchell T.
+
+
+Update: 2/20/2019
+ * Change to README.md
+ * Added jsoup.jar library for web scraping utilization
+ * Setting up testing procedure for web scraped html parsing
+ ** Author M. Taylor
