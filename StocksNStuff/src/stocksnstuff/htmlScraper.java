@@ -32,7 +32,7 @@ public class htmlScraper {
 
     private void instantiateFiles() throws IOException {
         doc = Jsoup.connect("http://www.wsj.com/mdc/public/page/2_3024-NYSE.html").get(); // URL shortened!
-        String current = new java.io.File(".").getCanonicalPath();
+        String current = new java.io.File(".").getCanonicalPath();// gets user specific file locations
         File outputDirectory = new File(current + "\\stockDat");
         this.rawDataFile = new File(outputDirectory.toPath() + "\\rawData.txt");
         if (!rawDataFile.exists()) {
@@ -55,17 +55,11 @@ public class htmlScraper {
         doc.select("p").prepend("\\n\\n");
         String s = doc.html().replaceAll("\\\\n", "\n");
 
-        String current = new java.io.File(".").getCanonicalPath();
-        File outputDirectory = new File(current + "\\stockDat");
-        this.rawDataFile = new File(outputDirectory.toPath() + "\\rawData.txt");
-        if (!rawDataFile.exists()) {
-            rawDataFile.createNewFile();
-        }
-
         if (!rawDataFile.canWrite()) {
             System.out.println("Bad WRITE Perms for: " + rawDataFile.toString());
+            System.exit(0);
         } else {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(rawDataFile),32 * 1024);
+            BufferedWriter bw = new BufferedWriter(new FileWriter(rawDataFile));
             bw.write(s);
             bw.close();
             System.out.println("Done writing raw data.");
@@ -77,6 +71,7 @@ public class htmlScraper {
         Boolean snipFlag = false;
         if (!rawDataFile.canRead() || !filteredDataFile.canWrite()) {
             System.out.println("Bad read/write perms for: " + rawDataFile.toString() + " or " + filteredDataFile.toString());
+            System.exit(0);
         } else {
             try {
 
@@ -96,7 +91,6 @@ public class htmlScraper {
                                 bw.write(line);
                                 bw.newLine();
                                 line = br.readLine().trim();
-                                System.out.println(line);
                             }
                         }
                         snipFlag = false;
@@ -118,7 +112,6 @@ public class htmlScraper {
         } else {
             boolean stockDataFlag = false;
             ArrayList<String> formattedData = new ArrayList<String>();
-            String outputLine = "";
             formattedData.add("Symbol");
             formattedData.add("Open");
             formattedData.add("High");
@@ -128,9 +121,6 @@ public class htmlScraper {
             formattedData.add("Net Change (%)");
             BufferedReader br = new BufferedReader(new FileReader(filteredDataFile));
             BufferedWriter bw = new BufferedWriter(new FileWriter(stockDataFile));
-            for (String s : formattedData) {
-                outputLine += s + ", ";
-            }
             bw.write(generateString(formattedData));
             bw.newLine();
             String line = br.readLine();
