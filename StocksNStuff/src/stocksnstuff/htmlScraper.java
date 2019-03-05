@@ -65,13 +65,11 @@ public class htmlScraper {
             System.out.println("Done writing raw data.");
         }
     }
-
     public void filterRawStockData() throws IOException {
 
         Boolean snipFlag = false;
         if (!rawDataFile.canRead() || !filteredDataFile.canWrite()) {
             System.out.println("Bad read/write perms for: " + rawDataFile.toString() + " or " + filteredDataFile.toString());
-            System.exit(0);
         } else {
             try {
 
@@ -86,6 +84,7 @@ public class htmlScraper {
                                 bw.newLine();
                                 bw.write("-+-");
                                 bw.newLine();
+                                bw.flush();
                                 snipFlag = true;
                             } else {
                                 bw.write(line);
@@ -98,13 +97,13 @@ public class htmlScraper {
                         line = br.readLine().trim();
                     }
                 }
+                bw.close();
             } catch (NullPointerException e) {
-                System.out.println("Reached end of file, expected.\n");
+                System.out.println("Done filtering raw data.");
             }
 
         }
     }
-
     public void segmentStockData() throws IOException {
 
         if (!filteredDataFile.canRead() || !stockDataFile.canWrite()) {
@@ -144,6 +143,7 @@ public class htmlScraper {
                     if(line.endsWith("-+-")){
                         bw.write(generateString(formattedData));
                         bw.newLine();
+                        bw.flush();
                         stockDataFlag = true;
                     }
                 }
@@ -151,6 +151,7 @@ public class htmlScraper {
                 line = br.readLine();
             }
         }
+        System.out.println("Done segmenting stock data.");
     }
     private String generateString(ArrayList<String> stringComponents){
         String outputString = "";
