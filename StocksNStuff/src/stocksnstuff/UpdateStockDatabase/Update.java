@@ -3,23 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package stocksnstuff;
+package stocksnstuff.UpdateStockDatabase;
 
 import java.io.IOException;
-import stocksnstuff.htmlScraper;
+import stocksnstuff.UpdateStockDatabase.HtmlScraper;
 
 /**
  *
  * @author mtaylo35
  */
-public class StocksNStuff {
+public class Update {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
         
-        htmlScraper scraper = new htmlScraper();
+        HtmlScraper scraper = new HtmlScraper();
         scraper.getRawHtmlData();
         scraper.filterRawStockData();
         scraper.segmentStockData();

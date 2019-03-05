@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package stocksnstuff;
+package stocksnstuff.UpdateStockDatabase;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -19,14 +19,14 @@ import org.jsoup.nodes.Document;
  *
  * @author mtaylo35
  */
-public class htmlScraper {
+public class HtmlScraper {
 
     private File rawDataFile;
     private File filteredDataFile;
     private File stockDataFile;
     private Document doc;
 
-    public htmlScraper() throws IOException {
+    public HtmlScraper() throws IOException {
         instantiateFiles();
     }
 
