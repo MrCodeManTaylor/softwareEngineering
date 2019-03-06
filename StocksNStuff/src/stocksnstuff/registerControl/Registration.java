@@ -6,13 +6,16 @@
 package stocksnstuff.registerControl;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 /**
  * Class responsible for handling registration events
  *
@@ -44,12 +47,38 @@ public class Registration {
         }
     }
 
-    public String formatUserInfo() {
+    public String formatUserInfo(String email, String username, String password) {
         String userInfo = "";
-
+        userInfo = email + ", " + username + ", " + password;
+        
         return userInfo;
     }
-
+    
+    public boolean verifyEmail(String email){
+        boolean isValid = false;
+        
+        try {
+            
+            InternetAddress ia = new InternetAddress(email);
+            ia.validate();
+            return true;
+            
+        } catch (AddressException ex) {
+            //Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return isValid;
+    }
+    
+    public boolean checkMatch(String str1, String str2){
+        
+        if(str1.equals(str2)){
+            return true;
+        }
+        
+        return false;
+    }
+    
     public boolean detectValidity(String emailAddress, String username) {
         
         try {
@@ -67,6 +96,7 @@ public class Registration {
                 }
                 line = br.readLine();
             }
+            br.close();
         } catch (FileNotFoundException ex) {
             System.out.println("Unable to find DB file register.txt");
         } catch (IOException ex) {
@@ -76,6 +106,19 @@ public class Registration {
         
         return true;
     }
+    
+    public void updateDB(String userData){
+        
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(regDB, true));
+            bw.write(userData);
+            bw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
     public int getRegFailCode(){
         
         return this.regFailCode;

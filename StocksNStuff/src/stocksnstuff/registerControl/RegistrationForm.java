@@ -39,9 +39,23 @@ public class RegistrationForm extends javax.swing.JFrame {
         eAdd = new javax.swing.JTextField();
         eAddC = new javax.swing.JTextField();
         uName = new javax.swing.JTextField();
-        pWord = new javax.swing.JTextField();
-        pWordC = new javax.swing.JTextField();
         submitReg = new javax.swing.JButton();
+        pWord = new javax.swing.JPasswordField();
+        pWordC = new javax.swing.JPasswordField();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        eAdd1 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        eAddC1 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        uName1 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        pWord1 = new javax.swing.JPasswordField();
+        jLabel12 = new javax.swing.JLabel();
+        pWordC1 = new javax.swing.JPasswordField();
+        submitReg1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,6 +85,105 @@ public class RegistrationForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
+        jLabel7.setText("REGISTER");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setText("Email Address");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setText("Confirm Email");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel10.setText("Username");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel11.setText("Password");
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel12.setText("Confirm Password");
+
+        submitReg1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        submitReg1.setText("SUBMIT");
+        submitReg1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitReg1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 695, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(223, 223, 223)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(pWord1)
+                            .addComponent(eAdd1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(eAddC1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(uName1)
+                            .addComponent(pWordC1))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addGap(58, 58, 58)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel12)
+                                    .addGap(65, 65, 65))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel11)
+                                    .addGap(96, 96, 96))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel10)
+                                    .addGap(92, 92, 92))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel9)
+                                    .addGap(78, 78, 78))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel8)
+                                    .addGap(78, 78, 78))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(submitReg1)
+                                    .addGap(89, 89, 89)))))
+                    .addGap(223, 223, 223)))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 472, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(35, 35, 35)
+                    .addComponent(jLabel7)
+                    .addGap(18, 18, 18)
+                    .addComponent(jLabel8)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(eAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(11, 11, 11)
+                    .addComponent(jLabel9)
+                    .addGap(9, 9, 9)
+                    .addComponent(eAddC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel10)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(uName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel11)
+                    .addGap(8, 8, 8)
+                    .addComponent(pWord1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(jLabel12)
+                    .addGap(18, 18, 18)
+                    .addComponent(pWordC1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(12, 12, 12)
+                    .addComponent(submitReg1)
+                    .addContainerGap(35, Short.MAX_VALUE)))
+        );
+
+        jTabbedPane1.addTab("tab1", jPanel2);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -90,16 +203,6 @@ public class RegistrationForm extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(220, 220, 220))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(309, 309, 309)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(eAdd)
-                    .addComponent(jLabel1)
-                    .addComponent(eAddC)
-                    .addComponent(uName, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pWord)
-                    .addComponent(pWordC, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(142, 142, 142))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,12 +212,26 @@ public class RegistrationForm extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(submitReg)
                         .addGap(231, 231, 231))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(209, 209, 209)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pWord)
+                    .addComponent(eAdd, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(eAddC, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(uName)
+                    .addComponent(pWordC))
+                .addGap(142, 142, 142))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(jLabel1))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -133,9 +250,9 @@ public class RegistrationForm extends javax.swing.JFrame {
                 .addComponent(pWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
-                .addGap(12, 12, 12)
-                .addComponent(pWordC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(pWordC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(submitReg)
                 .addContainerGap(24, Short.MAX_VALUE))
         );
@@ -160,31 +277,65 @@ public class RegistrationForm extends javax.swing.JFrame {
 
     private void submitRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitRegActionPerformed
         // TODO add your handling code here:
-        
-        //Registation page submission method
         Registration reg = new Registration();
-        
-        if(!reg.detectValidity(eAdd.getText(), uName.getText())){
-            if(reg.getRegFailCode() ==  1){
-                eAdd.setText("Email Already Used...");
-                eAddC.setText("");
-                uName.setText("");
-                pWord.setText("");
-                pWordC.setText("");
-            }else if(reg.getRegFailCode() == 2){
-                eAdd.setText("");
-                eAddC.setText("");
-                uName.setText("Username already used...");
-                pWord.setText("");
-                pWordC.setText("");
+        if (eAdd.getText().isEmpty()) {
+            eAdd.setText("Field is empty!");
+        } else if (eAddC.getText().isEmpty()) {
+            eAddC.setText("Field is empty!");
+        } else if (uName.getText().isEmpty()) {
+            uName.setText("Field is empty!");
+        } else if (pWord.getText().isEmpty()) {
+            pWord.setText("Field is empty!");
+        } else if (pWordC.getText().isEmpty()) {
+            pWordC.setText("Field is empty!");
+        } else {
+            if (!reg.verifyEmail(eAdd.getText())) {
+                eAdd.setText("Invalid email format");
+            } else if (!reg.verifyEmail(eAddC.getText())) {
+                eAddC.setText("Invalid email format");
+            } else {
+                if (!reg.checkMatch(eAdd.getText(), eAddC.getText())) {
+                    eAdd.setText("Emails do not match");
+                    eAddC.setText("Emails do not match");
+                    uName.setText("");
+                    pWord.setText("");
+                    pWordC.setText("");
+                } else if (!reg.checkMatch(pWord.getText(), pWordC.getText())) {
+                    eAdd.setText("");
+                    eAddC.setText("");
+                    uName.setText("");
+                    pWord.setText("Passwords dont match");
+                    pWordC.setText("Passwords dont match");
+                } else {
+                    if (!reg.detectValidity(eAdd.getText(), uName.getText())) {
+                        if (reg.getRegFailCode() == 1) {
+                            eAdd.setText("Email Already Used...");
+                            eAddC.setText("");
+                            uName.setText("");
+                            pWord.setText("");
+                            pWordC.setText("");
+                        } else if (reg.getRegFailCode() == 2) {
+                            eAdd.setText("");
+                            eAddC.setText("");
+                            uName.setText("Username already used...");
+                            pWord.setText("");
+                            pWordC.setText("");
+                        }
+                    } else {
+                        //Submit data here...
+                        String userData = reg.formatUserInfo(eAdd.getText(), uName.getText(), pWord.getText());
+                        reg.updateDB(userData);
+                    }
+                    //String outputLine = reg.formatUserInfo();
+                }
             }
         }
-            String outputLine = reg.formatUserInfo();
-        
     }//GEN-LAST:event_submitRegActionPerformed
-    
-    
-    
+
+    private void submitReg1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitReg1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_submitReg1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -222,17 +373,31 @@ public class RegistrationForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField eAdd;
+    private javax.swing.JTextField eAdd1;
     private javax.swing.JTextField eAddC;
+    private javax.swing.JTextField eAddC1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField pWord;
-    private javax.swing.JTextField pWordC;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPasswordField pWord;
+    private javax.swing.JPasswordField pWord1;
+    private javax.swing.JPasswordField pWordC;
+    private javax.swing.JPasswordField pWordC1;
     private javax.swing.JButton submitReg;
+    private javax.swing.JButton submitReg1;
     private javax.swing.JTextField uName;
+    private javax.swing.JTextField uName1;
     // End of variables declaration//GEN-END:variables
 }
