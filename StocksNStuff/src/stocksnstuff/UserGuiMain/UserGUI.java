@@ -6,6 +6,7 @@
 package stocksnstuff.UserGuiMain;
 
 import stocksnstuff.GuestGuiMain.GuestGUI;
+import stocksnstuff.SessionControl.Logout;
 
 /**
  *
@@ -17,13 +18,17 @@ public class UserGUI extends javax.swing.JFrame {
     
     /**
      * Creates new form UserGUI
+     * @param name  User identification string
      */
     
     //Specified Constructor
     public UserGUI(String name) {
-        initComponents();
-        username.setText(name);
         this.name = name;
+        initComponents();
+    }
+    
+    public String formatTitle(){
+        return "Stocks N Stuff | " + this.name;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,12 +39,10 @@ public class UserGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        username = new javax.swing.JLabel();
         logout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        username.setText("User");
+        setTitle(formatTitle());
 
         logout.setText("Logout");
         logout.addActionListener(new java.awt.event.ActionListener() {
@@ -52,21 +55,15 @@ public class UserGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(137, 137, 137)
-                .addComponent(username)
-                .addContainerGap(241, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 335, Short.MAX_VALUE)
                 .addComponent(logout))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(logout)
-                .addGap(17, 17, 17)
-                .addComponent(username)
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addContainerGap(277, Short.MAX_VALUE))
         );
 
         pack();
@@ -76,8 +73,11 @@ public class UserGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         //We need to terminate the session...
+        Logout logoutObj = new Logout(this);
+        logoutObj.endSession();
         
-        this.dispose();
+        
+        //restore to default state...
         GuestGUI uG = new GuestGUI();
         uG.setVisible(true);
     }//GEN-LAST:event_logoutActionPerformed
@@ -85,6 +85,5 @@ public class UserGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton logout;
-    private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
 }

@@ -39,6 +39,8 @@ public class Login {
                     //Credentials validated, allow session creation
                     return true;
                 }
+                line = br.readLine();
+                lineData = sf.segmentLine(line);
             }
             
             
