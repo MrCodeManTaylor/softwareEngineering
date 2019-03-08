@@ -47,9 +47,9 @@ public class Registration {
         }
     }
 
-    public String formatUserInfo(String email, String username, String password) {
+    public String formatUserInfo(String email, String username, String password, String sq1, String sqr1, String sq2, String sqr2) {
         String userInfo = "";
-        userInfo = email + ", " + username + ", " + password;
+        userInfo = email + ", " + username + ", " + password + ", " + sq1 + ", " + sqr1 + ", " + sq2 + ", " + sqr2;
         
         return userInfo;
     }
@@ -84,13 +84,14 @@ public class Registration {
         try {
             BufferedReader br = new BufferedReader(new FileReader(regDB));
             String line = br.readLine();
+            String[] segments;
             while(line != null){
-                if(line.contains(emailAddress)){
-                    
+                segments = line.split(", ");
+                if(segments[0].equals(emailAddress)){
                     this.regFailCode = 1;
                     return false;
                 }
-                else if(line.contains(username)){
+                else if(segments[1].equals(username)){
                     this.regFailCode = 2;
                     return false;
                 }
@@ -112,6 +113,7 @@ public class Registration {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(regDB, true));
             bw.write(userData);
+            bw.newLine();
             bw.close();
         } catch (IOException ex) {
             Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
