@@ -9,6 +9,7 @@ package stocksnstuff.StringManips;
  *
  * @author mtaylo35
  */
+
 public class StringFormatter {
  
     
