@@ -6,8 +6,9 @@ Stocks N Stuff Repository
 Authors:	Paul F.	Frank F. Mitchell T.
 
 
-Update: 3/7/2019
+Update: 3/9/2019
  * Change to README.md
+ * Recover user credentials functionality complete
  * Massive update to session control (LOGIN/LOGOUT FUNCTIONALITY COMPLETE) run GuestGUIMain for testing
  * Added jsoup.jar library for web scraping utilization
  * Added javamail.jar library for email verification
