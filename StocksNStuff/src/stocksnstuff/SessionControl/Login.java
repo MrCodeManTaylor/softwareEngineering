@@ -12,81 +12,54 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import stocksnstuff.StringManips.StringFormatter;
-import stocksnstuff.UserGuiMain.UserGUI;
+import stocksnstuff.database.ReadWriteDB.DBReader;
+import stocksnstuff.gui.UserGUI;
 
 /**
  *
  * @author mtaylo35
  */
 public class Login {
-    
+
     private File userDB;
-    
-    public Login(File userDB){
+
+    public Login(File userDB) {
         this.userDB = userDB;
     }
-    
-   public boolean loginEmail(String email, String password) {
-       
-        try {
-            StringFormatter sf = new StringFormatter();
-            BufferedReader br = new BufferedReader(new FileReader(userDB));
-            String line = br.readLine();
-            String[] lineData = sf.segmentLine(line);
-            while(line != null){
-                if(lineData[0].equals(email) && lineData[2].equals(password)){
-                    //Credentials validated, allow session creation
-                    return true;
-                }
-                line = br.readLine();
-                lineData = sf.segmentLine(line);
-            }
-            
-            
-            
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
-            return false;
-        }
-       return false;
-   } 
-    public boolean loginUsername(String username, String password) {
-       
-        try {
-            StringFormatter sf = new StringFormatter();
-            BufferedReader br = new BufferedReader(new FileReader(userDB));
-            String line = br.readLine();
-            String[] lineData = sf.segmentLine(line);
-            while(line != null){
-                if(lineData[1].equals(username) && lineData[2].equals(password)){
-                    //Credentials validated, allow session creation
-                    return true;
-                }
-                line = br.readLine();
-                lineData = sf.segmentLine(line);
-            }
-            
-            //Terminate request
-            return false;
-            
-            
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException e) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, e);
-            return false;
-        }
-       return false;
-   } 
 
-    public void startSession(String name){
-        
+    public boolean loginEmail(String email, String password) {
+        DBReader dbR = new DBReader();
+        if (!dbR.validatePerms()) {
+            return false;
+        } else {
+            if (!dbR.scanDB(email, 0) || !dbR.scanDB(password, 2)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    public boolean loginUsername(String username, String password) {
+
+        DBReader dbR = new DBReader();
+        if (!dbR.validatePerms()) {
+            return false;
+        } else {
+            if (!dbR.scanDB(username, 1) || !dbR.scanDB(password, 2)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    public void startSession(String name) {
+
         UserGUI uG = new UserGUI(name);
         uG.setVisible(true);
-        
-        
+
     }
 }
