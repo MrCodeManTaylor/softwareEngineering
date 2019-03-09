@@ -5,7 +5,7 @@
  */
 package stocksnstuff.SessionControl;
 
-import stocksnstuff.UserGuiMain.UserGUI;
+import stocksnstuff.gui.UserGUI;
 
 /**
  *

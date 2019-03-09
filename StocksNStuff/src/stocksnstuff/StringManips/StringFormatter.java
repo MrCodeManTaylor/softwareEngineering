@@ -29,4 +29,12 @@ public class StringFormatter {
         return null;
     }
     
+    public String formatLine(String[] lineData){
+        String dataLine = "";
+        for(String s : lineData){
+            dataLine += s + ", ";
+        }
+        dataLine = dataLine.substring(0,dataLine.length()-2);
+        return dataLine;
+    }
 }
