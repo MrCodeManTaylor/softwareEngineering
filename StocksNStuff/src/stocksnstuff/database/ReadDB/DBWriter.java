@@ -12,8 +12,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import stocksnstuff.StringManips.StringFormatter;
 
 /**
  *
@@ -43,25 +45,31 @@ public class DBWriter {
         }
     }
     
-    public void updateField(String param, int fieldNum) {
+    public boolean updateField(String uID, String param, int fieldNum, ArrayList<String> dbData) {
         try {
-            BufferedReader br = new BufferedReader(new FileReader(userDB));
             BufferedWriter bw = new BufferedWriter(new FileWriter(userDB));
-            DBReader dbR = new DBReader();
-            skipToLine(dbR.scanDBLine(param, fieldNum),br);
-            
+            StringFormatter sf = new StringFormatter();
+            for(String line : dbData){
+                String[] lineData = sf.segmentLine(line);
+                if(uID.equals(lineData[0])||uID.equals(lineData[1])){
+                    //Correct line, now update
+                    lineData[fieldNum] = param;
+                    bw.write(sf.formatLine(lineData));
+                    bw.newLine();
+                    
+                }else{
+                    bw.write(line);
+                    bw.newLine();
+                }
+            }
+            bw.close();
+            return true;
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(DBWriter.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         } catch (IOException e){
-            
+            return false;
         }
         
-    }
-    
-    public void skipToLine(int lineNum, BufferedReader br) throws IOException{
-        for(int i = 0; i < lineNum; i++){
-            br.readLine();
-        }
     }
     
 }

@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import stocksnstuff.StringManips.StringFormatter;
@@ -39,6 +40,26 @@ public class DBReader {
             return false;
         }else{
             return true;
+        }
+    }
+    
+    public ArrayList<String> getDBData(){
+        
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(userDB));
+            ArrayList<String> dbData = new ArrayList<String>();
+            String line = br.readLine();
+            while(line!=null){
+                dbData.add(line);
+                line = br.readLine();
+            }
+            return dbData;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DBReader.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } catch (IOException ex) {
+            Logger.getLogger(DBReader.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
     }
     
@@ -76,6 +97,7 @@ public class DBReader {
             while(l != null) {
                 String[] lDat = l.split(", ");
                 if (lDat[scanID].equals(scanParam)) {
+                    System.out.println(l+"\n"+scanParam+" : "+scanID);
                     this.userInfo = lDat;
                     return true; 
                 }
@@ -94,6 +116,36 @@ public class DBReader {
         
         return false;
     }
+    
+    public boolean scanDBByID(String scanParam, int scanID, String scanRef, int scanRefID){
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(userDB));
+            String l = br.readLine();
+            while(l != null) {
+                String[] lDat = l.split(", ");
+                if(lDat[scanRefID].equals(scanRef)){
+                    if (lDat[scanID].equals(scanParam)) {
+                        System.out.println(l+"\n"+scanParam+" : "+scanID);
+                        this.userInfo = lDat;
+                        return true; 
+                    }
+                }
+                
+                l = br.readLine();
+            }
+            
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DBReader.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException e) {
+            //do nuffin
+        }
+        
+        
+        return false;
+    }
+    
+    
     public String[] getUserIdentity(){
         String[] uID = {userInfo[0],userInfo[1]};
         

@@ -44,7 +44,8 @@ public class RecoverUserGUI extends javax.swing.JFrame {
         sq1 = new javax.swing.JLabel();
         sqr2 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Recover");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Recover Account Information");
@@ -128,7 +129,7 @@ public class RecoverUserGUI extends javax.swing.JFrame {
                 .addComponent(sqr2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(sqrSub)
-                .addGap(20, 20, 20))
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -143,7 +144,7 @@ public class RecoverUserGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 247, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -187,7 +188,7 @@ public class RecoverUserGUI extends javax.swing.JFrame {
 
         //Validate security question responses
         DBReader dbR = new DBReader();
-        if (!dbR.scanDB(sqr1.getText(), 4) || !dbR.scanDB(sqr2.getText(), 6)) {
+        if (!dbR.scanDBByID(sqr1.getText(), 4,eMailF.getText(),detectType()) || !dbR.scanDBByID(sqr2.getText(), 6,eMailF.getText(),detectType())) {
             JOptionPane.showMessageDialog(rootPane, "Invalid user credentials...");
             this.dispose();
 
