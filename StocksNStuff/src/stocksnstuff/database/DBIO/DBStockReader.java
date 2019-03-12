@@ -83,7 +83,6 @@ public class DBStockReader {
         String[] columnNames = sf.segmentLine(stockData[0]);
         String[][] rowData = new String[tSize][8];
         for(int i = 0; i < stockData.length-1; i++){
-            System.out.println(stockData[i+1]);
             rowData[i] = sf.segmentLine(stockData[i+1]);
         }
         DefaultTableModel model = new DefaultTableModel(columnNames,0);
