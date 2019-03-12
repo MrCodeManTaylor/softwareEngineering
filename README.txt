@@ -8,6 +8,7 @@ Authors:	Paul F.	Frank F. Mitchell T.
 
 Update: 3/9/2019
  * Change to README.md
+ * Browse-able stock data on Guest GUI complete *User GUI **WIP*
  * Recover user credentials functionality complete
  * Massive update to session control (LOGIN/LOGOUT FUNCTIONALITY COMPLETE) run GuestGUIMain for testing
  * Added jsoup.jar library for web scraping utilization
