@@ -46,7 +46,7 @@ public class DBReader {
         
         try {
             BufferedReader br = new BufferedReader(new FileReader(userDB));
-            ArrayList<String> dbData = new ArrayList<String>();
+            ArrayList<String> dbData = new ArrayList<>();
             String line = br.readLine();
             while(line!=null){
                 dbData.add(line);
@@ -96,7 +96,6 @@ public class DBReader {
             while(l != null) {
                 String[] lDat = l.split(", ");
                 if (lDat[scanID].equals(scanParam)) {
-                    System.out.println(l+"\n"+scanParam+" : "+scanID);
                     this.userInfo = lDat;
                     return true; 
                 }
@@ -124,7 +123,6 @@ public class DBReader {
                 String[] lDat = l.split(", ");
                 if(lDat[scanRefID].equals(scanRef)){
                     if (lDat[scanID].equals(scanParam)) {
-                        System.out.println(l+"\n"+scanParam+" : "+scanID);
                         this.userInfo = lDat;
                         return true; 
                     }

@@ -7,8 +7,6 @@ package stocksnstuff.gui;
 
 import javax.swing.JOptionPane;
 import stocksnstuff.database.registerControl.Registration;
-import stocksnstuff.database.registerControl.Registration;
-import stocksnstuff.gui.GuestGUI;
 
 /**
  *
@@ -269,6 +267,7 @@ public class RegistrationFormGUI extends javax.swing.JFrame {
                         String userData = reg.formatUserInfo(eAdd.getText(), uName.getText(), pWord.getText(),
                                 sQ1.getSelectedItem().toString(), sQR1.getText(), sQ2.getSelectedItem().toString(), sQR2.getText());
                         reg.updateDB(userData);
+                        reg.createUserDB(uName.getText());
                         clearFields();
                         this.dispose();
                         GuestGUI gui = new GuestGUI();
@@ -283,7 +282,7 @@ public class RegistrationFormGUI extends javax.swing.JFrame {
         //Clear all text Fields
         eAdd.setText("");
         eAddC.setText("");
-        uName.setText("Username already used...");
+        uName.setText("");
         pWord.setText("");
         pWordC.setText("");
         sQR1.setText("");
