@@ -49,6 +49,7 @@ public class GuestGUI extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
                     else{
                         stockData.setModel(dbS.getStockTable());
+                        stockData.setEnabled(false);
                     }
                 }
             }
