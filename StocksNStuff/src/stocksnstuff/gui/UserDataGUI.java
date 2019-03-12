@@ -6,8 +6,8 @@
 package stocksnstuff.gui;
 
 import javax.swing.JOptionPane;
-import stocksnstuff.database.ReadWriteDB.DBReader;
-import stocksnstuff.database.ReadWriteDB.DBWriter;
+import stocksnstuff.database.DBIO.DBReader;
+import stocksnstuff.database.DBIO.DBWriter;
 
 /**
  *

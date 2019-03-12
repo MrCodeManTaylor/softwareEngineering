@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package stocksnstuff.database.ReadWriteDB;
+package stocksnstuff.database.DBIO;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,8 +26,8 @@ public class DBReader {
     
     public DBReader(){
         try {
-            this.path = new File(".").getCanonicalPath()+"\\dbs\\register.txt";
-            this.userDB = new File(path);
+            this.path = new File(".").getCanonicalPath();
+            this.userDB = new File(path+"\\dbs\\register.txt");
         } catch (IOException ex) {
             Logger.getLogger(DBReader.class.getName()).log(Level.SEVERE, null, ex);
         }    
@@ -144,16 +144,17 @@ public class DBReader {
         return false;
     }
     
-    
     public String[] getUserIdentity(){
         String[] uID = {userInfo[0],userInfo[1]};
         
         return uID;
     }
+   
     public String[] getSecurityQuestions(){
         
         String[] secDat = {userInfo[3],userInfo[4],userInfo[5],userInfo[6]};
         
         return secDat;
     }
+
 }

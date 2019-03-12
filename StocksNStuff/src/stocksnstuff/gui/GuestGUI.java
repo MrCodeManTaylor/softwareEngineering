@@ -10,13 +10,17 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import stocksnstuff.SessionControl.Login;
+import stocksnstuff.database.DBIO.DBStockReader;
+
 /**
  *
  * @author mtaylo35
  */
 public class GuestGUI extends javax.swing.JFrame {
-    
+
     private File regDB;
 
     /**
@@ -27,10 +31,28 @@ public class GuestGUI extends javax.swing.JFrame {
         try {
             String userDB = new java.io.File(".").getCanonicalPath() + "\\dbs\\register.txt";
             this.regDB = new File(userDB);
-            if(!regDB.exists()||!regDB.canRead()){
+            if (!regDB.exists() || !regDB.canRead()) {
                 //user DB doesnt exist (This shouldnt happen)
                 regDB.createNewFile();
             }
+
+            //initialize jtable data
+            
+            DBStockReader dbS = new DBStockReader();
+            if(!dbS.formatStockDB())
+                JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
+            else{
+                if(!dbS.formatStockDB())
+                    JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
+                else{
+                    if(!dbS.formatJTable(dbS.getStockData()))
+                        JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
+                    else{
+                        stockData.setModel(dbS.getStockTable());
+                    }
+                }
+            }
+            
         } catch (IOException ex) {
             Logger.getLogger(GuestGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -59,7 +81,7 @@ public class GuestGUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        stockData = new javax.swing.JTable();
         recoverUser = new javax.swing.JButton();
 
         jScrollPane1.setViewportView(jEditorPane1);
@@ -79,6 +101,7 @@ public class GuestGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Stocks N Stuff");
+        setResizable(false);
 
         main.setBackground(new java.awt.Color(102, 153, 255));
         main.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -126,7 +149,7 @@ public class GuestGUI extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("SNS' Top 100 Movers");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        stockData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null}
             },
@@ -149,15 +172,15 @@ public class GuestGUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setResizable(false);
-            jTable1.getColumnModel().getColumn(6).setResizable(false);
+        jScrollPane2.setViewportView(stockData);
+        if (stockData.getColumnModel().getColumnCount() > 0) {
+            stockData.getColumnModel().getColumn(0).setResizable(false);
+            stockData.getColumnModel().getColumn(1).setResizable(false);
+            stockData.getColumnModel().getColumn(2).setResizable(false);
+            stockData.getColumnModel().getColumn(3).setResizable(false);
+            stockData.getColumnModel().getColumn(4).setResizable(false);
+            stockData.getColumnModel().getColumn(5).setResizable(false);
+            stockData.getColumnModel().getColumn(6).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -166,12 +189,12 @@ public class GuestGUI extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(20, 20, 20))
+                .addComponent(jLabel4)
+                .addContainerGap(533, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,9 +277,7 @@ public class GuestGUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(main, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 61, Short.MAX_VALUE))
+            .addComponent(main, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -264,7 +285,7 @@ public class GuestGUI extends javax.swing.JFrame {
 
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
         // TODO add your handling code here:
-        
+
         RegistrationFormGUI rf = new RegistrationFormGUI();
         rf.setVisible(true);
     }//GEN-LAST:event_registerActionPerformed
@@ -272,32 +293,32 @@ public class GuestGUI extends javax.swing.JFrame {
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         // TODO add your handling code here:
         Login loginObj = new Login(regDB);
-        if(userID.getText().isEmpty()||uPass.getText().isEmpty()){
-            
+        if (userID.getText().isEmpty() || uPass.getText().isEmpty()) {
+
             JOptionPane.showMessageDialog(rootPane, "Username/Password Field Empty...", "Login Error", HEIGHT);
             userID.setText("");
             uPass.setText("");
-            
-        }else if(userID.getText().contains("@")){
-            
-            if(loginObj.loginEmail(userID.getText(), uPass.getText())){
+
+        } else if (userID.getText().contains("@")) {
+
+            if (loginObj.loginEmail(userID.getText(), uPass.getText())) {
                 this.dispose();
                 loginObj.startSession(userID.getText());
-            } else{
-                JOptionPane.showMessageDialog(rootPane, "Invalid username/password","Login Error", HEIGHT);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Invalid username/password", "Login Error", HEIGHT);
                 uPass.setText("");
             }
-            
-        }else{
-            
-            if(loginObj.loginUsername(userID.getText(), uPass.getText())){
+
+        } else {
+
+            if (loginObj.loginUsername(userID.getText(), uPass.getText())) {
                 this.dispose();
                 loginObj.startSession(userID.getText());
-            } else{
-                JOptionPane.showMessageDialog(rootPane, "Invalid username/password","Login Error", HEIGHT);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Invalid username/password", "Login Error", HEIGHT);
                 uPass.setText("");
             }
-            
+
         }
     }//GEN-LAST:event_loginActionPerformed
 
@@ -311,7 +332,7 @@ public class GuestGUI extends javax.swing.JFrame {
 
     private void recoverUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recoverUserActionPerformed
         // TODO add your handling code here:
-        
+
         RecoverUserGUI ruG = new RecoverUserGUI();
         ruG.setVisible(true);
     }//GEN-LAST:event_recoverUserActionPerformed
@@ -362,11 +383,11 @@ public class GuestGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton login;
     private javax.swing.JPanel main;
     private javax.swing.JButton recoverUser;
     private javax.swing.JButton register;
+    private javax.swing.JTable stockData;
     private javax.swing.JPasswordField uPass;
     private javax.swing.JTextField userID;
     // End of variables declaration//GEN-END:variables

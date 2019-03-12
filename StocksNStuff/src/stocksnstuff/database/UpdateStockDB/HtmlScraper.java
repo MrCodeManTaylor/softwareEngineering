@@ -117,7 +117,6 @@ public class HtmlScraper {
             formattedData.add("Low");
             formattedData.add("Close");
             formattedData.add("Net Change");
-            formattedData.add("Net Change (%)");
             BufferedReader br = new BufferedReader(new FileReader(filteredDataFile));
             BufferedWriter bw = new BufferedWriter(new FileWriter(stockDataFile));
             bw.write(generateString(formattedData));
