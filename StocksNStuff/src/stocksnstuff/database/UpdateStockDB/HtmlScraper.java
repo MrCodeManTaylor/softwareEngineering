@@ -82,6 +82,9 @@ public class HtmlScraper {
                             if (line.endsWith("</span></nobr>&nbsp;</td>")) {
                                 bw.write(line);
                                 bw.newLine();
+                                line = br.readLine();
+                                bw.write(line);
+                                bw.newLine();
                                 bw.write("-+-");
                                 bw.newLine();
                                 bw.flush();
@@ -117,6 +120,7 @@ public class HtmlScraper {
             formattedData.add("Low");
             formattedData.add("Close");
             formattedData.add("Net Change");
+            formattedData.add("Net Change %");
             BufferedReader br = new BufferedReader(new FileReader(filteredDataFile));
             BufferedWriter bw = new BufferedWriter(new FileWriter(stockDataFile));
             bw.write(generateString(formattedData));
@@ -136,6 +140,8 @@ public class HtmlScraper {
                     formattedData.add(line.substring(10,line.lastIndexOf("</n")));                                      //High
                     line = br.readLine();
                     formattedData.add(line.substring(10,line.lastIndexOf("</n")));                                      //Low
+                    line = br.readLine();
+                    formattedData.add(line.substring(line.lastIndexOf("\">")+2,line.lastIndexOf("</s")));
                     line = br.readLine();
                     formattedData.add(line.substring(line.lastIndexOf("\">")+2,line.lastIndexOf("</s")));
                     line = br.readLine();
