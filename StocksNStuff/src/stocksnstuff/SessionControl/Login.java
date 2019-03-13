@@ -7,6 +7,7 @@ package stocksnstuff.SessionControl;
 
 import java.io.File;
 import stocksnstuff.database.DBIO.DBReader;
+import stocksnstuff.gui.AdminGUI;
 import stocksnstuff.gui.UserGUI;
 
 /**
@@ -16,7 +17,10 @@ import stocksnstuff.gui.UserGUI;
 public class Login {
 
     private File userDB;
-
+    private String[] userData;
+    private int banStatus = 0;
+    private int accType = 1;
+    
     public Login(File userDB) {
         this.userDB = userDB;
     }
@@ -29,7 +33,9 @@ public class Login {
             if (!dbR.scanDB(email, 0) || !dbR.scanDB(password, 2)) {
                 return false;
             } else {
-                return true;
+                userData = dbR.getUserInfo();
+                setAccType();
+                return !isBanned();
             }
         }
     }
@@ -43,15 +49,42 @@ public class Login {
             if (!dbR.scanDB(username, 1) || !dbR.scanDB(password, 2)) {
                 return false;
             } else {
-                return true;
+                userData = dbR.getUserInfo();
+                setAccType();
+                return !isBanned();
             }
         }
     }
 
     public void startSession(String name) {
 
-        UserGUI uG = new UserGUI(name);
-        uG.setVisible(true);
-
+        if(accType == 0){
+            AdminGUI aG = new AdminGUI();
+            aG.setVisible(true);
+        }else{
+            UserGUI uG = new UserGUI(name);
+            uG.setVisible(true);
+        }
+    }
+    
+    public boolean isBanned(){
+        if(!userData[8].equals("0"))
+            this.banStatus = 1;
+        return (!userData[8].equals("0"));
+    }
+    
+    public void setAccType(){
+        if(userData[7].equals("0"))
+            this.accType = 0;
+        else
+            this.accType = 1;
+    }
+    
+    public int getBanStatus(){
+        return this.banStatus;
+    }
+    
+    public int getAccType(){
+        return this.accType;
     }
 }
