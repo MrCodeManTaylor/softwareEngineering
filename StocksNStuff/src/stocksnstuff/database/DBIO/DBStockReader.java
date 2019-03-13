@@ -90,7 +90,6 @@ public class DBStockReader {
         this.stockTable = model;
         return true;
     }
-    
     public String[] getStockData(){
         return this.stockData;
     }

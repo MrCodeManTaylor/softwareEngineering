@@ -36,6 +36,7 @@ public class DBWriter {
         }    
     }
     
+    
     public boolean validatePerms(){
         if(!userDB.canRead()||!userDB.canWrite()){
             System.out.println("\nFailure to read/write to DB: "+userDB.toString());

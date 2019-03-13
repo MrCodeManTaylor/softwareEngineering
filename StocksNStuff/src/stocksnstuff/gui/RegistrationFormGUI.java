@@ -7,8 +7,6 @@ package stocksnstuff.gui;
 
 import javax.swing.JOptionPane;
 import stocksnstuff.database.registerControl.Registration;
-import stocksnstuff.database.registerControl.Registration;
-import stocksnstuff.gui.GuestGUI;
 
 /**
  *
@@ -71,6 +69,10 @@ public class RegistrationFormGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Register");
+
+        jPanel1.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setForeground(new java.awt.Color(51, 153, 255));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel1.setText("REGISTER");
@@ -269,6 +271,7 @@ public class RegistrationFormGUI extends javax.swing.JFrame {
                         String userData = reg.formatUserInfo(eAdd.getText(), uName.getText(), pWord.getText(),
                                 sQ1.getSelectedItem().toString(), sQR1.getText(), sQ2.getSelectedItem().toString(), sQR2.getText());
                         reg.updateDB(userData);
+                        reg.createUserDB(uName.getText());
                         clearFields();
                         this.dispose();
                         GuestGUI gui = new GuestGUI();
@@ -283,7 +286,7 @@ public class RegistrationFormGUI extends javax.swing.JFrame {
         //Clear all text Fields
         eAdd.setText("");
         eAddC.setText("");
-        uName.setText("Username already used...");
+        uName.setText("");
         pWord.setText("");
         pWordC.setText("");
         sQR1.setText("");

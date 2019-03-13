@@ -10,10 +10,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import stocksnstuff.SessionControl.Login;
 import stocksnstuff.database.DBIO.DBStockReader;
+import stocksnstuff.database.UpdateStockDB.Update;
 
 /**
  *
@@ -29,6 +28,8 @@ public class GuestGUI extends javax.swing.JFrame {
     public GuestGUI() {
         initComponents();
         try {
+            Update u = new Update();
+            u.updateDB();
             String userDB = new java.io.File(".").getCanonicalPath() + "\\dbs\\register.txt";
             this.regDB = new File(userDB);
             if (!regDB.exists() || !regDB.canRead()) {
@@ -37,23 +38,22 @@ public class GuestGUI extends javax.swing.JFrame {
             }
 
             //initialize jtable data
-            
             DBStockReader dbS = new DBStockReader();
-            if(!dbS.formatStockDB())
+            if (!dbS.formatStockDB()) {
                 JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
-            else{
-                if(!dbS.formatStockDB())
+            } else {
+                if (!dbS.formatStockDB()) {
                     JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
-                else{
-                    if(!dbS.formatJTable(dbS.getStockData()))
+                } else {
+                    if (!dbS.formatJTable(dbS.getStockData())) {
                         JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
-                    else{
+                    } else {
                         stockData.setModel(dbS.getStockTable());
-                        stockData.setEnabled(false);
+                        stockData.setDefaultEditor(Object.class, null);
                     }
                 }
             }
-            
+
         } catch (IOException ex) {
             Logger.getLogger(GuestGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -152,7 +152,7 @@ public class GuestGUI extends javax.swing.JFrame {
 
         stockData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Symbol", "Open", "High", "Low", "Close", "Net Change", "Net Change %"
@@ -171,6 +171,12 @@ public class GuestGUI extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        stockData.getTableHeader().setReorderingAllowed(false);
+        stockData.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                stockDataMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(stockData);
@@ -337,6 +343,9 @@ public class GuestGUI extends javax.swing.JFrame {
         RecoverUserGUI ruG = new RecoverUserGUI();
         ruG.setVisible(true);
     }//GEN-LAST:event_recoverUserActionPerformed
+
+    private void stockDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stockDataMouseClicked
+    }//GEN-LAST:event_stockDataMouseClicked
 
     /**
      * @param args the command line arguments
