@@ -30,7 +30,17 @@ public class UserGUI extends javax.swing.JFrame {
     public UserGUI(String name) {
         Update u = new Update();
         u.updateDB();
-        this.name = name;
+        switch (detectType(name)) {
+            case 0:
+                DBReader dbR = new DBReader();
+                dbR.scanDB(name, 0);
+                String[] userDat = dbR.getUserInfo();
+                this.name = userDat[1];
+                break;
+            case 1:
+                this.name = name;
+                break;
+        }
         initComponents();
         DBStockReader dbS = new DBStockReader();
         if (!dbS.formatStockDB()) {
@@ -163,35 +173,36 @@ public class UserGUI extends javax.swing.JFrame {
         GuestGUI uG = new GuestGUI();
         uG.setVisible(true);
     }//GEN-LAST:event_logoutActionPerformed
-    
-    public int detectType(String data){
-        if(data.contains("@"))
+
+    public int detectType(String data) {
+        if (data.contains("@")) {
             return 0;
-        else
+        } else {
             return 1;
+        }
     }
-    
-    public String[] getRowData(int row){
+
+    public String[] getRowData(int row) {
         String[] stockDat = new String[7];
-        for(int i = 0; i < 7; i++){
+        for (int i = 0; i < 7; i++) {
             stockDat[i] = stockData.getValueAt(row, i).toString();
         }
         return stockDat;
     }
-    
+
     private void stockDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stockDataMouseClicked
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
             int row = stockData.rowAtPoint(evt.getPoint());
             String[] stockDat = getRowData(row);
             String msg = stockData.getValueAt(row, 0).toString();
-            String[] options = {"Yes","No","Untrack"};
+            String[] options = {"Yes", "No", "Untrack"};
             int response = JOptionPane.showOptionDialog(rootPane, "Add " + msg + " to your tracked stocks?", "Track | " + msg,
-                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-            switch(response){
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+            switch (response) {
                 case 0:
                     //They wish to track the stock
-                    switch(detectType(name)){
+                    switch (detectType(name)) {
                         case 0:
                             //Email type
                             DBReader dbR = new DBReader();
@@ -214,7 +225,7 @@ public class UserGUI extends javax.swing.JFrame {
                     break;
                 case 2:
                     //They wish to untrack the stock
-                    switch(detectType(name)){
+                    switch (detectType(name)) {
                         case 0:
                             DBReader dbR = new DBReader();
                             dbR.scanDB(name, 0);
