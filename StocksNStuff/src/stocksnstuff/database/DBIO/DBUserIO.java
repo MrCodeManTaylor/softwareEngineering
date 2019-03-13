@@ -45,11 +45,7 @@ public class DBUserIO {
 
     private boolean detectValidity() {
         if (userDB.exists()) {
-            if (!userDB.canRead() || !userDB.canWrite()) {
-                return false;
-            } else {
-                return true;
-            }
+            return !(!userDB.canRead() || !userDB.canWrite());
         }
         return false;
     }
@@ -90,7 +86,7 @@ public class DBUserIO {
 
     }
     
-    public void fillData(){
+    public final void fillData(){
         try {
             BufferedReader br = new BufferedReader(new FileReader(userDB));
             String l = br.readLine();
