@@ -142,6 +142,10 @@ public class DBReader {
         return false;
     }
     
+    public String[] getUserInfo(){
+        return this.userInfo;
+    }
+    
     public String[] getUserIdentity(){
         String[] uID = {userInfo[0],userInfo[1]};
         

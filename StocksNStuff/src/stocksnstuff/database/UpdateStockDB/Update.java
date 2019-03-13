@@ -6,7 +6,8 @@
 package stocksnstuff.database.UpdateStockDB;
 
 import java.io.IOException;
-import stocksnstuff.database.UpdateStockDB.HtmlScraper;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,13 +18,19 @@ public class Update {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
-        
-        HtmlScraper scraper = new HtmlScraper();
-        scraper.getRawHtmlData();
-        scraper.filterRawStockData();
-        scraper.segmentStockData();
-        
+    public static void main(String[] args){
+
     }
 
+    public void updateDB() {
+        try {
+            HtmlScraper scraper = new HtmlScraper();
+            scraper.getRawHtmlData();
+            scraper.filterRawStockData();
+            scraper.segmentStockData();
+        } catch (IOException ex) {
+            //Logger.getLogger(Update.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }

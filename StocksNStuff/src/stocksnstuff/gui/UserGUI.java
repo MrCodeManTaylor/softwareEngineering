@@ -7,7 +7,11 @@ package stocksnstuff.gui;
 
 import javax.swing.JOptionPane;
 import stocksnstuff.SessionControl.Logout;
+import stocksnstuff.StringManips.StringFormatter;
+import stocksnstuff.database.DBIO.DBReader;
 import stocksnstuff.database.DBIO.DBStockReader;
+import stocksnstuff.database.DBIO.DBUserIO;
+import stocksnstuff.database.UpdateStockDB.Update;
 
 /**
  *
@@ -24,6 +28,8 @@ public class UserGUI extends javax.swing.JFrame {
      */
     //Specified Constructor
     public UserGUI(String name) {
+        Update u = new Update();
+        u.updateDB();
         this.name = name;
         initComponents();
         DBStockReader dbS = new DBStockReader();
@@ -157,11 +163,27 @@ public class UserGUI extends javax.swing.JFrame {
         GuestGUI uG = new GuestGUI();
         uG.setVisible(true);
     }//GEN-LAST:event_logoutActionPerformed
-
+    
+    public int detectType(String data){
+        if(data.contains("@"))
+            return 0;
+        else
+            return 1;
+    }
+    
+    public String[] getRowData(int row){
+        String[] stockDat = new String[7];
+        for(int i = 0; i < 7; i++){
+            stockDat[i] = stockData.getValueAt(row, i).toString();
+        }
+        return stockDat;
+    }
+    
     private void stockDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stockDataMouseClicked
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
             int row = stockData.rowAtPoint(evt.getPoint());
+            String[] stockDat = getRowData(row);
             String msg = stockData.getValueAt(row, 0).toString();
             String[] options = {"Yes","No","Untrack"};
             int response = JOptionPane.showOptionDialog(rootPane, "Add " + msg + " to your tracked stocks?", "Track | " + msg,
@@ -169,16 +191,44 @@ public class UserGUI extends javax.swing.JFrame {
             switch(response){
                 case 0:
                     //They wish to track the stock
-                    System.out.println(response);
+                    switch(detectType(name)){
+                        case 0:
+                            //Email type
+                            DBReader dbR = new DBReader();
+                            dbR.scanDB(name, 0);
+                            String[] userDat = dbR.getUserInfo();
+                            StringFormatter sf = new StringFormatter();
+                            DBUserIO uIO = new DBUserIO(userDat[1]);
+                            uIO.trackStock(sf.formatLine(stockDat));
+                            break;
+                        case 1:
+                            //Username type
+                            uIO = new DBUserIO(name);
+                            sf = new StringFormatter();
+                            uIO.trackStock(sf.formatLine(stockDat));
+                            break;
+                    }
                     break;
                 case 1:
                     //They do not wish to track the stock
-                    System.out.println(response);
                     break;
                 case 2:
                     //They wish to untrack the stock
-                    System.out.println(response);
-                    break;
+                    switch(detectType(name)){
+                        case 0:
+                            DBReader dbR = new DBReader();
+                            dbR.scanDB(name, 0);
+                            String[] userDat = dbR.getUserInfo();
+                            StringFormatter sf = new StringFormatter();
+                            DBUserIO uIO = new DBUserIO(userDat[1]);
+                            uIO.removeStock(sf.formatLine(stockDat));
+                            break;
+                        case 1:
+                            uIO = new DBUserIO(name);
+                            sf = new StringFormatter();
+                            uIO.removeStock(sf.formatLine(stockDat));
+                            break;
+                    }
             }
         }
     }//GEN-LAST:event_stockDataMouseClicked

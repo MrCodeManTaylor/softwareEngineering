@@ -10,10 +10,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import stocksnstuff.SessionControl.Login;
 import stocksnstuff.database.DBIO.DBStockReader;
+import stocksnstuff.database.UpdateStockDB.Update;
 
 /**
  *
@@ -29,6 +28,8 @@ public class GuestGUI extends javax.swing.JFrame {
     public GuestGUI() {
         initComponents();
         try {
+            Update u = new Update();
+            u.updateDB();
             String userDB = new java.io.File(".").getCanonicalPath() + "\\dbs\\register.txt";
             this.regDB = new File(userDB);
             if (!regDB.exists() || !regDB.canRead()) {
