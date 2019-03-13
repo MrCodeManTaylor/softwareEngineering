@@ -5,6 +5,7 @@
  */
 package stocksnstuff.SessionControl;
 
+import stocksnstuff.gui.AdminGUI;
 import stocksnstuff.gui.UserGUI;
 
 /**
@@ -14,12 +15,18 @@ import stocksnstuff.gui.UserGUI;
 public class Logout {
     
     UserGUI uG;
+    AdminGUI aG;
+    
     public Logout(UserGUI uG){
         this.uG = uG;
     }
-    
+    public Logout(AdminGUI aG){
+        this.aG = aG;
+    }
     public void endSession(){
-        uG.dispose();
-        
+        if(uG != null)
+            uG.dispose();
+        else if(aG != null)
+            aG.dispose();
     }
 }

@@ -62,7 +62,6 @@ public class HtmlScraper {
             BufferedWriter bw = new BufferedWriter(new FileWriter(rawDataFile));
             bw.write(s);
             bw.close();
-            System.out.println("Done writing raw data.");
         }
     }
     public void filterRawStockData() throws IOException {
@@ -102,7 +101,6 @@ public class HtmlScraper {
                 }
                 bw.close();
             } catch (NullPointerException e) {
-                System.out.println("Done filtering raw data.");
             }
 
         }
@@ -156,7 +154,6 @@ public class HtmlScraper {
                 line = br.readLine();
             }
         }
-        System.out.println("Done segmenting stock data.");
     }
     private String generateString(ArrayList<String> stringComponents){
         String outputString = "";
