@@ -28,6 +28,7 @@ public class GuestGUI extends javax.swing.JFrame {
     public GuestGUI() {
         initComponents();
         try {
+            
             Update u = new Update();
             u.updateDB();
             String userDB = new java.io.File(".").getCanonicalPath() + "\\dbs\\register.txt";
@@ -322,8 +323,15 @@ public class GuestGUI extends javax.swing.JFrame {
                 this.dispose();
                 loginObj.startSession(userID.getText());
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Invalid username/password", "Login Error", HEIGHT);
-                uPass.setText("");
+                if(loginObj.getBanStatus() == 0){
+                    JOptionPane.showMessageDialog(rootPane, "Invalid username/password", "Login Error", HEIGHT);
+                    uPass.setText("");
+                }else{
+                    //User is banned
+                    JOptionPane.showMessageDialog(rootPane, "Your account has been suspended...", "User Banned!", HEIGHT);
+                    uPass.setText("");
+                    userID.setText("");
+                }
             }
 
         }
