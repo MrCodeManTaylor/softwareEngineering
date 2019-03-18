@@ -5,14 +5,19 @@
  */
 package stocksnstuff.gui;
 
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import stocksnstuff.SessionControl.Login;
 import stocksnstuff.database.DBIO.DBStockReader;
 import stocksnstuff.database.UpdateStockDB.Update;
+import stocksnstuff.generalResources.focusListener;
 
 /**
  *
@@ -27,8 +32,9 @@ public class GuestGUI extends javax.swing.JFrame {
      */
     public GuestGUI() {
         initComponents();
+        setup();
         try {
-            
+
             Update u = new Update();
             u.updateDB();
             String userDB = new java.io.File(".").getCanonicalPath() + "\\dbs\\register.txt";
@@ -72,6 +78,7 @@ public class GuestGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jEditorPane1 = new javax.swing.JEditorPane();
         jFrame1 = new javax.swing.JFrame();
+        dBWriter1 = new stocksnstuff.database.DBIO.DBWriter();
         main = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         register = new javax.swing.JButton();
@@ -84,6 +91,8 @@ public class GuestGUI extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         stockData = new javax.swing.JTable();
+        searchField = new javax.swing.JTextField();
+        searchFilter = new javax.swing.JToggleButton();
         recoverUser = new javax.swing.JButton();
 
         jScrollPane1.setViewportView(jEditorPane1);
@@ -191,27 +200,44 @@ public class GuestGUI extends javax.swing.JFrame {
             stockData.getColumnModel().getColumn(6).setResizable(false);
         }
 
+        searchField.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        searchField.setText("Search...");
+
+        searchFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchFilterActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel4)
-                .addContainerGap(533, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel4)
+                .addGap(14, 14, 14)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(searchFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         recoverUser.setText("Recover User");
@@ -323,10 +349,10 @@ public class GuestGUI extends javax.swing.JFrame {
                 this.dispose();
                 loginObj.startSession(userID.getText());
             } else {
-                if(loginObj.getBanStatus() == 0){
+                if (loginObj.getBanStatus() == 0) {
                     JOptionPane.showMessageDialog(rootPane, "Invalid username/password", "Login Error", HEIGHT);
                     uPass.setText("");
-                }else{
+                } else {
                     //User is banned
                     JOptionPane.showMessageDialog(rootPane, "Your account has been suspended...", "User Banned!", HEIGHT);
                     uPass.setText("");
@@ -354,6 +380,10 @@ public class GuestGUI extends javax.swing.JFrame {
 
     private void stockDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stockDataMouseClicked
     }//GEN-LAST:event_stockDataMouseClicked
+
+    private void searchFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFilterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchFilterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -391,7 +421,24 @@ public class GuestGUI extends javax.swing.JFrame {
         });
     }
 
+    public void setup() {
+
+        try {
+            Icon Icon;
+            String f = new File(".").getCanonicalPath() + "\\src\\resources\\searchIcon.bmp";
+            File file = new File(f);
+            Image img;
+            img = ImageIO.read(file);
+            focusListener fL = new focusListener(searchField, "Search...");
+            searchField.addFocusListener(fL.getFocusListener());
+            searchFilter.setIcon(new ImageIcon(img));
+        } catch (IOException ex) {
+            Logger.getLogger(GuestGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private stocksnstuff.database.DBIO.DBWriter dBWriter1;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
@@ -405,6 +452,8 @@ public class GuestGUI extends javax.swing.JFrame {
     private javax.swing.JPanel main;
     private javax.swing.JButton recoverUser;
     private javax.swing.JButton register;
+    private javax.swing.JTextField searchField;
+    private javax.swing.JToggleButton searchFilter;
     private javax.swing.JTable stockData;
     private javax.swing.JPasswordField uPass;
     private javax.swing.JTextField userID;
