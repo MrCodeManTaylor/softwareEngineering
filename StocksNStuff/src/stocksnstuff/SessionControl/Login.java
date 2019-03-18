@@ -7,8 +7,8 @@ package stocksnstuff.SessionControl;
 
 import java.io.File;
 import stocksnstuff.database.DBIO.DBReader;
-import stocksnstuff.gui.AdminGUI;
 import stocksnstuff.gui.UserGUI;
+import stocksnstuff.gui.AdminGUI;
 
 /**
  *
@@ -18,7 +18,7 @@ public class Login {
 
     private File userDB;
     private String[] userData;
-    private int banStatus = 0;
+    private int banStatus;
     private int accType = 1;
     
     public Login(File userDB) {
@@ -35,7 +35,8 @@ public class Login {
             } else {
                 userData = dbR.getUserInfo();
                 setAccType();
-                return !isBanned();
+                isBanned();
+                return true;
             }
         }
     }
@@ -51,7 +52,8 @@ public class Login {
             } else {
                 userData = dbR.getUserInfo();
                 setAccType();
-                return !isBanned();
+                isBanned();
+                return true;
             }
         }
     }
@@ -67,10 +69,10 @@ public class Login {
         }
     }
     
-    public boolean isBanned(){
-        if(!userData[8].equals("0"))
+    public void isBanned(){
+        if(!userData[8].equals("0")){
             this.banStatus = 1;
-        return (!userData[8].equals("0"));
+        }
     }
     
     public void setAccType(){

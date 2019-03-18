@@ -26,7 +26,7 @@ import stocksnstuff.generalResources.focusListener;
  *
  * @author mtaylo35
  */
-public class UserGUI extends javax.swing.JFrame {
+public final class UserGUI extends javax.swing.JFrame {
 
     private String name;
 
@@ -37,7 +37,7 @@ public class UserGUI extends javax.swing.JFrame {
      */
     //Specified Constructor
     public UserGUI(String name) {
-        
+
         Update u = new Update();
         u.updateDB();
         switch (detectType(name)) {
@@ -53,21 +53,6 @@ public class UserGUI extends javax.swing.JFrame {
         }
         initComponents();
         setup();
-        DBStockReader dbS = new DBStockReader();
-        if (!dbS.formatStockDB()) {
-            JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
-        } else {
-            if (!dbS.formatStockDB()) {
-                JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
-            } else {
-                if (!dbS.formatJTable(dbS.getStockData())) {
-                    JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
-                } else {
-                    stockData.setModel(dbS.getStockTable());
-                    stockData.setDefaultEditor(Object.class, null);
-                }
-            }
-        }
     }
 
     public String formatTitle() {
@@ -185,7 +170,8 @@ public class UserGUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Home", StockData);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText(this.name);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -316,6 +302,15 @@ public class UserGUI extends javax.swing.JFrame {
 
     private void searchFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFilterActionPerformed
         // TODO add your handling code here:
+
+        if (!searchField.getText().equals("")) {
+            //Extract filtration schema and recreate Table Model Obj
+            String filterString = searchField.getText();
+
+        } else {
+            //Do nothing, it's empty
+
+        }
     }//GEN-LAST:event_searchFilterActionPerformed
 
     public void setup() {
@@ -329,6 +324,21 @@ public class UserGUI extends javax.swing.JFrame {
             focusListener fL = new focusListener(searchField, "Search...");
             searchField.addFocusListener(fL.getFocusListener());
             searchFilter.setIcon(new ImageIcon(img));
+            DBStockReader dbS = new DBStockReader();
+            if (!dbS.formatStockDB()) {
+                JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
+            } else {
+                if (!dbS.formatStockDB()) {
+                    JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
+                } else {
+                    if (!dbS.formatJTable(dbS.getStockData())) {
+                        JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
+                    } else {
+                        stockData.setModel(dbS.getStockTable());
+                        stockData.setDefaultEditor(Object.class, null);
+                    }
+                }
+            }
         } catch (IOException ex) {
             Logger.getLogger(GuestGUI.class.getName()).log(Level.SEVERE, null, ex);
         }

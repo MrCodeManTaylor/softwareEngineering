@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <!--added for registration bypass2 October 3,2002-->
  
-<!-- CDS hostname /sbkj2kmdcappp02/ -->
+<!-- CDS hostname /secj2kmdcappp01/ -->
  
 <meta name="pagename" content="Markets Data Center Table_2_3024_NYSE Stock Exchange">
 <meta name="section" content="Research and Tools">
@@ -16,8 +16,8 @@
 
 <script type="text/javascript" language="javascript" charset="ISO-8859-1">
 <!--
-var userName = '<!--#echo var="REMOTE_USER" -->';
-var serverTime = new Date("March 17, 2019 20:02:06");
+var userName = '(none)';
+var serverTime = new Date("March 18, 2019 00:06:42");
 //-->
 </script>
 
@@ -25,7 +25,7 @@ var serverTime = new Date("March 17, 2019 20:02:06");
 <link rel="stylesheet" href="/j20type.css" type="text/css">
 <link rel="stylesheet" href="/css/mdc.css" type="text/css">
 <script type="text/javascript"><!--
-var pID="2_3024",nSP="http://online.wsj.com",uP="http://online.wsj.com",gcPH="/pj/PortfolioDisplay.cgi",gcWIA="http://users.wsj.com/WebIntegration/WebIntegrationServlet",gcLFU="https://users1.wsj.com/lmda/do/submitLogin",gcHSP="https://",gcDomain="online.wsj.com",pStl="mdc",PSS="2_3024",PSSG="header2_3024",_navTxt="",pDate="8:02&nbsp;p.m.&nbsp;EDT&nbsp;Sunday,&nbsp;March&nbsp;17,&nbsp;2019",writeUrl="http://ds.wsj.com";
+var pID="2_3024",nSP="http://online.wsj.com",uP="http://online.wsj.com",gcPH="/pj/PortfolioDisplay.cgi",gcWIA="http://users.wsj.com/WebIntegration/WebIntegrationServlet",gcLFU="https://users1.wsj.com/lmda/do/submitLogin",gcHSP="https://",gcDomain="online.wsj.com",pStl="mdc",PSS="2_3024",PSSG="header2_3024",_navTxt="",pDate="12:06&nbsp;a.m.&nbsp;EDT&nbsp;Monday,&nbsp;March&nbsp;18,&nbsp;2019",writeUrl="http://ds.wsj.com";
 var isTrial=false, isDenial=false, isFree=false;
 //--></script>
 
@@ -665,7 +665,7 @@ try {
 <!-- END_PG: 0_0_WG_Header2012_NonReno -->
 
 
-<!-- fastdynapage - sbkj2kentwap07 - Sun 03/17/19 - 00:10:05 EDT -->
+<!-- fastdynapage - secj2kentwap08 - Sun 03/17/19 - 00:10:09 EDT -->
 
 
 
@@ -684,15 +684,15 @@ try {
 <span id="adSpanJ"><script type="text/javascript">
 <!--
 var tempHTML = '';
-var adURL = 'http://ad.doubleclick.net/adi/'+((GetCookie('etsFlag'))?'ets.wsj.com':'interactive.wsj.com')+'/default;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';sz=377x50;ord=25050250502505025050;';
+var adURL = 'http://ad.doubleclick.net/adi/'+((GetCookie('etsFlag'))?'ets.wsj.com':'interactive.wsj.com')+'/default;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';sz=377x50;ord=9031903190319031;';
 if ( isSafari ) {
   tempHTML += '<iframe id="adJ" src="'+adURL+'" width="377" height="50" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" style="width:377">';
 } else {
   tempHTML += '<iframe id="adJ" src="/static_html_files/blank.htm" width="377" height="50" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" style="width:377px;">';
   ListOfIframes.adJ= adURL;
 }
-tempHTML += '<a href="http://ad.doubleclick.net/jump/'+((GetCookie('etsFlag'))?'ets.wsj.com':'interactive.wsj.com')+'/default;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';sz=377x50;ord=25050250502505025050;" target="_new">';
-tempHTML += '<img src="http://ad.doubleclick.net/ad/'+((GetCookie('etsFlag'))?'ets.wsj.com':'interactive.wsj.com')+'/default;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';sz=377x50;ord=25050250502505025050;" border="0" width="377" height="50" vspace="0" alt="Advertisement" /></a><br /></iframe>';
+tempHTML += '<a href="http://ad.doubleclick.net/jump/'+((GetCookie('etsFlag'))?'ets.wsj.com':'interactive.wsj.com')+'/default;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';sz=377x50;ord=9031903190319031;" target="_new">';
+tempHTML += '<img src="http://ad.doubleclick.net/ad/'+((GetCookie('etsFlag'))?'ets.wsj.com':'interactive.wsj.com')+'/default;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';sz=377x50;ord=9031903190319031;" border="0" width="377" height="50" vspace="0" alt="Advertisement" /></a><br /></iframe>';
 document.write(tempHTML);
 // -->
 </script>
@@ -807,15 +807,15 @@ document.write('<sc'+'ript type="text/javascript" src="http://'+cdnDomain+'/java
 <div style="text-align:center;padding:10px 0px;"><script type="text/javascript">
 <!--
 var tempHTML = '';
-var adURL = 'http://ad.doubleclick.net/adi/'+((GetCookie('etsFlag'))?'ets.wsj.com':'interactive.wsj.com')+'/marketsdata_usstocks;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';sz=728x90;ord=25050250502505025050;';
+var adURL = 'http://ad.doubleclick.net/adi/'+((GetCookie('etsFlag'))?'ets.wsj.com':'interactive.wsj.com')+'/marketsdata_usstocks;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';sz=728x90;ord=9031903190319031;';
 if ( isSafari ) {
   tempHTML += '<iframe id="adU" src="'+adURL+'" width="728" height="90" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" style="width:728">';
 } else {
   tempHTML += '<iframe id="adU" src="/static_html_files/blank.htm" width="728" height="90" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" style="width:728px;">';
   ListOfIframes.adU= adURL;
 }
-tempHTML += '<a href="http://ad.doubleclick.net/jump/'+((GetCookie('etsFlag'))?'ets.wsj.com':'interactive.wsj.com')+'/marketsdata_usstocks;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';sz=728x90;ord=25050250502505025050;" target="_new">';
-tempHTML += '<img src="http://ad.doubleclick.net/ad/'+((GetCookie('etsFlag'))?'ets.wsj.com':'interactive.wsj.com')+'/marketsdata_usstocks;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';sz=728x90;ord=25050250502505025050;" border="0" width="728" height="90" vspace="0" alt="Advertisement" /></a><br /></iframe>';
+tempHTML += '<a href="http://ad.doubleclick.net/jump/'+((GetCookie('etsFlag'))?'ets.wsj.com':'interactive.wsj.com')+'/marketsdata_usstocks;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';sz=728x90;ord=9031903190319031;" target="_new">';
+tempHTML += '<img src="http://ad.doubleclick.net/ad/'+((GetCookie('etsFlag'))?'ets.wsj.com':'interactive.wsj.com')+'/marketsdata_usstocks;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';sz=728x90;ord=9031903190319031;" border="0" width="728" height="90" vspace="0" alt="Advertisement" /></a><br /></iframe>';
 document.write(tempHTML);
 // -->
 </script>
@@ -40820,15 +40820,15 @@ document.write(tempHTML);
 <script type="text/javascript">
 <!--
 var tempHTML = '';
-var adURL = 'http://ad.doubleclick.net/adi/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=1;sz=170x67;ord=25050250502505025050;';
+var adURL = 'http://ad.doubleclick.net/adi/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=1;sz=170x67;ord=9031903190319031;';
 if ( isSafari ) {
   tempHTML += '<iframe id="mdc_tradingcenter1" src="'+adURL+'" width="170" height="67" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" style="width:170">';
 } else {
   tempHTML += '<iframe id="mdc_tradingcenter1" src="/static_html_files/blank.htm" width="170" height="67" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" style="width:170px;">';
   ListOfIframes.mdc_tradingcenter1= adURL;
 }
-tempHTML += '<a href="http://ad.doubleclick.net/jump/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=1;sz=170x67;ord=25050250502505025050;" target="_new">';
-tempHTML += '<img src="http://ad.doubleclick.net/ad/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=1;sz=170x67;ord=25050250502505025050;" border="0" width="170" height="67" vspace="0" alt="Advertisement" /></a><br /></iframe>';
+tempHTML += '<a href="http://ad.doubleclick.net/jump/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=1;sz=170x67;ord=9031903190319031;" target="_new">';
+tempHTML += '<img src="http://ad.doubleclick.net/ad/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=1;sz=170x67;ord=9031903190319031;" border="0" width="170" height="67" vspace="0" alt="Advertisement" /></a><br /></iframe>';
 document.write(tempHTML);
 // -->
 </script>
@@ -40841,15 +40841,15 @@ document.write(tempHTML);
 <script type="text/javascript">
 <!--
 var tempHTML = '';
-var adURL = 'http://ad.doubleclick.net/adi/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=2;sz=170x67;ord=25050250502505025050;';
+var adURL = 'http://ad.doubleclick.net/adi/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=2;sz=170x67;ord=9031903190319031;';
 if ( isSafari ) {
   tempHTML += '<iframe id="mdc_tradingcenter2" src="'+adURL+'" width="170" height="67" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" style="width:170">';
 } else {
   tempHTML += '<iframe id="mdc_tradingcenter2" src="/static_html_files/blank.htm" width="170" height="67" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" style="width:170px;">';
   ListOfIframes.mdc_tradingcenter2= adURL;
 }
-tempHTML += '<a href="http://ad.doubleclick.net/jump/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=2;sz=170x67;ord=25050250502505025050;" target="_new">';
-tempHTML += '<img src="http://ad.doubleclick.net/ad/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=2;sz=170x67;ord=25050250502505025050;" border="0" width="170" height="67" vspace="0" alt="Advertisement" /></a><br /></iframe>';
+tempHTML += '<a href="http://ad.doubleclick.net/jump/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=2;sz=170x67;ord=9031903190319031;" target="_new">';
+tempHTML += '<img src="http://ad.doubleclick.net/ad/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=2;sz=170x67;ord=9031903190319031;" border="0" width="170" height="67" vspace="0" alt="Advertisement" /></a><br /></iframe>';
 document.write(tempHTML);
 // -->
 </script>
@@ -40862,15 +40862,15 @@ document.write(tempHTML);
 <script type="text/javascript">
 <!--
 var tempHTML = '';
-var adURL = 'http://ad.doubleclick.net/adi/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=3;sz=170x67;ord=25050250502505025050;';
+var adURL = 'http://ad.doubleclick.net/adi/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=3;sz=170x67;ord=9031903190319031;';
 if ( isSafari ) {
   tempHTML += '<iframe id="mdc_tradingcenter3" src="'+adURL+'" width="170" height="67" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" style="width:170">';
 } else {
   tempHTML += '<iframe id="mdc_tradingcenter3" src="/static_html_files/blank.htm" width="170" height="67" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" style="width:170px;">';
   ListOfIframes.mdc_tradingcenter3= adURL;
 }
-tempHTML += '<a href="http://ad.doubleclick.net/jump/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=3;sz=170x67;ord=25050250502505025050;" target="_new">';
-tempHTML += '<img src="http://ad.doubleclick.net/ad/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=3;sz=170x67;ord=25050250502505025050;" border="0" width="170" height="67" vspace="0" alt="Advertisement" /></a><br /></iframe>';
+tempHTML += '<a href="http://ad.doubleclick.net/jump/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=3;sz=170x67;ord=9031903190319031;" target="_new">';
+tempHTML += '<img src="http://ad.doubleclick.net/ad/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=3;sz=170x67;ord=9031903190319031;" border="0" width="170" height="67" vspace="0" alt="Advertisement" /></a><br /></iframe>';
 document.write(tempHTML);
 // -->
 </script>
@@ -40886,15 +40886,15 @@ document.write(tempHTML);
 <script type="text/javascript">
 <!--
 var tempHTML = '';
-var adURL = 'http://ad.doubleclick.net/adi/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=4;sz=170x67;ord=25050250502505025050;';
+var adURL = 'http://ad.doubleclick.net/adi/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=4;sz=170x67;ord=9031903190319031;';
 if ( isSafari ) {
   tempHTML += '<iframe id="mdc_tradingcenter4" src="'+adURL+'" width="170" height="67" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" style="width:170">';
 } else {
   tempHTML += '<iframe id="mdc_tradingcenter4" src="/static_html_files/blank.htm" width="170" height="67" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" style="width:170px;">';
   ListOfIframes.mdc_tradingcenter4= adURL;
 }
-tempHTML += '<a href="http://ad.doubleclick.net/jump/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=4;sz=170x67;ord=25050250502505025050;" target="_new">';
-tempHTML += '<img src="http://ad.doubleclick.net/ad/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=4;sz=170x67;ord=25050250502505025050;" border="0" width="170" height="67" vspace="0" alt="Advertisement" /></a><br /></iframe>';
+tempHTML += '<a href="http://ad.doubleclick.net/jump/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=4;sz=170x67;ord=9031903190319031;" target="_new">';
+tempHTML += '<img src="http://ad.doubleclick.net/ad/'+((GetCookie('etsFlag'))?'ets.wsj.com':'brokerbuttons.wsj.com')+'/markets_front;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';tile=4;sz=170x67;ord=9031903190319031;" border="0" width="170" height="67" vspace="0" alt="Advertisement" /></a><br /></iframe>';
 document.write(tempHTML);
 // -->
 </script>
@@ -41119,15 +41119,15 @@ function openLiveHelp (ev) {
 <script type="text/javascript">
 <!--
 var tempHTML = '';
-var adURL = 'http://ad.doubleclick.net/adi/'+((GetCookie('etsFlag'))?'ets.wsj.com':'interactive.wsj.com')+'/default;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';sz=1x1;ord=25050250502505025050;';
+var adURL = 'http://ad.doubleclick.net/adi/'+((GetCookie('etsFlag'))?'ets.wsj.com':'interactive.wsj.com')+'/default;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';sz=1x1;ord=9031903190319031;';
 if ( isSafari ) {
   tempHTML += '<iframe id="adO" src="'+adURL+'" width="1" height="1" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" style="width:1">';
 } else {
   tempHTML += '<iframe id="adO" src="/static_html_files/blank.htm" width="1" height="1" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" bordercolor="#000000" style="width:1px;">';
   ListOfIframes.adO= adURL;
 }
-tempHTML += '<a href="http://ad.doubleclick.net/jump/'+((GetCookie('etsFlag'))?'ets.wsj.com':'interactive.wsj.com')+'/default;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';sz=1x1;ord=25050250502505025050;" target="_new">';
-tempHTML += '<img src="http://ad.doubleclick.net/ad/'+((GetCookie('etsFlag'))?'ets.wsj.com':'interactive.wsj.com')+'/default;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';sz=1x1;ord=25050250502505025050;" border="0" width="1" height="1" vspace="0" alt="Advertisement" /></a><br /></iframe>';
+tempHTML += '<a href="http://ad.doubleclick.net/jump/'+((GetCookie('etsFlag'))?'ets.wsj.com':'interactive.wsj.com')+'/default;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';sz=1x1;ord=9031903190319031;" target="_new">';
+tempHTML += '<img src="http://ad.doubleclick.net/ad/'+((GetCookie('etsFlag'))?'ets.wsj.com':'interactive.wsj.com')+'/default;!category=;msrc=' + msrc + ';' + segQS + ';' + mc + ';sz=1x1;ord=9031903190319031;" border="0" width="1" height="1" vspace="0" alt="Advertisement" /></a><br /></iframe>';
 document.write(tempHTML);
 // -->
 </script>
@@ -41585,5 +41585,4 @@ if(blueKai){blueKai.blueKai.bk_track(true);}
 
 
 
-<!-- fastdynapage - sbkj2kmdcwebp02 - Sun 03/17/19 - 20:02:05 EDT -->
 </body></html>

@@ -19,36 +19,36 @@ import java.util.logging.Logger;
  * @author Mitchell
  */
 public class DBReader {
-    
+
     private String path;
     private File userDB;
     private String[] userInfo;
-    
-    public DBReader(){
+
+    public DBReader() {
         try {
             this.path = new File(".").getCanonicalPath();
-            this.userDB = new File(path+"\\dbs\\register.txt");
+            this.userDB = new File(path + "\\dbs\\register.txt");
         } catch (IOException ex) {
             Logger.getLogger(DBReader.class.getName()).log(Level.SEVERE, null, ex);
-        }    
+        }
     }
-    
-    public boolean validatePerms(){
-        if(!userDB.canRead()||!userDB.canWrite()){
-            System.out.println("\nFailure to read/write to DB: "+userDB.toString());
+
+    public boolean validatePerms() {
+        if (!userDB.canRead() || !userDB.canWrite()) {
+            System.out.println("\nFailure to read/write to DB: " + userDB.toString());
             return false;
-        }else{
+        } else {
             return true;
         }
     }
-    
-    public ArrayList<String> getDBData(){
-        
+
+    public ArrayList<String> getDBData() {
+
         try {
             BufferedReader br = new BufferedReader(new FileReader(userDB));
             ArrayList<String> dbData = new ArrayList<>();
             String line = br.readLine();
-            while(line!=null){
+            while (line != null) {
                 dbData.add(line);
                 line = br.readLine();
             }
@@ -61,101 +61,96 @@ public class DBReader {
             return null;
         }
     }
-    
-    public int scanDBLine(String scanParam, int scanID){
+
+    public int scanDBLine(String scanParam, int scanID) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(userDB));
             String l = br.readLine();
             int lineNum = 0;
-            while(l != null) {
+            while (l != null) {
                 String[] lDat = l.split(", ");
                 if (lDat[scanID].equals(scanParam)) {
                     return lineNum;
                 }
-                
-                
+
                 l = br.readLine();
                 lineNum++;
             }
-            
-            
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DBReader.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException e) {
             //do nuffin
         }
-        
-        
+
         return -1;
     }
-    
-    public boolean scanDB(String scanParam, int scanID){
+
+    public boolean scanDB(String scanParam, int scanID) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(userDB));
             String l = br.readLine();
-            while(l != null) {
+            while (l != null) {
                 String[] lDat = l.split(", ");
                 if (lDat[scanID].equals(scanParam)) {
                     this.userInfo = lDat;
-                    return true; 
+                    return true;
+                } else {
+                    l = br.readLine();
+
                 }
-                
-                
-                l = br.readLine();
             }
-            
-            
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(DBReader.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException e) {
             //do nuffin
         }
-        
-        
+
         return false;
     }
-    
-    public boolean scanDBByID(String scanParam, int scanID, String scanRef, int scanRefID){
+
+    public boolean scanDBByID(String scanParam, int scanID, String scanRef, int scanRefID) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(userDB));
             String l = br.readLine();
-            while(l != null) {
+            while (l != null) {
                 String[] lDat = l.split(", ");
-                if(lDat[scanRefID].equals(scanRef)){
+                if (lDat[scanRefID].equals(scanRef)) {
                     if (lDat[scanID].equals(scanParam)) {
                         this.userInfo = lDat;
-                        return true; 
+                        return true;
                     }
                 }
-                
+
                 l = br.readLine();
+
             }
-            
-            
+
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(DBReader.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBReader.class
+                    .getName()).log(Level.SEVERE, null, ex);
         } catch (IOException e) {
             //do nuffin
         }
-        
-        
+
         return false;
     }
-    
-    public String[] getUserInfo(){
+
+    public String[] getUserInfo() {
         return this.userInfo;
     }
-    
-    public String[] getUserIdentity(){
-        String[] uID = {userInfo[0],userInfo[1]};
-        
+
+    public String[] getUserIdentity() {
+        String[] uID = {userInfo[0], userInfo[1]};
+
         return uID;
     }
-   
-    public String[] getSecurityQuestions(){
-        
-        String[] secDat = {userInfo[3],userInfo[4],userInfo[5],userInfo[6]};
-        
+
+    public String[] getSecurityQuestions() {
+
+        String[] secDat = {userInfo[3], userInfo[4], userInfo[5], userInfo[6]};
+
         return secDat;
     }
 

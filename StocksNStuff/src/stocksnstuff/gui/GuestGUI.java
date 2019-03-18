@@ -33,37 +33,6 @@ public class GuestGUI extends javax.swing.JFrame {
     public GuestGUI() {
         initComponents();
         setup();
-        try {
-
-            Update u = new Update();
-            u.updateDB();
-            String userDB = new java.io.File(".").getCanonicalPath() + "\\dbs\\register.txt";
-            this.regDB = new File(userDB);
-            if (!regDB.exists() || !regDB.canRead()) {
-                //user DB doesnt exist (This shouldnt happen)
-                regDB.createNewFile();
-            }
-
-            //initialize jtable data
-            DBStockReader dbS = new DBStockReader();
-            if (!dbS.formatStockDB()) {
-                JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
-            } else {
-                if (!dbS.formatStockDB()) {
-                    JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
-                } else {
-                    if (!dbS.formatJTable(dbS.getStockData())) {
-                        JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
-                    } else {
-                        stockData.setModel(dbS.getStockTable());
-                        stockData.setDefaultEditor(Object.class, null);
-                    }
-                }
-            }
-
-        } catch (IOException ex) {
-            Logger.getLogger(GuestGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**
@@ -333,33 +302,43 @@ public class GuestGUI extends javax.swing.JFrame {
             userID.setText("");
             uPass.setText("");
 
-        } else if (userID.getText().contains("@")) {
-
-            if (loginObj.loginEmail(userID.getText(), uPass.getText())) {
-                this.dispose();
-                loginObj.startSession(userID.getText());
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Invalid username/password", "Login Error", HEIGHT);
-                uPass.setText("");
-            }
-
         } else {
+            if (userID.getText().contains("@")) {
 
-            if (loginObj.loginUsername(userID.getText(), uPass.getText())) {
-                this.dispose();
-                loginObj.startSession(userID.getText());
-            } else {
-                if (loginObj.getBanStatus() == 0) {
+                if (loginObj.loginEmail(userID.getText(), uPass.getText())) {
+                    if (loginObj.getBanStatus() != 0) {
+                        JOptionPane.showMessageDialog(rootPane, "Your account has been suspended...", "User Banned!", HEIGHT);
+                        uPass.setText("");
+                        userID.setText("");
+
+                    } else if (loginObj.getBanStatus() == 0) {
+                        this.dispose();
+                        loginObj.startSession(userID.getText());
+                    }
+                } else {
                     JOptionPane.showMessageDialog(rootPane, "Invalid username/password", "Login Error", HEIGHT);
                     uPass.setText("");
+                }
+
+            } else {
+
+                if (loginObj.loginUsername(userID.getText(), uPass.getText())) {
+                    if (loginObj.getBanStatus() != 0) {
+                        JOptionPane.showMessageDialog(rootPane, "Your account has been suspended...", "User Banned!", HEIGHT);
+                        uPass.setText("");
+                        userID.setText("");
+
+                    } else if (loginObj.getBanStatus() == 0) {
+                        this.dispose();
+                        loginObj.startSession(userID.getText());
+                    }
                 } else {
-                    //User is banned
-                    JOptionPane.showMessageDialog(rootPane, "Your account has been suspended...", "User Banned!", HEIGHT);
-                    uPass.setText("");
-                    userID.setText("");
+                    if (loginObj.getBanStatus() == 0) {
+                        JOptionPane.showMessageDialog(rootPane, "Invalid username/password", "Login Error", HEIGHT);
+                        uPass.setText("");
+                    }
                 }
             }
-
         }
     }//GEN-LAST:event_loginActionPerformed
 
@@ -432,10 +411,40 @@ public class GuestGUI extends javax.swing.JFrame {
             focusListener fL = new focusListener(searchField, "Search...");
             searchField.addFocusListener(fL.getFocusListener());
             searchFilter.setIcon(new ImageIcon(img));
+            try {
+
+                Update u = new Update();
+                u.updateDB();
+                String userDB = new java.io.File(".").getCanonicalPath() + "\\dbs\\register.txt";
+                this.regDB = new File(userDB);
+                if (!regDB.exists() || !regDB.canRead()) {
+                    //user DB doesnt exist (This shouldnt happen)
+                    regDB.createNewFile();
+                }
+
+                //initialize jtable data
+                DBStockReader dbS = new DBStockReader();
+                if (!dbS.formatStockDB()) {
+                    JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
+                } else {
+                    if (!dbS.formatStockDB()) {
+                        JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
+                    } else {
+                        if (!dbS.formatJTable(dbS.getStockData())) {
+                            JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
+                        } else {
+                            stockData.setModel(dbS.getStockTable());
+                            stockData.setDefaultEditor(Object.class, null);
+                        }
+                    }
+                }
+
+            } catch (IOException ex) {
+                Logger.getLogger(GuestGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (IOException ex) {
             Logger.getLogger(GuestGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private stocksnstuff.database.DBIO.DBWriter dBWriter1;
