@@ -17,23 +17,26 @@ import javax.swing.JOptionPane;
 import stocksnstuff.SessionControl.Login;
 import stocksnstuff.database.DBIO.DBStockReader;
 import stocksnstuff.database.UpdateStockDB.Update;
+import stocksnstuff.generalResources.STFilter;
 import stocksnstuff.generalResources.focusListener;
 
 /**
  *
  * @author mtaylo35
  */
-public class GuestGUI extends javax.swing.JFrame {
+public final class GuestGUI extends javax.swing.JFrame {
 
     private File regDB;
-
+    private DBStockReader dbS;
+    
     /**
      * Creates new form guestGui
      */
     public GuestGUI() {
         initComponents();
         setup();
-    }
+        }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -200,10 +203,10 @@ public class GuestGUI extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(searchFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
@@ -362,44 +365,28 @@ public class GuestGUI extends javax.swing.JFrame {
 
     private void searchFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFilterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_searchFilterActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GuestGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GuestGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GuestGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GuestGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        if (!searchField.getText().isEmpty()) {
+            //We need to rebuild the stock table now, utilizing the searchField as a basis
+            String searchFilter = searchField.getText();
+            STFilter sTF = new STFilter(searchField.getText());
+            stockData.setModel(sTF.getTModel());
+            stockData.setDefaultEditor(Object.class, null);
+        } else {
+            //Revert to default table state.
+            stockData.setModel(dbS.getStockTable());
+            stockData.setDefaultEditor(Object.class, null);
         }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GuestGUI().setVisible(true);
-            }
-        });
+    }//GEN-LAST:event_searchFilterActionPerformed
+  
+    private void updateTable(){
+        dbS.formatStockDB();
+        dbS.formatJTable(dbS.getStockData());
+        stockData.setModel(dbS.getStockTable());
+        stockData.setDefaultEditor(Object.class, null);
     }
-
+    
     public void setup() {
 
         try {
@@ -412,9 +399,7 @@ public class GuestGUI extends javax.swing.JFrame {
             searchField.addFocusListener(fL.getFocusListener());
             searchFilter.setIcon(new ImageIcon(img));
             try {
-
-                Update u = new Update();
-                u.updateDB();
+                
                 String userDB = new java.io.File(".").getCanonicalPath() + "\\dbs\\register.txt";
                 this.regDB = new File(userDB);
                 if (!regDB.exists() || !regDB.canRead()) {
@@ -423,20 +408,17 @@ public class GuestGUI extends javax.swing.JFrame {
                 }
 
                 //initialize jtable data
-                DBStockReader dbS = new DBStockReader();
+                dbS = new DBStockReader();
                 if (!dbS.formatStockDB()) {
                     JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
                 } else {
-                    if (!dbS.formatStockDB()) {
+                    if (!dbS.formatJTable(dbS.getStockData())) {
                         JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
                     } else {
-                        if (!dbS.formatJTable(dbS.getStockData())) {
-                            JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
-                        } else {
-                            stockData.setModel(dbS.getStockTable());
-                            stockData.setDefaultEditor(Object.class, null);
-                        }
+                        stockData.setModel(dbS.getStockTable());
+                        stockData.setDefaultEditor(Object.class, null);
                     }
+
                 }
 
             } catch (IOException ex) {

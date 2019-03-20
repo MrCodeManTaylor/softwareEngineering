@@ -19,7 +19,7 @@ import stocksnstuff.generalResources.StringFormatter;
 import stocksnstuff.database.DBIO.DBReader;
 import stocksnstuff.database.DBIO.DBStockReader;
 import stocksnstuff.database.DBIO.DBUserIO;
-import stocksnstuff.database.UpdateStockDB.Update;
+import stocksnstuff.generalResources.STFilter;
 import stocksnstuff.generalResources.focusListener;
 
 /**
@@ -29,7 +29,8 @@ import stocksnstuff.generalResources.focusListener;
 public final class UserGUI extends javax.swing.JFrame {
 
     private String name;
-
+    private boolean filtered = false;
+    private DBStockReader dbS;
     /**
      * Creates new form UserGUI
      *
@@ -38,8 +39,7 @@ public final class UserGUI extends javax.swing.JFrame {
     //Specified Constructor
     public UserGUI(String name) {
 
-        Update u = new Update();
-        u.updateDB();
+        
         switch (detectType(name)) {
             case 0:
                 DBReader dbR = new DBReader();
@@ -51,11 +51,19 @@ public final class UserGUI extends javax.swing.JFrame {
                 this.name = name;
                 break;
         }
+        
         initComponents();
         setup();
     }
 
-    public String formatTitle() {
+    private void updateTable(){
+        dbS.formatStockDB();
+        dbS.formatJTable(dbS.getStockData());
+        stockData.setModel(dbS.getStockTable());
+        stockData.setDefaultEditor(Object.class, null);
+    }
+    
+    private String formatTitle() {
         return "Stocks N Stuff | " + this.name;
     }
 
@@ -159,7 +167,7 @@ public final class UserGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StockDataLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(StockDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(StockDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(StockDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1))
                     .addComponent(searchFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -305,11 +313,22 @@ public final class UserGUI extends javax.swing.JFrame {
 
         if (!searchField.getText().equals("")) {
             //Extract filtration schema and recreate Table Model Obj
-            String filterString = searchField.getText();
-
+            String searchFilter = searchField.getText();
+            STFilter sTF = new STFilter(searchField.getText());
+            stockData.setModel(sTF.getTModel());
+            stockData.setDefaultEditor(Object.class, null);
+            this.filtered = true;
         } else {
-            //Do nothing, it's empty
-
+            //Detect if table has been filtered, if so reinstate default table.
+            if(filtered){
+                //Reinstate table
+                stockData.setModel(dbS.getStockTable());
+                stockData.setDefaultEditor(Object.class, null);
+            }else{
+                //DO nothing
+                
+            }
+            
         }
     }//GEN-LAST:event_searchFilterActionPerformed
 
@@ -324,7 +343,7 @@ public final class UserGUI extends javax.swing.JFrame {
             focusListener fL = new focusListener(searchField, "Search...");
             searchField.addFocusListener(fL.getFocusListener());
             searchFilter.setIcon(new ImageIcon(img));
-            DBStockReader dbS = new DBStockReader();
+            dbS = new DBStockReader();
             if (!dbS.formatStockDB()) {
                 JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
             } else {
@@ -349,7 +368,6 @@ public final class UserGUI extends javax.swing.JFrame {
     private javax.swing.JPanel StockData;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;

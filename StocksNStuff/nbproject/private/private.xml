@@ -5,7 +5,11 @@
         <group>
             <file>file:/C:/Users/Mitchell/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/gui/UserGUI.java</file>
             <file>file:/C:/Users/Mitchell/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/database/DBIO/DBWriter.java</file>
+            <file>file:/C:/Users/Mitchell/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/SessionControl/main.java</file>
+            <file>file:/C:/Users/Mitchell/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/generalResources/focusListener.java</file>
+            <file>file:/C:/Users/Mitchell/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/SessionControl/Login.java</file>
             <file>file:/C:/Users/Mitchell/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/database/DBIO/DBReader.java</file>
+            <file>file:/C:/Users/Mitchell/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/database/DBIO/DBStockReader.java</file>
             <file>file:/C:/Users/Mitchell/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/gui/GuestGUI.java</file>
         </group>
     </open-files>

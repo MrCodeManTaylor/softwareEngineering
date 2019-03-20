@@ -8,6 +8,8 @@ package stocksnstuff.SessionControl;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import stocksnstuff.database.DBIO.DBStockReader;
+import stocksnstuff.database.UpdateStockDB.Update;
 import stocksnstuff.gui.GuestGUI;
 
 /**
@@ -16,17 +18,17 @@ import stocksnstuff.gui.GuestGUI;
  */
 public class main {
  
-    public File stockData;
-    
+    private File stockData;
     //Quite literally responsible for maintaining everything...
     public static void main(String[] args){
         
         GuestGUI gG = new GuestGUI();
+        gG.setVisible(true);
         while(true){
             try {
-                //update DB after timer sequence | note 300,000 = 5 minutes
-                Thread.sleep(1000);
-                System.out.println("1 second");
+                //update DB after timer sequence | note 150,000 = 2.5 minutes
+                Thread.sleep(60000);
+                updateDB();
                 
             } catch (InterruptedException ex) {
                 Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
@@ -34,4 +36,8 @@ public class main {
         }
     }
     
+    private static void updateDB() {
+        Update u = new Update();
+        u.updateDB();
+    }
 }

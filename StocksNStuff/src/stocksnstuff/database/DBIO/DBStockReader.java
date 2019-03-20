@@ -85,7 +85,7 @@ public class DBStockReader {
             rowData[i] = sf.segmentLine(stockData[i+1]);
         }
         DefaultTableModel model = new DefaultTableModel(columnNames,0);
-        for(int i = 0; i < rowData.length-1; i++)
+        for(int i = 0; i <= rowData.length-1; i++)
             model.addRow(rowData[i]);
         this.stockTable = model;
         return true;
