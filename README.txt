@@ -8,6 +8,8 @@ Authors:	Paul F.	Frank F. Mitchell T.
 
 Update: 3/18/2019
  * Change to README.md
+ * Minor tweaks to Main() class for session control flow, browse 
+      functionality implemented for stock filtering.
  * Minor tweaking of functional requirements, Main() Class beginning to be built for full session control
  * Browse-able stock data on Guest GUI complete *User GUI **WIP*
  * Recover user credentials functionality complete
