@@ -2,7 +2,10 @@ _README_
 =========================================================================================================
 
 **Stocks N Stuff Repository**
-_Developed by: Paul F., Frank F., Mitchell T._
+
+_Developed by: @pfears - Paul F.,@fwfiricano - Frank F.,@MrCodeManTaylor - Mitchell T._
+
+
 _Fitchburg State University | CSC 4400-01 Software Engineering |Spring 2019 |Dr. N. Mahadev_
 
 Update: 3/21/2019
