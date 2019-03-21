@@ -27,6 +27,9 @@ public class main {
         while(true){
             try {
                 //update DB after timer sequence | note 150,000 = 2.5 minutes
+                //holy heck you can multithread 
+                Thread t2 = new Thread();
+                
                 Thread.sleep(60000);
                 updateDB();
                 
