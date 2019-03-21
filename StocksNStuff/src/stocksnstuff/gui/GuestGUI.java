@@ -6,6 +6,8 @@
 package stocksnstuff.gui;
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -14,9 +16,10 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import stocksnstuff.SessionControl.Login;
+import stocksnstuff.SessionControl.TableUpdateThread;
 import stocksnstuff.database.DBIO.DBStockReader;
-import stocksnstuff.database.UpdateStockDB.Update;
 import stocksnstuff.generalResources.STFilter;
 import stocksnstuff.generalResources.focusListener;
 
@@ -28,15 +31,15 @@ public final class GuestGUI extends javax.swing.JFrame {
 
     private File regDB;
     private DBStockReader dbS;
-    
+
     /**
      * Creates new form guestGui
      */
     public GuestGUI() {
         initComponents();
         setup();
-        }
-    
+        liveUpdate(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -379,15 +382,15 @@ public final class GuestGUI extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_searchFilterActionPerformed
-  
-    private void updateTable(){
+
+    private void updateTable() {
         dbS.formatStockDB();
         dbS.formatJTable(dbS.getStockData());
         stockData.setModel(dbS.getStockTable());
         stockData.setDefaultEditor(Object.class, null);
     }
-    
-    public void setup() {
+
+    private void setup() {
 
         try {
             Icon Icon;
@@ -399,7 +402,7 @@ public final class GuestGUI extends javax.swing.JFrame {
             searchField.addFocusListener(fL.getFocusListener());
             searchFilter.setIcon(new ImageIcon(img));
             try {
-                
+
                 String userDB = new java.io.File(".").getCanonicalPath() + "\\dbs\\register.txt";
                 this.regDB = new File(userDB);
                 if (!regDB.exists() || !regDB.canRead()) {
@@ -426,6 +429,23 @@ public final class GuestGUI extends javax.swing.JFrame {
             }
         } catch (IOException ex) {
             Logger.getLogger(GuestGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void liveUpdate(Boolean val) {
+        if (val) {
+            Timer timer = new Timer(60000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    TableUpdateThread tut = new TableUpdateThread();
+                    tut.run();
+                    stockData.setModel(tut.getStockTableUpdate());
+                    stockData.setDefaultEditor(Object.class, null);
+                    System.out.println("Table update finished");
+                }
+            });
+            timer.setRepeats(this.isEnabled());
+            timer.start();
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -6,6 +6,8 @@
 package stocksnstuff.gui;
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -14,7 +16,9 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import stocksnstuff.SessionControl.Logout;
+import stocksnstuff.SessionControl.TableUpdateThread;
 import stocksnstuff.generalResources.StringFormatter;
 import stocksnstuff.database.DBIO.DBReader;
 import stocksnstuff.database.DBIO.DBStockReader;
@@ -54,6 +58,7 @@ public final class UserGUI extends javax.swing.JFrame {
         
         initComponents();
         setup();
+        liveUpdate(true);
     }
 
     private void updateTable(){
@@ -343,10 +348,9 @@ public final class UserGUI extends javax.swing.JFrame {
             focusListener fL = new focusListener(searchField, "Search...");
             searchField.addFocusListener(fL.getFocusListener());
             searchFilter.setIcon(new ImageIcon(img));
-            dbS = new DBStockReader();
-            if (!dbS.formatStockDB()) {
-                JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
-            } else {
+            
+            //initialize jtable data
+                dbS = new DBStockReader();
                 if (!dbS.formatStockDB()) {
                     JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
                 } else {
@@ -356,12 +360,29 @@ public final class UserGUI extends javax.swing.JFrame {
                         stockData.setModel(dbS.getStockTable());
                         stockData.setDefaultEditor(Object.class, null);
                     }
+
                 }
-            }
         } catch (IOException ex) {
             Logger.getLogger(GuestGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    private void liveUpdate(Boolean val) {
+        if (val) {
+            Timer timer = new Timer(60000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    TableUpdateThread tut = new TableUpdateThread();
+                    tut.run();
+                    stockData.setModel(tut.getStockTableUpdate());
+                    stockData.setDefaultEditor(Object.class, null);
+                    System.out.println("Table update finished");
+                }
+            });
+            timer.setRepeats(this.isEnabled());
+            timer.start();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
