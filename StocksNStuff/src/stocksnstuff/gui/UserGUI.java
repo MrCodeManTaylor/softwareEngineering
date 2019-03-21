@@ -370,14 +370,13 @@ public final class UserGUI extends javax.swing.JFrame {
     
     private void liveUpdate(Boolean val) {
         if (val) {
-            Timer timer = new Timer(60000, new ActionListener() {
+            Timer timer = new Timer(150000, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     TableUpdateThread tut = new TableUpdateThread();
                     tut.run();
                     stockData.setModel(tut.getStockTableUpdate());
                     stockData.setDefaultEditor(Object.class, null);
-                    System.out.println("Table update finished");
                 }
             });
             timer.setRepeats(this.isEnabled());

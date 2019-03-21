@@ -21,7 +21,6 @@ public class TableUpdateThread implements Runnable {
     
     @Override
     public void run() {
-        System.out.println("Table update start");
         DBStockReader dbS;
         dbS = new DBStockReader();
         if (!dbS.formatStockDB()) {
@@ -30,12 +29,7 @@ public class TableUpdateThread implements Runnable {
             if (!dbS.formatJTable(dbS.getStockData())) {
                 System.exit(0);
             } else {
-                try {
-                    this.tb = dbS.getStockTable();
-                    sleep(1000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(TableUpdateThread.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                this.tb = dbS.getStockTable();
             }
 
         }

@@ -29,7 +29,7 @@ public class main extends Thread{
             try {
                 UpdateThread ut = new UpdateThread();
                 ut.run();
-                main.sleep(1000);
+                main.sleep(150000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
             }
