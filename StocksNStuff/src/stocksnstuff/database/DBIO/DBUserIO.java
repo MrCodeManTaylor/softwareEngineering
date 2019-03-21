@@ -61,7 +61,6 @@ public class DBUserIO {
             l = sf.segmentLine(line);
             if(l[0].equals(stockName)){
                 //Stock already tracked
-                System.out.println(l[0]);
                 return true;
             }
             line = br.readLine();
