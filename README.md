@@ -1,13 +1,18 @@
-README
+_README_
+=========================================================================================================
+
+**Stocks N Stuff Repository**
+
+_Developed by: @pfears - Paul F.,@fwfiricano - Frank F.,@MrCodeManTaylor - Mitchell T._
 
 
-Stocks N Stuff Repository
+_Fitchburg State University | CSC 4400-01 Software Engineering |Spring 2019 |Dr. N. Mahadev_
 
-Authors:	Paul F.	Frank F. Mitchell T.
-
-
-Update: 3/18/2019
+Update: 3/21/2019
  * Change to README.md
+ * Added multithreading capability for Main()
+ * Added automatic live stock table updating and HTML Webscraping utils
+ * LiveStock current build - WIP
  * Minor tweaks to Main() class for session control flow, browse 
       functionality implemented for stock filtering.
  * Minor tweaking of functional requirements, Main() Class beginning to be built for full session control
@@ -18,4 +23,3 @@ Update: 3/18/2019
  * Added javamail.jar library for email verification
  * Setting up testing procedure for web scraped html parsing
  * Website for web scraping stock data http://www.wsj.com/mdc/public/page/2_3024-NYSE.html
- ** Author M. Taylor

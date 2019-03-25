@@ -16,7 +16,7 @@ import stocksnstuff.gui.GuestGUI;
  *
  * @author Mitchell
  */
-public class main {
+public class main extends Thread{
  
     private File stockData;
     //Quite literally responsible for maintaining everything...
@@ -24,12 +24,12 @@ public class main {
         
         GuestGUI gG = new GuestGUI();
         gG.setVisible(true);
+        updateDB();
         while(true){
             try {
-                //update DB after timer sequence | note 150,000 = 2.5 minutes
-                Thread.sleep(60000);
-                updateDB();
-                
+                UpdateThread ut = new UpdateThread();
+                ut.run();
+                main.sleep(150000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -40,4 +40,6 @@ public class main {
         Update u = new Update();
         u.updateDB();
     }
+    
+    
 }
