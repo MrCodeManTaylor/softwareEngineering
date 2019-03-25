@@ -180,6 +180,11 @@ public class AdminGUI extends javax.swing.JFrame {
         });
 
         jButton1.setText("Enforce Action");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         accActions.add(unbanU);
         unbanU.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -287,7 +292,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
                 .addGap(15, 15, 15))
         );
         jPanel2Layout.setVerticalGroup(
@@ -406,6 +411,24 @@ public class AdminGUI extends javax.swing.JFrame {
     private void unwarnUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unwarnUActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_unwarnUActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        if(banU.isSelected()){
+            System.out.println("Banned, son");
+        }else if (clearU.isSelected()){
+            System.out.println("Clear, son");
+        }else if (warnU.isSelected()){
+            System.out.println("Warned, son");
+        }else if (unbanU.isSelected()){
+            System.out.println("Unbanned, son");
+        }else if (unwarnU.isSelected()){
+            System.out.println("Unwarned, son");
+        }else{
+            //Do nothing
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
