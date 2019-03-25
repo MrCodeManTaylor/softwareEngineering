@@ -254,7 +254,11 @@ public final class UserGUI extends javax.swing.JFrame {
     public String[] getRowData(int row) {
         String[] stockDat = new String[7];
         for (int i = 0; i < 7; i++) {
-            stockDat[i] = stockData.getValueAt(row, i).toString();
+            if(stockData.getValueAt(row, i).toString() == null){
+                break;
+            }else{
+                stockDat[i] = stockData.getValueAt(row, i).toString();
+            }
         }
         return stockDat;
     }
