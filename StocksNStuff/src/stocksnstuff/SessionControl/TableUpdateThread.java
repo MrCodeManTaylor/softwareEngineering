@@ -5,9 +5,6 @@
  */
 package stocksnstuff.SessionControl;
 
-import static java.lang.Thread.sleep;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import stocksnstuff.database.DBIO.DBStockReader;
 

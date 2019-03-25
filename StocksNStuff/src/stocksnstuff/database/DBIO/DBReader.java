@@ -110,6 +110,12 @@ public class DBReader {
         return false;
     }
 
+    public boolean validatePWord(String pWord){
+        if(pWord.equals(userInfo[2]))
+            return true;
+        return false;
+    }
+    
     public boolean scanDBByID(String scanParam, int scanID, String scanRef, int scanRefID) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(userDB));

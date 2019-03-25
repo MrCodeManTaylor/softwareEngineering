@@ -52,7 +52,7 @@ public class Registration {
 
     public String formatUserInfo(String email, String username, String password, String sq1, String sqr1, String sq2, String sqr2) {
         String userInfo = "";
-        userInfo = email + ", " + username + ", " + password + ", " + sq1 + ", " + sqr1 + ", " + sq2 + ", " + sqr2 + ", 1, 0, 0, 0";
+        userInfo = email + ", " + username + ", " + password + ", " + sq1 + ", " + sqr1 + ", " + sq2 + ", " + sqr2 + ", 1, 0, 0, 0, 0";
 
         return userInfo;
     }
@@ -75,7 +75,7 @@ public class Registration {
 
     public boolean checkMatch(String str1, String str2) {
 
-        if (str1.equals(str2)) {
+        if(str1.equals(str2)) {
             return true;
         }
 

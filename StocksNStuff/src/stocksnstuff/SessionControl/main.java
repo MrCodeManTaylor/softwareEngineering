@@ -8,7 +8,6 @@ package stocksnstuff.SessionControl;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import stocksnstuff.database.DBIO.DBStockReader;
 import stocksnstuff.database.UpdateStockDB.Update;
 import stocksnstuff.gui.GuestGUI;
 
@@ -29,7 +28,7 @@ public class main extends Thread{
             try {
                 UpdateThread ut = new UpdateThread();
                 ut.run();
-                main.sleep(150000);
+                main.sleep(15000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
             }

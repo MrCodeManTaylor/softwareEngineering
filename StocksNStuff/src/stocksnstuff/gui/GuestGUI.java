@@ -396,6 +396,7 @@ public final class GuestGUI extends javax.swing.JFrame {
             Icon Icon;
             String f = new File(".").getCanonicalPath() + "\\src\\resources\\searchIcon.bmp";
             File file = new File(f);
+            
             Image img;
             img = ImageIO.read(file);
             focusListener fL = new focusListener(searchField, "Search...");
@@ -434,7 +435,7 @@ public final class GuestGUI extends javax.swing.JFrame {
 
     private void liveUpdate(Boolean val) {
         if (val) {
-            Timer timer = new Timer(150000, new ActionListener() {
+            Timer timer = new Timer(15000, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     TableUpdateThread tut = new TableUpdateThread();
