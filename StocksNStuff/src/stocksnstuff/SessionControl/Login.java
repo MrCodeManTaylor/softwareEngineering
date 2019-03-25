@@ -30,7 +30,7 @@ public class Login {
         if (!dbR.validatePerms()) {
             return false;
         } else {
-            if (!dbR.scanDB(email, 0) || !dbR.scanDB(password, 2)) {
+            if (!dbR.scanDB(email, 0) || !dbR.validatePWord(password)) {
                 return false;
             } else {
                 userData = dbR.getUserInfo();
@@ -42,12 +42,11 @@ public class Login {
     }
 
     public boolean loginUsername(String username, String password) {
-
         DBReader dbR = new DBReader();
         if (!dbR.validatePerms()) {
             return false;
         } else {
-            if (!dbR.scanDB(username, 1) || !dbR.scanDB(password, 2)) {
+            if (!dbR.scanDB(username, 1) || !dbR.validatePWord(password)) {
                 return false;
             } else {
                 userData = dbR.getUserInfo();
@@ -70,8 +69,11 @@ public class Login {
     }
     
     public void isBanned(){
+        
         if(userData[8].equals("1")){
             this.banStatus = 1;
+        }else{
+            this.banStatus = 0;
         }
     }
     
