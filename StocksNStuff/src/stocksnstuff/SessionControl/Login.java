@@ -70,7 +70,7 @@ public class Login {
     }
     
     public void isBanned(){
-        if(!userData[8].equals("0")){
+        if(userData[8].equals("1")){
             this.banStatus = 1;
         }
     }
