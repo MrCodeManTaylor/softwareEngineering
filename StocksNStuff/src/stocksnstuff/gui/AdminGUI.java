@@ -5,11 +5,16 @@
  */
 package stocksnstuff.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
+import stocksnstuff.SessionControl.BanUpdateThread;
 import stocksnstuff.SessionControl.Logout;
+import stocksnstuff.database.DBIO.DBAdminIO;
+import stocksnstuff.database.DBIO.DBReader;
+import stocksnstuff.database.DBIO.DBWriter;
 
 /**
  *
@@ -23,7 +28,10 @@ public class AdminGUI extends javax.swing.JFrame {
      * Creates new form AdminGUI
      */
     public AdminGUI() {
+
         initComponents();
+        setup();
+        liveUpdate(true);
     }
 
     /**
@@ -42,8 +50,8 @@ public class AdminGUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        reportTable = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        pendingReports = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         banU = new javax.swing.JRadioButton();
@@ -52,10 +60,6 @@ public class AdminGUI extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         unbanU = new javax.swing.JRadioButton();
         unwarnU = new javax.swing.JRadioButton();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -90,19 +94,19 @@ public class AdminGUI extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Pending Reports");
 
-        reportTable.setModel(new javax.swing.table.DefaultTableModel(
+        pendingReports.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Username", "Email", "Report Count", "Previous Ban"
+                "Username", "Email", "Report count", "Previous Ban", "Ban Status", "Warn Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -113,13 +117,14 @@ public class AdminGUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        reportTable.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(reportTable);
-        if (reportTable.getColumnModel().getColumnCount() > 0) {
-            reportTable.getColumnModel().getColumn(0).setResizable(false);
-            reportTable.getColumnModel().getColumn(1).setResizable(false);
-            reportTable.getColumnModel().getColumn(2).setResizable(false);
-            reportTable.getColumnModel().getColumn(3).setResizable(false);
+        jScrollPane1.setViewportView(pendingReports);
+        if (pendingReports.getColumnModel().getColumnCount() > 0) {
+            pendingReports.getColumnModel().getColumn(0).setResizable(false);
+            pendingReports.getColumnModel().getColumn(1).setResizable(false);
+            pendingReports.getColumnModel().getColumn(2).setResizable(false);
+            pendingReports.getColumnModel().getColumn(3).setResizable(false);
+            pendingReports.getColumnModel().getColumn(4).setResizable(false);
+            pendingReports.getColumnModel().getColumn(5).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -127,12 +132,12 @@ public class AdminGUI extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel1)
-                .addContainerGap(246, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -141,8 +146,8 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -204,44 +209,6 @@ public class AdminGUI extends javax.swing.JFrame {
             }
         });
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("NOTICE:");
-
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Current account \nactions are in a\nvolatile state \nand should not \nbe played with \nlightly.\n\nCurrently Build \nImplements:\n\n * Ban User\n * Unban User\n * Clear User");
-        jTextArea1.setPreferredSize(new java.awt.Dimension(169, 288));
-        jScrollPane1.setViewportView(jTextArea1);
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -256,32 +223,26 @@ public class AdminGUI extends javax.swing.JFrame {
                     .addComponent(banU)
                     .addComponent(jLabel3)
                     .addComponent(warnU))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(banU)
-                        .addGap(5, 5, 5)
-                        .addComponent(warnU)
-                        .addGap(5, 5, 5)
-                        .addComponent(clearU)
-                        .addGap(5, 5, 5)
-                        .addComponent(unbanU)
-                        .addGap(5, 5, 5)
-                        .addComponent(unwarnU)
-                        .addGap(9, 9, 9)
-                        .addComponent(jButton1)
-                        .addGap(0, 130, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(banU)
+                .addGap(5, 5, 5)
+                .addComponent(warnU)
+                .addGap(5, 5, 5)
+                .addComponent(clearU)
+                .addGap(5, 5, 5)
+                .addComponent(unbanU)
+                .addGap(5, 5, 5)
+                .addComponent(unwarnU)
+                .addGap(9, 9, 9)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -290,18 +251,18 @@ public class AdminGUI extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
-                .addGap(15, 15, 15))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE))
                 .addGap(15, 15, 15))
         );
 
@@ -317,7 +278,7 @@ public class AdminGUI extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 421, Short.MAX_VALUE)
+            .addGap(0, 392, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Reported Posts", jPanel4);
@@ -332,7 +293,7 @@ public class AdminGUI extends javax.swing.JFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 421, Short.MAX_VALUE)
+            .addGap(0, 392, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Manage Ban List", jPanel5);
@@ -374,7 +335,7 @@ public class AdminGUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -414,18 +375,33 @@ public class AdminGUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-        if(banU.isSelected()){
-            System.out.println("Banned, son");
-        }else if (clearU.isSelected()){
-            System.out.println("Clear, son");
-        }else if (warnU.isSelected()){
-            System.out.println("Warned, son");
-        }else if (unbanU.isSelected()){
-            System.out.println("Unbanned, son");
-        }else if (unwarnU.isSelected()){
-            System.out.println("Unwarned, son");
-        }else{
+        DBReader dbR = new DBReader();
+        DBWriter dbW = new DBWriter();
+        if (banU.isSelected()) {
+            if (pendingReports.getSelectedRow() != -1) {
+                dbW.updateField(pendingReports.getValueAt(pendingReports.getSelectedRow(),1).toString(), "1", 8, dbR.getDBData());
+            }
+        } else if (clearU.isSelected()) {
+            if (pendingReports.getSelectedRow() != -1) {
+                dbW.updateField(pendingReports.getValueAt(pendingReports.getSelectedRow(),1).toString(), "0", 8, dbR.getDBData());
+                dbW.updateField(pendingReports.getValueAt(pendingReports.getSelectedRow(),1).toString(), "0", 9, dbR.getDBData());
+                dbW.updateField(pendingReports.getValueAt(pendingReports.getSelectedRow(),1).toString(), "0", 10, dbR.getDBData());
+                dbW.updateField(pendingReports.getValueAt(pendingReports.getSelectedRow(),1).toString(), "1", 11, dbR.getDBData());
+            }
+        } else if (warnU.isSelected()) {
+            if (pendingReports.getSelectedRow() != -1) {
+                dbW.updateField(pendingReports.getValueAt(pendingReports.getSelectedRow(),1).toString(), "1", 9, dbR.getDBData());
+            }
+        } else if (unbanU.isSelected()) {
+            if (pendingReports.getSelectedRow() != -1) {
+                dbW.updateField(pendingReports.getValueAt(pendingReports.getSelectedRow(),1).toString(), "0", 8, dbR.getDBData());
+                dbW.updateField(pendingReports.getValueAt(pendingReports.getSelectedRow(),1).toString(), "1", 11, dbR.getDBData());
+            }
+        } else if (unwarnU.isSelected()) {
+            if (pendingReports.getSelectedRow() != -1) {
+                dbW.updateField(pendingReports.getValueAt(pendingReports.getSelectedRow(),1).toString(), "0", 9, dbR.getDBData());
+            }
+        } else {
             //Do nothing
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -467,18 +443,30 @@ public class AdminGUI extends javax.swing.JFrame {
 
     private void setup() {
 
-        try {
-            //Contains initialization procedures for dynamic components...
-            //TODO: Create reportTable construction code
-            String userDB = new java.io.File(".").getCanonicalPath() + "\\dbs\\register.txt";
-            this.regDB = new File(userDB);
-            
-            
-        } catch (IOException ex) {
-            Logger.getLogger(AdminGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        DBAdminIO dbA = new DBAdminIO();
+        pendingReports.setModel(dbA.formatJTable(dbA.getBanList()));
+        pendingReports.setDefaultEditor(Object.class, null);
+
     }
+
+    private void liveUpdate(Boolean val) {
+
+        if (val) {
+            Timer timer = new Timer(15000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    BanUpdateThread but = new BanUpdateThread();
+                    but.run();
+                    pendingReports.setModel(but.getStockTableUpdate());
+                    pendingReports.setDefaultEditor(Object.class, null);
+                }
+            });
+            timer.setRepeats(this.isEnabled());
+            timer.start();
+        }
+
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup accActions;
     private javax.swing.JRadioButton banU;
@@ -487,20 +475,16 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton logout;
-    private javax.swing.JTable reportTable;
+    private javax.swing.JTable pendingReports;
     private javax.swing.JRadioButton unbanU;
     private javax.swing.JRadioButton unwarnU;
     private javax.swing.JRadioButton warnU;

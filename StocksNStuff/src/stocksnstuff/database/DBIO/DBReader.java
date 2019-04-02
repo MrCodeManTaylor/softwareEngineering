@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import stocksnstuff.generalResources.StringFormatter;
 
 /**
  *
@@ -23,6 +24,7 @@ public class DBReader {
     private String path;
     private File userDB;
     private String[] userInfo;
+    private int banListSize;
 
     public DBReader() {
         try {
@@ -86,6 +88,74 @@ public class DBReader {
         return -1;
     }
 
+    private int banListSize(BufferedReader br){
+        try {
+            StringFormatter sf = new StringFormatter();
+            String line = br.readLine();
+            int count = 0;
+            while(line != null){
+                String[] lineData = sf.segmentLine(line);
+                if(lineData[8].equals("1"))
+                    count++;
+                else if(lineData[9].equals(1)){
+                    count++;
+                }else if(Integer.parseInt(lineData[10]) >= 1){
+                    count++;
+                }else if(Integer.parseInt(lineData[11]) == 1){
+                    count++;
+                }
+                line = br.readLine();
+            }
+            this.banListSize = count;
+            br.close();
+            return count;
+        } catch (IOException ex) {
+            Logger.getLogger(DBReader.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+    }
+    
+    private String[] fillBanList(BufferedReader br){
+        try {
+            String[] banList = new String[banListSize(new BufferedReader(new FileReader(userDB)))];
+            StringFormatter sf = new StringFormatter();
+            String line = br.readLine();
+            int count = 0;
+            while(line != null){
+                String[] dat = sf.segmentLine(line);
+                if(dat[8].equals("1")){
+                    banList[count] = line;
+                    count++;
+                }else if(Integer.parseInt(dat[9]) == 1){
+                    banList[count] = line;
+                    count++;
+                }else if(Integer.parseInt(dat[10]) >= 1){
+                    banList[count] = line;
+                    count++;
+                }else if(Integer.parseInt(dat[11]) == 1){
+                    banList[count] = line;
+                    count++;
+                }
+                line = br.readLine();
+            }
+            return banList;
+        } catch (IOException ex) {
+            Logger.getLogger(DBReader.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        
+    }
+    
+    public String[] getBanList(){
+        
+        try {
+            return fillBanList(new BufferedReader(new FileReader(userDB)));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DBReader.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } 
+    }
+    
     public boolean scanDB(String scanParam, int scanID) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(userDB));
@@ -160,4 +230,8 @@ public class DBReader {
         return secDat;
     }
 
+    public int getBanListSize(){
+        return this.banListSize;
+    }
+    
 }

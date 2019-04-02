@@ -1,9 +1,8 @@
-email, username, password, sq1, sqr1, sq2, sqr2, accounttype, ban status, warned, reportCount, previouslyBanned
-mitch@taylor.com, mtaylor, 123, What is your mother's maiden name?, j, What was your first pet's name?, a, 1, 1, 0, 1, 0
+mitch@taylor.com, mtaylor, 123, What is your mother's maiden name?, j, What was your first pet's name?, a, 1, 1, 0, 0, 1
 test@test.com, test, test, What is your mother's maiden name?, test, What was your first pet's name?, test, 1, 0, 0, 0, 0
 admin@admin.com, admin, admin, What is your mother's maiden name?, admin, What was your first pet's name?, admin, 0, 0, 0, 0, 0
-user@user.com, user, user, What is your mother's maiden name?, a, What was your first pet's name?, a, 1, 0, 0, 0, 0
+user@user.com, user, user, What is your mother's maiden name?, a, What was your first pet's name?, a, 1, 0, 0, 0, 1
 greg@taylor.com, greg, greg, What is your mother's maiden name?, bell, What was your first pet's name?, dog, 1, 0, 0, 0, 0
-a@a.a, a, a, What is your mother's maiden name?, a, What was your first pet's name?, a, 1, 0, 0, 0, 0
-newtest@test.test, alt, alt, What year was your father born?, 1965, What is your favorite food?, donut, 1, 0, 0, 0, 0
+a@a.a, a, a, What is your mother's maiden name?, a, What was your first pet's name?, a, 1, 0, 0, 0, 1
+newtest@test.test, alt, alt, What year was your father born?, 1965, What is your favorite food?, donut, 1, 0, 0, 0, 1
 ffirican@student.fitchburgstate.edu, frank, 123, What is your mother's maiden name?, 1, What was your first pet's name?, he, 1, 0, 0, 0, 0

@@ -3,19 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/J:/senior/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/gui/UserGUI.java</file>
-            <file>file:/J:/senior/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/SessionControl/main.java</file>
-            <file>file:/J:/senior/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/database/DBIO/DBUserIO.java</file>
-            <file>file:/J:/senior/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/gui/RecoverUserGUI.java</file>
-=======
-            <file>file:/C:/Users/Mitchell/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/gui/UserGUI.java</file>
+            <file>file:/C:/Users/Mitchell/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/SessionControl/TableUpdateThread.java</file>
             <file>file:/C:/Users/Mitchell/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/SessionControl/main.java</file>
+            <file>file:/C:/Users/Mitchell/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/database/DBIO/DBAdminIO.java</file>
             <file>file:/C:/Users/Mitchell/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/gui/AdminGUI.java</file>
-            <file>file:/C:/Users/Mitchell/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/SessionControl/Login.java</file>
             <file>file:/C:/Users/Mitchell/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/database/DBIO/DBStockReader.java</file>
+            <file>file:/C:/Users/Mitchell/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/database/DBIO/DBReader.java</file>
             <file>file:/C:/Users/Mitchell/softwareEngineering/softwareEngineering/StocksNStuff/src/stocksnstuff/gui/GuestGUI.java</file>
->>>>>>> ef8a1213001ac1e2a92bccb60dacf4d469bcffd6
         </group>
     </open-files>
 </project-private>

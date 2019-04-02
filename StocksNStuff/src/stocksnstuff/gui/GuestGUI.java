@@ -383,13 +383,6 @@ public final class GuestGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_searchFilterActionPerformed
 
-    private void updateTable() {
-        dbS.formatStockDB();
-        dbS.formatJTable(dbS.getStockData());
-        stockData.setModel(dbS.getStockTable());
-        stockData.setDefaultEditor(Object.class, null);
-    }
-
     private void setup() {
 
         try {
