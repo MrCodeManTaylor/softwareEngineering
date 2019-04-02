@@ -51,7 +51,7 @@ public class AdminGUI extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        pendingReports = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         banU = new javax.swing.JRadioButton();
@@ -61,7 +61,6 @@ public class AdminGUI extends javax.swing.JFrame {
         unbanU = new javax.swing.JRadioButton();
         unwarnU = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -94,7 +93,7 @@ public class AdminGUI extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Pending Reports");
 
-        pendingReports.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -117,14 +116,14 @@ public class AdminGUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(pendingReports);
-        if (pendingReports.getColumnModel().getColumnCount() > 0) {
-            pendingReports.getColumnModel().getColumn(0).setResizable(false);
-            pendingReports.getColumnModel().getColumn(1).setResizable(false);
-            pendingReports.getColumnModel().getColumn(2).setResizable(false);
-            pendingReports.getColumnModel().getColumn(3).setResizable(false);
-            pendingReports.getColumnModel().getColumn(4).setResizable(false);
-            pendingReports.getColumnModel().getColumn(5).setResizable(false);
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -254,7 +253,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,7 +273,7 @@ public class AdminGUI extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 870, Short.MAX_VALUE)
+            .addGap(0, 875, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,21 +281,6 @@ public class AdminGUI extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Reported Posts", jPanel4);
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 870, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 392, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Manage Ban List", jPanel5);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel2.setText("Administrator Control");
@@ -353,58 +337,58 @@ public class AdminGUI extends javax.swing.JFrame {
         gG.setVisible(true);
     }//GEN-LAST:event_logoutActionPerformed
 
-    private void banUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_banUActionPerformed
+    private void unwarnUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unwarnUActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_banUActionPerformed
-
-    private void warnUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_warnUActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_warnUActionPerformed
-
-    private void clearUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearUActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_clearUActionPerformed
+    }//GEN-LAST:event_unwarnUActionPerformed
 
     private void unbanUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unbanUActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_unbanUActionPerformed
-
-    private void unwarnUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unwarnUActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_unwarnUActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         DBReader dbR = new DBReader();
         DBWriter dbW = new DBWriter();
         if (banU.isSelected()) {
-            if (pendingReports.getSelectedRow() != -1) {
-                dbW.updateField(pendingReports.getValueAt(pendingReports.getSelectedRow(),1).toString(), "1", 8, dbR.getDBData());
+            if (jTable1.getSelectedRow() != -1) {
+                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(), "1", 8, dbR.getDBData());
             }
         } else if (clearU.isSelected()) {
-            if (pendingReports.getSelectedRow() != -1) {
-                dbW.updateField(pendingReports.getValueAt(pendingReports.getSelectedRow(),1).toString(), "0", 8, dbR.getDBData());
-                dbW.updateField(pendingReports.getValueAt(pendingReports.getSelectedRow(),1).toString(), "0", 9, dbR.getDBData());
-                dbW.updateField(pendingReports.getValueAt(pendingReports.getSelectedRow(),1).toString(), "0", 10, dbR.getDBData());
-                dbW.updateField(pendingReports.getValueAt(pendingReports.getSelectedRow(),1).toString(), "1", 11, dbR.getDBData());
+            if (jTable1.getSelectedRow() != -1) {
+                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(), "0", 8, dbR.getDBData());
+                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(), "0", 9, dbR.getDBData());
+                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(), "0", 10, dbR.getDBData());
+                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(), "1", 11, dbR.getDBData());
             }
         } else if (warnU.isSelected()) {
-            if (pendingReports.getSelectedRow() != -1) {
-                dbW.updateField(pendingReports.getValueAt(pendingReports.getSelectedRow(),1).toString(), "1", 9, dbR.getDBData());
+            if (jTable1.getSelectedRow() != -1) {
+                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(), "1", 9, dbR.getDBData());
             }
         } else if (unbanU.isSelected()) {
-            if (pendingReports.getSelectedRow() != -1) {
-                dbW.updateField(pendingReports.getValueAt(pendingReports.getSelectedRow(),1).toString(), "0", 8, dbR.getDBData());
-                dbW.updateField(pendingReports.getValueAt(pendingReports.getSelectedRow(),1).toString(), "1", 11, dbR.getDBData());
+            if (jTable1.getSelectedRow() != -1) {
+                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(), "0", 8, dbR.getDBData());
+                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(), "1", 11, dbR.getDBData());
             }
         } else if (unwarnU.isSelected()) {
-            if (pendingReports.getSelectedRow() != -1) {
-                dbW.updateField(pendingReports.getValueAt(pendingReports.getSelectedRow(),1).toString(), "0", 9, dbR.getDBData());
+            if (jTable1.getSelectedRow() != -1) {
+                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(), "0", 9, dbR.getDBData());
             }
         } else {
             //Do nothing
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void clearUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearUActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clearUActionPerformed
+
+    private void warnUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_warnUActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_warnUActionPerformed
+
+    private void banUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_banUActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_banUActionPerformed
 
     /**
      * @param args the command line arguments
@@ -444,8 +428,8 @@ public class AdminGUI extends javax.swing.JFrame {
     private void setup() {
 
         DBAdminIO dbA = new DBAdminIO();
-        pendingReports.setModel(dbA.formatJTable(dbA.getBanList()));
-        pendingReports.setDefaultEditor(Object.class, null);
+        jTable1.setModel(dbA.formatJTable(dbA.getBanList()));
+        jTable1.setDefaultEditor(Object.class, null);
 
     }
 
@@ -457,8 +441,8 @@ public class AdminGUI extends javax.swing.JFrame {
                 public void actionPerformed(ActionEvent e) {
                     BanUpdateThread but = new BanUpdateThread();
                     but.run();
-                    pendingReports.setModel(but.getStockTableUpdate());
-                    pendingReports.setDefaultEditor(Object.class, null);
+                    jTable1.setModel(but.getStockTableUpdate());
+                    jTable1.setDefaultEditor(Object.class, null);
                 }
             });
             timer.setRepeats(this.isEnabled());
@@ -479,12 +463,11 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JButton logout;
-    private javax.swing.JTable pendingReports;
     private javax.swing.JRadioButton unbanU;
     private javax.swing.JRadioButton unwarnU;
     private javax.swing.JRadioButton warnU;
