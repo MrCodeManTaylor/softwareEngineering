@@ -348,7 +348,7 @@ public class AdminGUI extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         DBReader dbR = new DBReader();
-        DBWriter dbW = new DBWriter();
+        DBWriter dbW = new DBWriter("register.txt");
         if (banU.isSelected()) {
             if (jTable1.getSelectedRow() != -1) {
                 dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(), "1", 8, dbR.getDBData());

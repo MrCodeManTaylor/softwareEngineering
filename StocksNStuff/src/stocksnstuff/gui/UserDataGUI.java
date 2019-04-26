@@ -163,7 +163,7 @@ public class UserDataGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Empty password field.");
         }else{
             DBReader dbR = new DBReader();
-            DBWriter dbW = new DBWriter();
+            DBWriter dbW = new DBWriter("register.txt");
             if(dbW.updateField(email.getText(), pWord.getText(), 2, dbR.getDBData())){
                 //Successful Update
                 JOptionPane.showMessageDialog(rootPane,"Updated your password, try logging in!");

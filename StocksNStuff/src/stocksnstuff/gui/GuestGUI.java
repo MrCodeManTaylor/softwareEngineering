@@ -50,10 +50,6 @@ public final class GuestGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jEditorPane1 = new javax.swing.JEditorPane();
-        jFrame1 = new javax.swing.JFrame();
-        dBWriter1 = new stocksnstuff.database.DBIO.DBWriter();
         main = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         register = new javax.swing.JButton();
@@ -69,21 +65,6 @@ public final class GuestGUI extends javax.swing.JFrame {
         searchField = new javax.swing.JTextField();
         searchFilter = new javax.swing.JToggleButton();
         recoverUser = new javax.swing.JButton();
-
-        jScrollPane1.setViewportView(jEditorPane1);
-
-        jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Stocks N Stuff");
@@ -389,7 +370,7 @@ public final class GuestGUI extends javax.swing.JFrame {
             Icon Icon;
             String f = new File(".").getCanonicalPath() + "\\src\\resources\\searchIcon.bmp";
             File file = new File(f);
-            
+
             Image img;
             img = ImageIO.read(file);
             focusListener fL = new focusListener(searchField, "Search...");
@@ -406,17 +387,10 @@ public final class GuestGUI extends javax.swing.JFrame {
 
                 //initialize jtable data
                 dbS = new DBStockReader();
-                if (!dbS.formatStockDB()) {
-                    JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
-                } else {
-                    if (!dbS.formatJTable(dbS.getStockData())) {
-                        JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
-                    } else {
-                        stockData.setModel(dbS.getStockTable());
-                        stockData.setDefaultEditor(Object.class, null);
-                    }
-
-                }
+                dbS.formatData(dbS.getStockDB(), dbS.getTSize());
+                dbS.formatJTable(dbS.getStockData(), dbS.getTSize(), 8);
+                stockData.setModel(dbS.getStockTable());
+                stockData.setDefaultEditor(Object.class, null);
 
             } catch (IOException ex) {
                 Logger.getLogger(GuestGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -442,15 +416,11 @@ public final class GuestGUI extends javax.swing.JFrame {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private stocksnstuff.database.DBIO.DBWriter dBWriter1;
-    private javax.swing.JEditorPane jEditorPane1;
-    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton login;
     private javax.swing.JPanel main;

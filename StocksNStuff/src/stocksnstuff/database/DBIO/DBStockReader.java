@@ -26,76 +26,36 @@ public class DBStockReader {
     private String[] stockData;
     private DefaultTableModel stockTable;
     private int tSize;
+    private DBFuncs dbf = new DBFuncs();
     
     public DBStockReader() {
         try {
             this.path = new File(".").getCanonicalPath();
-            this.stockDB = new File(path + "\\stockDat\\stockData.txt");
+            path = path + "\\stockDat\\stockData.txt";
+            this.stockDB = new File(path);
+            this.tSize = dbf.findTableSize(path);
         } catch (IOException ex) {
             Logger.getLogger(DBReader.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public boolean formatStockDB() {
-
-        try {
-            if (!stockDB.canRead()) {
-                return false;
-            } else {
-                tSize = findTableSize();
-                stockData = new String[tSize];
-                BufferedReader br = new BufferedReader(new FileReader(stockDB));
-                String line = br.readLine();
-                stockData[0] = line;
-                int i = 0;
-                while(i < tSize - 1){
-                    i++;
-                    line = br.readLine();
-                    stockData[i] = line;
-                }
-                return true;
-            }
-
-        } catch (FileNotFoundException ex) {
-            return false;
-        } catch (IOException ex) {
-            return false;
-        }
-
+    public void formatData(File stockDB, int tSize) {
+        this.stockData = dbf.formatData(stockDB, tSize);
     }
-    
-    private int findTableSize() throws FileNotFoundException, IOException{
-        BufferedReader br = new BufferedReader(new FileReader(stockDB));
-        int i = 0;
-        while(br.readLine()!=null){
-            i++;
-        }
-        return i;
-    }
-    
-    
-    public boolean formatJTable(String[] stockData){
-        
-        if(stockData.length == 0)
-            return false;
-        StringFormatter sf = new StringFormatter();
-        String[] columnNames = sf.segmentLine(stockData[0]);
-        String[][] rowData = new String[tSize][8];
-        for(int i = 0; i < stockData.length-1; i++){
-            rowData[i] = sf.segmentLine(stockData[i+1]);
-        }
-        DefaultTableModel model = new DefaultTableModel(columnNames,0);
-        for(int i = 0; i <= rowData.length-1; i++)
-            model.addRow(rowData[i]);
-        this.stockTable = model;
-        return true;
+    public void formatJTable(String[] stockData, int tSize, int cols){
+        this.stockTable = dbf.formatJTable(stockData, tSize, cols);
     }
     public String[] getStockData(){
         return this.stockData;
     }
-    public DefaultTableModel getStockTable(){
-        
+    public File getStockDB(){
+        return this.stockDB;
+    }
+    public DefaultTableModel getStockTable(){    
         return this.stockTable;
+    }
+    public int getTSize(){
+        return this.tSize;
     }
     
 }

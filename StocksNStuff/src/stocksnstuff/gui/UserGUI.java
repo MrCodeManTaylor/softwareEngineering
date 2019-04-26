@@ -17,8 +17,10 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import stocksnstuff.SessionControl.ForumUpdateThread;
 import stocksnstuff.SessionControl.Logout;
 import stocksnstuff.SessionControl.TableUpdateThread;
+import stocksnstuff.database.DBIO.DBForumReader;
 import stocksnstuff.generalResources.StringFormatter;
 import stocksnstuff.database.DBIO.DBReader;
 import stocksnstuff.database.DBIO.DBStockReader;
@@ -35,6 +37,7 @@ public final class UserGUI extends javax.swing.JFrame {
     private String name;
     private boolean filtered = false;
     private DBStockReader dbS;
+
     /**
      * Creates new form UserGUI
      *
@@ -43,7 +46,6 @@ public final class UserGUI extends javax.swing.JFrame {
     //Specified Constructor
     public UserGUI(String name) {
 
-        
         switch (detectType(name)) {
             case 0:
                 DBReader dbR = new DBReader();
@@ -55,19 +57,12 @@ public final class UserGUI extends javax.swing.JFrame {
                 this.name = name;
                 break;
         }
-        
+
         initComponents();
         setup();
         liveUpdate(true);
     }
 
-    private void updateTable(){
-        dbS.formatStockDB();
-        dbS.formatJTable(dbS.getStockData());
-        stockData.setModel(dbS.getStockTable());
-        stockData.setDefaultEditor(Object.class, null);
-    }
-    
     private String formatTitle() {
         return "Stocks N Stuff | " + this.name;
     }
@@ -83,13 +78,18 @@ public final class UserGUI extends javax.swing.JFrame {
 
         jPanel3 = new javax.swing.JPanel();
         logout = new javax.swing.JButton();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        forum = new javax.swing.JTabbedPane();
         StockData = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         stockData = new javax.swing.JTable();
         searchField = new javax.swing.JTextField();
         searchFilter = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        rThreads = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        cThread = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -142,6 +142,11 @@ public final class UserGUI extends javax.swing.JFrame {
 
         searchField.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         searchField.setText("Search...");
+        searchField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchFieldActionPerformed(evt);
+            }
+        });
 
         searchFilter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,7 +164,7 @@ public final class UserGUI extends javax.swing.JFrame {
             .addGroup(StockDataLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(StockDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StockDataLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -182,7 +187,79 @@ public final class UserGUI extends javax.swing.JFrame {
                 .addGap(12, 12, 12))
         );
 
-        jTabbedPane1.addTab("Home", StockData);
+        forum.addTab("Home", StockData);
+
+        rThreads.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Thread Creator", "Thread Name"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        rThreads.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rThreadsMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(rThreads);
+        if (rThreads.getColumnModel().getColumnCount() > 0) {
+            rThreads.getColumnModel().getColumn(0).setMinWidth(150);
+            rThreads.getColumnModel().getColumn(0).setMaxWidth(150);
+            rThreads.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel3.setText("User Created Threads");
+
+        cThread.setText("Create New Thread");
+        cThread.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cThreadActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(cThread))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(cThread))
+        );
+
+        forum.addTab("Forum", jPanel1);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -202,7 +279,7 @@ public final class UserGUI extends javax.swing.JFrame {
                         .addComponent(logout)
                         .addGap(11, 11, 11))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jTabbedPane1)
+                        .addComponent(forum)
                         .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
@@ -213,7 +290,7 @@ public final class UserGUI extends javax.swing.JFrame {
                     .addComponent(logout)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1)
+                .addComponent(forum)
                 .addContainerGap())
         );
 
@@ -326,17 +403,39 @@ public final class UserGUI extends javax.swing.JFrame {
             this.filtered = true;
         } else {
             //Detect if table has been filtered, if so reinstate default table.
-            if(filtered){
+            if (filtered) {
                 //Reinstate table
                 stockData.setModel(dbS.getStockTable());
                 stockData.setDefaultEditor(Object.class, null);
-            }else{
+            } else {
                 //DO nothing
-                
+
             }
-            
+
         }
     }//GEN-LAST:event_searchFilterActionPerformed
+
+    private void cThreadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cThreadActionPerformed
+        ThreadC ct = new ThreadC(this.name);
+        ct.setVisible(true);
+    }//GEN-LAST:event_cThreadActionPerformed
+
+    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchFieldActionPerformed
+
+    private void rThreadsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rThreadsMouseClicked
+        // TODO add your handling code here:
+        
+        if (evt.getClickCount() == 2) {
+            int row = rThreads.rowAtPoint(evt.getPoint());
+            String[] forumDat = getRowData(row);
+            String name = rThreads.getValueAt(row, 0).toString();
+            String title = rThreads.getValueAt(row, 1).toString();
+            ThreadV tv = new ThreadV(name,title);
+            tv.setVisible(true);
+        }
+    }//GEN-LAST:event_rThreadsMouseClicked
 
     public void setup() {
 
@@ -349,34 +448,39 @@ public final class UserGUI extends javax.swing.JFrame {
             focusListener fL = new focusListener(searchField, "Search...");
             searchField.addFocusListener(fL.getFocusListener());
             searchFilter.setIcon(new ImageIcon(img));
-            
-            //initialize jtable data
-                dbS = new DBStockReader();
-                if (!dbS.formatStockDB()) {
-                    JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
-                } else {
-                    if (!dbS.formatJTable(dbS.getStockData())) {
-                        JOptionPane.showMessageDialog(rootPane, "Something went wrong, quitting...");
-                    } else {
-                        stockData.setModel(dbS.getStockTable());
-                        stockData.setDefaultEditor(Object.class, null);
-                    }
 
-                }
+            //initialize jtable data
+            dbS = new DBStockReader();
+            dbS.formatData(dbS.getStockDB(), dbS.getTSize());
+            dbS.formatJTable(dbS.getStockData(), dbS.getTSize(), 8);
+            stockData.setModel(dbS.getStockTable());
+            stockData.setDefaultEditor(Object.class, null);
+
+            //initialize jtable forum
+            DBForumReader dbf = new DBForumReader();
+            dbf.formatData(dbf.getForumDB(), dbf.getTSize());
+            dbf.formatJTable(dbf.getForumData(), dbf.getTSize(), 2);
+            rThreads.setModel(dbf.getForumTable());
+            rThreads.setDefaultEditor(Object.class, null);
+
         } catch (IOException ex) {
             Logger.getLogger(GuestGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    
+
     private void liveUpdate(Boolean val) {
         if (val) {
-            Timer timer = new Timer(150000, new ActionListener() {
+            Timer timer = new Timer(30000, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     TableUpdateThread tut = new TableUpdateThread();
                     tut.run();
                     stockData.setModel(tut.getStockTableUpdate());
+                    stockData.setDefaultEditor(Object.class, null);
+                    ForumUpdateThread fut = new ForumUpdateThread();
+                    fut.run();
+                    rThreads.setModel(fut.getForumTableUpdate());
                     stockData.setDefaultEditor(Object.class, null);
                 }
             });
@@ -387,12 +491,17 @@ public final class UserGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel StockData;
+    private javax.swing.JButton cThread;
+    private javax.swing.JTabbedPane forum;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton logout;
+    private javax.swing.JTable rThreads;
     private javax.swing.JTextField searchField;
     private javax.swing.JToggleButton searchFilter;
     private javax.swing.JTable stockData;

@@ -5,9 +5,11 @@
  */
 package stocksnstuff.database.DBIO;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,22 +24,53 @@ import stocksnstuff.generalResources.StringFormatter;
 public class DBWriter {
  
     private String path;
-    private File userDB;
+    private File DB;
     private String[] userInfo;
+    private ArrayList<String> data;
     
-    public DBWriter(){
+    public DBWriter(String loc){
         try {
-            this.path = new File(".").getCanonicalPath()+"\\dbs\\register.txt";
-            this.userDB = new File(path);
+            this.path = new File(".").getCanonicalPath()+"\\dbs\\"+loc;
+            this.DB = new File(path);
+            readDat();
         } catch (IOException ex) {
             Logger.getLogger(DBReader.class.getName()).log(Level.SEVERE, null, ex);
         }    
     }
     
+    private void readDat(){
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(path));
+            data = new ArrayList<>();
+            String l = br.readLine();
+            while(l!=null){
+                data.add(l);
+                l = br.readLine();
+            }
+            br.close();
+        }catch(IOException E){
+            
+        }
+    }
+    
+    public void writeLine(String lineData){
+        try{
+            BufferedWriter bw = new BufferedWriter(new FileWriter(path));
+            for(String line : data){
+                bw.write(line);
+                bw.newLine();
+            }
+            bw.write(lineData);
+            bw.close();
+            
+        }catch(IOException e){
+            
+        }
+    }
     
     public boolean validatePerms(){
-        if(!userDB.canRead()||!userDB.canWrite()){
-            System.out.println("\nFailure to read/write to DB: "+userDB.toString());
+        if(!DB.canRead()||!DB.canWrite()){
+            System.out.println("\nFailure to read/write to DB: "+DB.toString());
             return false;
         }else{
             return true;
@@ -46,7 +79,7 @@ public class DBWriter {
     
     public boolean updateField(String uID, String param, int fieldNum, ArrayList<String> dbData) {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(userDB));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(DB));
             StringFormatter sf = new StringFormatter();
             for(String line : dbData){
                 String[] lineData = sf.segmentLine(line);

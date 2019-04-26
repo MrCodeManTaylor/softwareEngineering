@@ -27,7 +27,7 @@ public class STFilter {
     private void filterStock(String filterParam){
         DBStockReader db = new DBStockReader();
         StringFormatter sf = new StringFormatter();
-        db.formatStockDB();
+        db.formatData(db.getStockDB(),db.getTSize());
         String[] rawData = db.getStockData();
         for(int i = 0; i < rawData.length-1; i++){
             String[] lDat = sf.segmentLine(rawData[i]);
