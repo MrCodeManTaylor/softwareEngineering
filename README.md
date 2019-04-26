@@ -8,8 +8,9 @@ _Developed by: @pfears - Paul F.,@fwfiricano - Frank F.,@MrCodeManTaylor - Mitch
 
 _Fitchburg State University | CSC 4400-01 Software Engineering |Spring 2019 |Dr. N. Mahadev_
 
-Update: 3/21/2019
+Update: 4/26/2019
  * Change to README.md
+ * Added some functionality to the forum subfunctions **WIP**
  * Added multithreading capability for Main()
  * Added automatic live stock table updating and HTML Webscraping utils
  * LiveStock current build - WIP
