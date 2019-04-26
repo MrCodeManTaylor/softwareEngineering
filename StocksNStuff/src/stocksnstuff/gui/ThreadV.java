@@ -6,6 +6,7 @@
 package stocksnstuff.gui;
 
 import java.awt.event.WindowEvent;
+import stocksnstuff.database.DBIO.DBForumReader;
 import stocksnstuff.database.DBIO.DBWriter;
 import stocksnstuff.generalResources.focusListener;
 
@@ -14,12 +15,14 @@ import stocksnstuff.generalResources.focusListener;
  * @author pfears
  */
 public class ThreadV extends javax.swing.JFrame {
-    private final String name,title;
-    
+
+    private final String name, title;
+
     public ThreadV(String name, String title) {
         this.name = name;
         this.title = title;
         initComponents();
+        setup();
     }
 
     /**
@@ -36,6 +39,8 @@ public class ThreadV extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        rPosts = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Create a Thread");
@@ -55,15 +60,61 @@ public class ThreadV extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        rPosts.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Stock Code", "Thread Creator", "Thread Name"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        rPosts.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rPostsMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(rPosts);
+        if (rPosts.getColumnModel().getColumnCount() > 0) {
+            rPosts.getColumnModel().getColumn(0).setMinWidth(100);
+            rPosts.getColumnModel().getColumn(0).setMaxWidth(100);
+            rPosts.getColumnModel().getColumn(1).setMinWidth(100);
+            rPosts.getColumnModel().getColumn(1).setMaxWidth(100);
+        }
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 694, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 389, Short.MAX_VALUE)
+            .addGap(0, 391, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(80, 80, 80)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -109,12 +160,36 @@ public class ThreadV extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void rPostsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rPostsMouseClicked
+        // TODO add your handling code here:
+
+        if (evt.getClickCount() == 2) {
+            int row = rPosts.rowAtPoint(evt.getPoint());
+            String name = rPosts.getValueAt(row, 0).toString();
+            String title = rPosts.getValueAt(row, 1).toString();
+            ThreadV tv = new ThreadV(name, title);
+            tv.setVisible(true);
+        }
+    }//GEN-LAST:event_rPostsMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JTable rPosts;
     // End of variables declaration//GEN-END:variables
+
+    void setup() {
+        //initialize jtable forum
+        DBForumReader dbf = new DBForumReader(title+"_"+name,1);
+                
+        dbf.formatData(dbf.getForumDB(), dbf.getTSize());
+        dbf.formatJTable(dbf.getForumData(), dbf.getTSize(), 3);
+        rPosts.setModel(dbf.getForumTable());
+        rPosts.setDefaultEditor(Object.class, null);
+    }
 }

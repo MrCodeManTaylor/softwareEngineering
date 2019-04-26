@@ -5,7 +5,9 @@
  */
 package stocksnstuff.gui;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import stocksnstuff.database.DBIO.DBWriter;
 import stocksnstuff.generalResources.focusListener;
@@ -113,12 +115,13 @@ public class ThreadC extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(create)
-                        .addComponent(cancel)))
+                        .addComponent(cancel))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)))
                 .addGap(9, 9, 9)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(12, Short.MAX_VALUE))
@@ -158,11 +161,12 @@ public class ThreadC extends javax.swing.JFrame {
             dbW.writeLine(username + ", " + title.getText());
             String path = new File(".").getCanonicalPath()+"\\dbs\\threads\\"+title.getText()+"_"+username;
             File dir = new File(path);
-            if(!dir.exists())
+            if(!dir.exists()){
                 dir.mkdir();
+            }
             dispose();
         } catch (IOException E) {
-
+            
         }
     }//GEN-LAST:event_createActionPerformed
 

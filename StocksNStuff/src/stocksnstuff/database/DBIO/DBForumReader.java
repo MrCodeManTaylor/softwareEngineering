@@ -10,10 +10,7 @@ package stocksnstuff.database.DBIO;
  * @author mtaylo35
  */
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,12 +26,14 @@ public class DBForumReader {
     private DBFuncs dbf = new DBFuncs();
     
     //Default Constructor
-    public DBForumReader(){
+    public DBForumReader(String loc, int type){
         try {
-            this.path = new File(".").getCanonicalPath();
-            path = path + "\\dbs\\threads.txt";
-            this.forumDB = new File(path);
-            this.tSize = dbf.findTableSize(path);
+            if(type == 0){
+                this.path = new File(".").getCanonicalPath();
+                path = path + "\\dbs\\"+loc;
+                this.forumDB = new File(path);
+                this.tSize = dbf.findTableSize(path);
+            }
         } catch (IOException ex) {
             Logger.getLogger(DBReader.class.getName()).log(Level.SEVERE, null, ex);
         }

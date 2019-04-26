@@ -457,7 +457,7 @@ public final class UserGUI extends javax.swing.JFrame {
             stockData.setDefaultEditor(Object.class, null);
 
             //initialize jtable forum
-            DBForumReader dbf = new DBForumReader();
+            DBForumReader dbf = new DBForumReader("threads.txt",0);
             dbf.formatData(dbf.getForumDB(), dbf.getTSize());
             dbf.formatJTable(dbf.getForumData(), dbf.getTSize(), 2);
             rThreads.setModel(dbf.getForumTable());

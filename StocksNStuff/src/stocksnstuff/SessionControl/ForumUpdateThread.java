@@ -19,7 +19,7 @@ public class ForumUpdateThread implements Runnable {
     @Override
     public void run() {
         DBForumReader dbf;
-        dbf = new DBForumReader();
+        dbf = new DBForumReader("threads.txt",0);
         dbf.formatData(dbf.getForumDB(), dbf.getTSize());
         dbf.formatJTable(dbf.getForumData(), dbf.getTSize(), 2);
         this.tb = dbf.getForumTable();
