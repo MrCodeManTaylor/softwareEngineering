@@ -33,6 +33,10 @@ public class DBForumReader {
                 path = path + "\\dbs\\"+loc;
                 this.forumDB = new File(path);
                 this.tSize = dbf.findTableSize(path);
+            }else{
+                this.path = new File(".").getCanonicalPath() + "\\dbs\\threads\\"+loc+"\\main.txt";
+                this.forumDB = new File(path);
+                this.tSize = dbf.findTableSize(path);
             }
         } catch (IOException ex) {
             Logger.getLogger(DBReader.class.getName()).log(Level.SEVERE, null, ex);

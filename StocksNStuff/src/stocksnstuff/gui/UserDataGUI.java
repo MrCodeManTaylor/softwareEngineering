@@ -162,7 +162,7 @@ public class UserDataGUI extends javax.swing.JFrame {
         if(pWord.getText().isEmpty()){
             JOptionPane.showMessageDialog(rootPane, "Empty password field.");
         }else{
-            DBReader dbR = new DBReader();
+            DBReader dbR = new DBReader("register.txt");
             DBWriter dbW = new DBWriter("register.txt");
             if(dbW.updateField(email.getText(), pWord.getText(), 2, dbR.getDBData())){
                 //Successful Update

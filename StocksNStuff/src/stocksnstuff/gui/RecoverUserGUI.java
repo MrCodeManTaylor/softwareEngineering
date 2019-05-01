@@ -164,7 +164,7 @@ public class RecoverUserGUI extends javax.swing.JFrame {
         if (!validateFields()) {
             JOptionPane.showMessageDialog(rootPane, "Empty fields!");
         } else {
-            DBReader dbR = new DBReader();
+            DBReader dbR = new DBReader("register.txt");
             dbR.validatePerms();
             if (!dbR.scanDB(eMailF.getText(), detectType())) {
                 JOptionPane.showMessageDialog(rootPane, "Invalid Email/Username");
@@ -188,7 +188,7 @@ public class RecoverUserGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         //Validate security question responses
-        DBReader dbR = new DBReader();
+        DBReader dbR = new DBReader("register.txt");
         if (!dbR.scanDBByID(sqr1.getText(), 4,eMailF.getText(),detectType()) || !dbR.scanDBByID(sqr2.getText(), 6,eMailF.getText(),detectType())) {
             JOptionPane.showMessageDialog(rootPane, "Invalid user credentials...");
             this.dispose();

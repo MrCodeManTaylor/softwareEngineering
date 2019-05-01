@@ -5,16 +5,18 @@
  */
 package stocksnstuff.gui;
 
-import java.awt.event.WindowEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
+import stocksnstuff.SessionControl.ForumUpdateThread;
 import stocksnstuff.database.DBIO.DBForumReader;
-import stocksnstuff.database.DBIO.DBWriter;
-import stocksnstuff.generalResources.focusListener;
+import stocksnstuff.database.DBIO.DBReader;
 
 /**
  *
  * @author pfears
  */
-public class ThreadV extends javax.swing.JFrame {
+public final class ThreadV extends javax.swing.JFrame {
 
     private final String name, title;
 
@@ -23,6 +25,7 @@ public class ThreadV extends javax.swing.JFrame {
         this.title = title;
         initComponents();
         setup();
+        liveUpdate(true);
     }
 
     /**
@@ -41,6 +44,8 @@ public class ThreadV extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         rPosts = new javax.swing.JTable();
+        pCreate = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Create a Thread");
@@ -65,7 +70,7 @@ public class ThreadV extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Stock Code", "Thread Creator", "Thread Name"
+                "Stock Code", "Post Creator", "Post Title"
             }
         ) {
             Class[] types = new Class [] {
@@ -96,11 +101,25 @@ public class ThreadV extends javax.swing.JFrame {
             rPosts.getColumnModel().getColumn(1).setMaxWidth(100);
         }
 
+        pCreate.setText("Create New post");
+        pCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pCreateActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Report Thread");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 694, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pCreate)
+                .addContainerGap())
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
@@ -109,7 +128,12 @@ public class ThreadV extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 391, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(384, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pCreate)
+                    .addComponent(jButton2))
+                .addGap(5, 5, 5))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(80, 80, 80)
@@ -128,7 +152,7 @@ public class ThreadV extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 361, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 365, Short.MAX_VALUE)
                         .addComponent(jLabel2)))
                 .addContainerGap())
         );
@@ -154,7 +178,7 @@ public class ThreadV extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -165,31 +189,62 @@ public class ThreadV extends javax.swing.JFrame {
 
         if (evt.getClickCount() == 2) {
             int row = rPosts.rowAtPoint(evt.getPoint());
-            String name = rPosts.getValueAt(row, 0).toString();
-            String title = rPosts.getValueAt(row, 1).toString();
-            ThreadV tv = new ThreadV(name, title);
-            tv.setVisible(true);
+            String name = rPosts.getValueAt(row, 1).toString();
+            String title = rPosts.getValueAt(row, 2).toString();
+            DBReader dbr = new DBReader("threads\\"+title+"_"+name+"\\main.txt");
+            
+            //TODO: Update dbr.getPost() for functionality.
+            dbr.getPost("parameter");
+            PostV post = new PostV(name,title, "Paraaameter");
+            post.setVisible(true);
         }
     }//GEN-LAST:event_rPostsMouseClicked
 
+    private void pCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pCreateActionPerformed
+        // TODO add your handling code here:
+        //Create post...
+        PostC post = new PostC(name, title+"_"+name);
+        post.setVisible(true);
+        
+        
+    }//GEN-LAST:event_pCreateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JButton pCreate;
     private javax.swing.JTable rPosts;
     // End of variables declaration//GEN-END:variables
 
     void setup() {
         //initialize jtable forum
         DBForumReader dbf = new DBForumReader(title+"_"+name,1);
-                
         dbf.formatData(dbf.getForumDB(), dbf.getTSize());
         dbf.formatJTable(dbf.getForumData(), dbf.getTSize(), 3);
         rPosts.setModel(dbf.getForumTable());
         rPosts.setDefaultEditor(Object.class, null);
+    }
+    
+    private void liveUpdate(Boolean val) {
+        if (val) {
+            Timer timer = new Timer(30000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    ForumUpdateThread fut = new ForumUpdateThread();
+                    fut.setTarget("threads\\"+title+"_"+name+"\\main.txt");
+                    fut.run();
+                    rPosts.setModel(fut.getForumTableUpdate());
+                    rPosts.setDefaultEditor(Object.class, null);
+                }
+            });
+            timer.setRepeats(this.isEnabled());
+            timer.start();
+        }
     }
 }

@@ -18,7 +18,7 @@ public class DBAdminIO {
     private DBReader dbr;
     private String[] banList;
     public DBAdminIO(){
-        dbr = new DBReader();
+        dbr = new DBReader("register.txt");
         banList = dbr.getBanList();
     }
     

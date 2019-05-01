@@ -48,7 +48,7 @@ public final class UserGUI extends javax.swing.JFrame {
 
         switch (detectType(name)) {
             case 0:
-                DBReader dbR = new DBReader();
+                DBReader dbR = new DBReader("Register.txt");
                 dbR.scanDB(name, 0);
                 String[] userDat = dbR.getUserInfo();
                 this.name = userDat[1];
@@ -91,6 +91,7 @@ public final class UserGUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         cThread = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(formatTitle());
@@ -155,7 +156,7 @@ public final class UserGUI extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Stocks N Stuff | Latest Data");
+        jLabel1.setText("SNS' Live Tracker");
 
         javax.swing.GroupLayout StockDataLayout = new javax.swing.GroupLayout(StockData);
         StockData.setLayout(StockDataLayout);
@@ -183,8 +184,8 @@ public final class UserGUI extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addComponent(searchFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         forum.addTab("Home", StockData);
@@ -253,7 +254,7 @@ public final class UserGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addComponent(cThread))
@@ -265,6 +266,8 @@ public final class UserGUI extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText(this.name);
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/StocksnStuffLogoCompact1.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -273,22 +276,26 @@ public final class UserGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(logout)
-                        .addGap(11, 11, 11))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(forum)
-                        .addContainerGap())))
+                        .addGap(11, 11, 11)
+                        .addComponent(logout))
+                    .addComponent(forum))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(logout)
-                    .addComponent(jLabel2))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(logout)
+                            .addComponent(jLabel2)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(forum)
                 .addContainerGap())
@@ -302,7 +309,9 @@ public final class UserGUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -352,7 +361,7 @@ public final class UserGUI extends javax.swing.JFrame {
                     switch (detectType(name)) {
                         case 0:
                             //Email type
-                            DBReader dbR = new DBReader();
+                            DBReader dbR = new DBReader("register.txt");
                             dbR.scanDB(name, 0);
                             String[] userDat = dbR.getUserInfo();
                             StringFormatter sf = new StringFormatter();
@@ -374,7 +383,7 @@ public final class UserGUI extends javax.swing.JFrame {
                     //They wish to untrack the stock
                     switch (detectType(name)) {
                         case 0:
-                            DBReader dbR = new DBReader();
+                            DBReader dbR = new DBReader("register.txt");
                             dbR.scanDB(name, 0);
                             String[] userDat = dbR.getUserInfo();
                             StringFormatter sf = new StringFormatter();
@@ -479,6 +488,7 @@ public final class UserGUI extends javax.swing.JFrame {
                     stockData.setModel(tut.getStockTableUpdate());
                     stockData.setDefaultEditor(Object.class, null);
                     ForumUpdateThread fut = new ForumUpdateThread();
+                    fut.setTarget("threads.txt");
                     fut.run();
                     rThreads.setModel(fut.getForumTableUpdate());
                     stockData.setDefaultEditor(Object.class, null);
@@ -496,6 +506,7 @@ public final class UserGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;

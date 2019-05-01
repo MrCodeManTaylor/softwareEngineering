@@ -15,17 +15,20 @@ import stocksnstuff.database.DBIO.DBForumReader;
 public class ForumUpdateThread implements Runnable {
 
     public DefaultTableModel tb = new DefaultTableModel();
-
+    private String target;
     @Override
     public void run() {
         DBForumReader dbf;
-        dbf = new DBForumReader("threads.txt",0);
+        dbf = new DBForumReader(target,0);
         dbf.formatData(dbf.getForumDB(), dbf.getTSize());
         dbf.formatJTable(dbf.getForumData(), dbf.getTSize(), 2);
         this.tb = dbf.getForumTable();
 
     }
 
+    public void setTarget(String target){
+        this.target = target;
+    }
     public DefaultTableModel getForumTableUpdate() {
         return this.tb;
     }

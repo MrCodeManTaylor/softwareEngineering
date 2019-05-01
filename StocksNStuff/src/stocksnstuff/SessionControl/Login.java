@@ -26,7 +26,7 @@ public class Login {
     }
 
     public boolean loginEmail(String email, String password) {
-        DBReader dbR = new DBReader();
+        DBReader dbR = new DBReader("register.txt");
         if (!dbR.validatePerms()) {
             return false;
         } else {
@@ -42,7 +42,7 @@ public class Login {
     }
 
     public boolean loginUsername(String username, String password) {
-        DBReader dbR = new DBReader();
+        DBReader dbR = new DBReader("register.txt");
         if (!dbR.validatePerms()) {
             return false;
         } else {

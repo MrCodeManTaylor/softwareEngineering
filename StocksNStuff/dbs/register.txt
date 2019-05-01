@@ -8,3 +8,4 @@ newtest@test.test, alt, alt, What year was your father born?, 1965, What is your
 ffirican@student.fitchburgstate.edu, frank, 123, What is your mother's maiden name?, 1, What was your first pet's name?, he, 1, 0, 0, 0, 0
 paul@fears.com, paulfears, a, What is your mother's maiden name?, a, What was your first pet's name?, a, 1, 0, 0, 0, 0
 pfeaaaaaars@pfears.com, 123fears, fears, What is your mother's maiden name?, my mom is p, What was your first pet's name?, my dog is fears, 1, 0, 0, 0, 0
+mitchTaylor@gmail.com, MrCodeManTaylor, 123, What is your mother's maiden name?, J, What was your first pet's name?, A, 1, 0, 0, 0, 0

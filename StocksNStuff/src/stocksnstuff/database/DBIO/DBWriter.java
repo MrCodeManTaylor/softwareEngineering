@@ -52,7 +52,7 @@ public class DBWriter {
             
         }
     }
-    
+
     public void writeLine(String lineData){
         try{
             BufferedWriter bw = new BufferedWriter(new FileWriter(path));

@@ -29,47 +29,48 @@ public class DBFuncs {
         while (br.readLine() != null) {
             i++;
         }
+        br.close();
         return i;
     }
-    
+
     public String[] formatData(File DB, int tSize) {
         try {
-            if (!DB.canRead()) {
-                return null;
-            } else {
-                String[] forumData = new String[tSize];
-                BufferedReader br = new BufferedReader(new FileReader(DB));
-                String line = br.readLine();
-                forumData[0] = line;
-                int i = 0;
-                while(i < tSize -1){
-                    i++;
-                    line = br.readLine();
-                    forumData[i] = line;
-                }
-                return forumData;
+            String[] forumData = new String[tSize];
+            BufferedReader br = new BufferedReader(new FileReader(DB));
+            String line = br.readLine();
+            forumData[0] = line;
+            int i = 0;
+            while (i < tSize - 1) {
+                i++;
+                line = br.readLine();
+                forumData[i] = line;
             }
+            br.close();
+            return forumData;
+
         } catch (FileNotFoundException ex) {
             return null;
         } catch (IOException ex) {
             return null;
         }
     }
-    
-    public DefaultTableModel formatJTable(String[] data, int tSize, int cols){
-        
-        if(data.length == 0)
+
+    public DefaultTableModel formatJTable(String[] data, int tSize, int cols) {
+
+        if (data.length == 0) {
             return null;
+        }
         tSize--;
         StringFormatter sf = new StringFormatter();
         String[] columnNames = sf.segmentLine(data[0]);
         String[][] rowData = new String[tSize][cols];
-        for(int i = 0; i < data.length-1; i++){
-            rowData[i] = sf.segmentLine(data[i+1]);
+        for (int i = 0; i < data.length - 1; i++) {
+            rowData[i] = sf.segmentLine(data[i + 1]);
         }
-        DefaultTableModel model = new DefaultTableModel(columnNames,0);
-        for(int i = 0; i <= rowData.length-1; i++)
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        for (int i = 0; i <= rowData.length - 1; i++) {
             model.addRow(rowData[i]);
+        }
         return model;
     }
 }

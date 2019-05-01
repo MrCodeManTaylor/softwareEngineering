@@ -26,15 +26,20 @@ public class DBReader {
     private String[] userInfo;
     private int banListSize;
 
-    public DBReader() {
+    public DBReader(String loc) {
         try {
             this.path = new File(".").getCanonicalPath();
-            this.userDB = new File(path + "\\dbs\\register.txt");
+            this.userDB = new File(path + "\\dbs\\"+ loc);
         } catch (IOException ex) {
             Logger.getLogger(DBReader.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    public String getPost(String param){
+        //Responsible for obtaining post data
+        return null;
+    }
+    
     public boolean validatePerms() {
         if (!userDB.canRead() || !userDB.canWrite()) {
             System.out.println("\nFailure to read/write to DB: " + userDB.toString());
