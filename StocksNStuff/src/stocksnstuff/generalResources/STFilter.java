@@ -18,14 +18,16 @@ public class STFilter {
     private ArrayList<String> fDat = new ArrayList<>();
     private int tSize;
     private DefaultTableModel tModel;
+    private String loc;
     
-    public STFilter(String filterParam){
+    public STFilter(String filterParam, String loc){
+        this.loc = loc;
         filterStock(filterParam.toUpperCase());
         formatJTable();
     }
     
     private void filterStock(String filterParam){
-        DBStockReader db = new DBStockReader();
+        DBStockReader db = new DBStockReader(loc);
         StringFormatter sf = new StringFormatter();
         db.formatData(db.getStockDB(),db.getTSize());
         String[] rawData = db.getStockData();

@@ -188,6 +188,7 @@ public final class ThreadV extends javax.swing.JFrame {
             String name = rPosts.getValueAt(row, 1).toString();
             String title = rPosts.getValueAt(row, 2).toString();
             String code = rPosts.getValueAt(row, 0).toString();
+            System.out.println(code + " : "  + name + " : " +  title);
             String postData = dbr.getPost(name, title, true);
             dbr.setDB("\\stockDat\\stockData.txt");
             String stock = dbr.getPost(code, code, false);

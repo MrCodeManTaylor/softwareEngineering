@@ -5,16 +5,11 @@
  */
 package stocksnstuff.database.DBIO;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import stocksnstuff.generalResources.StringFormatter;
-
 /**
  *
  * @author Mitchell
@@ -28,12 +23,12 @@ public class DBStockReader {
     private int tSize;
     private DBFuncs dbf = new DBFuncs();
     
-    public DBStockReader() {
+    public DBStockReader(String path) {
         try {
             this.path = new File(".").getCanonicalPath();
-            path = path + "\\stockDat\\stockData.txt";
-            this.stockDB = new File(path);
-            this.tSize = dbf.findTableSize(path);
+            this.path = this.path + path;
+            this.stockDB = new File(this.path);
+            this.tSize = dbf.findTableSize(this.path);
         } catch (IOException ex) {
             Logger.getLogger(DBReader.class.getName()).log(Level.SEVERE, null, ex);
         }

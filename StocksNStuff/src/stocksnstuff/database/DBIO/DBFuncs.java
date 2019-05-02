@@ -33,6 +33,7 @@ public class DBFuncs {
         return i;
     }
 
+    
     public String[] formatData(File DB, int tSize) {
         try {
             String[] forumData = new String[tSize];

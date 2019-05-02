@@ -153,6 +153,11 @@ public final class GuestGUI extends javax.swing.JFrame {
 
         searchField.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         searchField.setText("Search...");
+        searchField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchFieldActionPerformed(evt);
+            }
+        });
 
         searchFilter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,7 +285,7 @@ public final class GuestGUI extends javax.swing.JFrame {
         if (!searchField.getText().isEmpty()) {
             //We need to rebuild the stock table now, utilizing the searchField as a basis
             String searchFilter = searchField.getText();
-            STFilter sTF = new STFilter(searchField.getText());
+            STFilter sTF = new STFilter(searchField.getText(), "\\stockDat\\stockData.txt");
             stockData.setModel(sTF.getTModel());
             stockData.setDefaultEditor(Object.class, null);
             stockData.getTableHeader().setResizingAllowed(false);
@@ -364,10 +369,13 @@ public final class GuestGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_uPassActionPerformed
 
+    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchFieldActionPerformed
+
     private void setup() {
 
         try {
-            Icon Icon;
             String f = new File(".").getCanonicalPath() + "\\src\\resources\\searchIcon.bmp";
             File file = new File(f);
 
@@ -386,7 +394,7 @@ public final class GuestGUI extends javax.swing.JFrame {
                 }
 
                 //initialize jtable data
-                dbS = new DBStockReader();
+                dbS = new DBStockReader("\\stockDat\\stockData.txt");
                 dbS.formatData(dbS.getStockDB(), dbS.getTSize());
                 dbS.formatJTable(dbS.getStockData(), dbS.getTSize(), 8);
                 stockData.setModel(dbS.getStockTable());
@@ -407,6 +415,7 @@ public final class GuestGUI extends javax.swing.JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     TableUpdateThread tut = new TableUpdateThread();
+                    tut.setLoc("\\stockDat\\stockData.txt");
                     tut.run();
                     stockData.setModel(tut.getStockTableUpdate());
                     stockData.setDefaultEditor(Object.class, null);

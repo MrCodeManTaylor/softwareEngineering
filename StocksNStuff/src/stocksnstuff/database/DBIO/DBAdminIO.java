@@ -82,7 +82,7 @@ public class DBAdminIO {
                 String[] data = sf.segmentLine(line);
                 if (data[11].equals("1")) {
                     String directory = dir.substring(dir.indexOf("\\threads\\")+9,dir.indexOf("\\main.txt"));
-                    String postData = data[1] + ", " + data[2] + ", " + directory;
+                    String postData = data[1] + ", " + data[2] + ", " + directory + ", " + data[0];
                     reportedPosts.add(postData);
                 }
                 line = br.readLine();
@@ -99,8 +99,8 @@ public class DBAdminIO {
     public DefaultTableModel formatJTable(ArrayList<String> reportedList) {
 
         StringFormatter sf = new StringFormatter();
-        String[] columnNames = sf.segmentLine("User, Post Title, Thread");
-        String[][] rowData = new String[reportedList.size()][3];
+        String[] columnNames = sf.segmentLine("User, Post Title, Thread, Stock Code");
+        String[][] rowData = new String[reportedList.size()][4];
         int i = 0;
         for (String s : reportedList) {
 

@@ -294,7 +294,7 @@ public class AdminGUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title", "Created by", "Stock code"
+                "User", "Post Title", "Thread"
             }
         ) {
             Class[] types = new Class [] {
@@ -313,6 +313,11 @@ public class AdminGUI extends javax.swing.JFrame {
             }
         });
         pReportTable.setRowHeight(24);
+        pReportTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pReportTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(pReportTable);
         if (pReportTable.getColumnModel().getColumnCount() > 0) {
             pReportTable.getColumnModel().getColumn(0).setResizable(false);
@@ -536,27 +541,27 @@ public class AdminGUI extends javax.swing.JFrame {
         DBWriter dbW = new DBWriter("register.txt");
         if (banU.isSelected()) {
             if (jTable1.getSelectedRow() != -1) {
-                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(), "1", 8, dbR.getDBData());
-                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(), "1", 11, dbR.getDBData());
+                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString(), "1", 8, dbR.getDBData());
+                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString(), "1", 11, dbR.getDBData());
             }
         } else if (clearU.isSelected()) {
             if (jTable1.getSelectedRow() != -1) {
-                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(), "0", 8, dbR.getDBData());
-                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(), "0", 9, dbR.getDBData());
-                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(), "0", 10, dbR.getDBData());
+                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString(), "0", 8, dbR.getDBData());
+                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString(), "0", 9, dbR.getDBData());
+                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString(), "0", 10, dbR.getDBData());
             }
         } else if (warnU.isSelected()) {
             if (jTable1.getSelectedRow() != -1) {
-                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(), "1", 9, dbR.getDBData());
+                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString(), "1", 9, dbR.getDBData());
             }
         } else if (unbanU.isSelected()) {
             if (jTable1.getSelectedRow() != -1) {
-                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(), "0", 8, dbR.getDBData());
-                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(), "1", 11, dbR.getDBData());
+                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString(), "0", 8, dbR.getDBData());
+                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString(), "1", 11, dbR.getDBData());
             }
         } else if (unwarnU.isSelected()) {
             if (jTable1.getSelectedRow() != -1) {
-                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(),1).toString(), "0", 9, dbR.getDBData());
+                dbW.updateField(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString(), "0", 9, dbR.getDBData());
             }
         } else {
             //Do nothing
@@ -593,34 +598,52 @@ public class AdminGUI extends javax.swing.JFrame {
 
     private void eaButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eaButton2ActionPerformed
         // Enforce action post button
-        DBReader dbR = new DBReader("\\dbs\\threads\\"+pReportTable.getValueAt(pReportTable.getSelectedRow(),2)+"\\main.txt");
-        DBWriter dbW = new DBWriter("\\threads\\"+pReportTable.getValueAt(pReportTable.getSelectedRow(),2)+"\\main.txt");
-        String poster = pReportTable.getValueAt(pReportTable.getSelectedRow(),0).toString();
-        String title = pReportTable.getValueAt(pReportTable.getSelectedRow(),1).toString();
-        String thread = pReportTable.getValueAt(pReportTable.getSelectedRow(),2).toString();
-        if(clearP.isSelected()){
-            if(pReportTable.getSelectedRow() != -1){
+        DBReader dbR = new DBReader("\\dbs\\threads\\" + pReportTable.getValueAt(pReportTable.getSelectedRow(), 2) + "\\main.txt");
+        DBWriter dbW = new DBWriter("\\threads\\" + pReportTable.getValueAt(pReportTable.getSelectedRow(), 2) + "\\main.txt");
+        String poster = pReportTable.getValueAt(pReportTable.getSelectedRow(), 0).toString();
+        String title = pReportTable.getValueAt(pReportTable.getSelectedRow(), 1).toString();
+        String thread = pReportTable.getValueAt(pReportTable.getSelectedRow(), 2).toString();
+        if (clearP.isSelected()) {
+            if (pReportTable.getSelectedRow() != -1) {
                 dbW.updatePost(poster, thread, "0");
             }
-        }else if(deleteP.isSelected()){
-            if(pReportTable.getSelectedRow() != -1){
+        } else if (deleteP.isSelected()) {
+            if (pReportTable.getSelectedRow() != -1) {
                 //Delete post!
                 dbW.deleteLine(poster, title);
             }
-        }else if(reportU.isSelected()){
-            if(pReportTable.getSelectedRow() != -1){
+        } else if (reportU.isSelected()) {
+            if (pReportTable.getSelectedRow() != -1) {
                 dbR = new DBReader("\\dbs\\register.txt");
                 dbW = new DBWriter("register.txt");
                 dbW.updateField(poster, "1", 10, dbR.getDBData());
             }
-        }else if(warnU2.isSelected()){
-            if(pReportTable.getSelectedRow() != -1){
+        } else if (warnU2.isSelected()) {
+            if (pReportTable.getSelectedRow() != -1) {
                 dbR = new DBReader("\\dbs\\register.txt");
                 dbW = new DBWriter("register.txt");
                 dbW.updateField(poster, "1", 9, dbR.getDBData());
             }
         }
     }//GEN-LAST:event_eaButton2ActionPerformed
+
+    private void pReportTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pReportTableMouseClicked
+        // TODO add your handling code here:
+
+        if (evt.getClickCount() == 2) {
+            String poster = pReportTable.getValueAt(pReportTable.getSelectedRow(), 0).toString();
+            String title = pReportTable.getValueAt(pReportTable.getSelectedRow(), 1).toString();
+            String thread = pReportTable.getValueAt(pReportTable.getSelectedRow(), 2).toString();
+            String code = pReportTable.getValueAt(pReportTable.getSelectedRow(), 3).toString();
+            DBReader dbr = new DBReader("\\dbs\\threads\\" + thread + "\\main.txt");
+            int row = pReportTable.rowAtPoint(evt.getPoint());
+            String postData = dbr.getPost(poster, title, true);
+            dbr.setDB("\\stockDat\\stockData.txt");
+            String stock = dbr.getPost(code, code, false);
+            PostV post = new PostV(poster, title, postData, stock, thread);
+            post.setVisible(true);
+        }
+    }//GEN-LAST:event_pReportTableMouseClicked
 
     private void setup() {
 

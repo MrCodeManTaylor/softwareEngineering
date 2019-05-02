@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -36,7 +35,7 @@ public final class UserGUI extends javax.swing.JFrame {
 
     private String name;
     private boolean filtered = false;
-    private DBStockReader dbS;
+    private DBStockReader dbS, dbST;
 
     /**
      * Creates new form UserGUI
@@ -90,6 +89,12 @@ public final class UserGUI extends javax.swing.JFrame {
         rThreads = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         cThread = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        trackedStocks = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        searchFieldTracked = new javax.swing.JTextField();
+        searchFilterTracked = new javax.swing.JToggleButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -245,12 +250,11 @@ public final class UserGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addGap(25, 25, 25))
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(25, 552, Short.MAX_VALUE))))
+                        .addGap(0, 527, Short.MAX_VALUE)))
+                .addGap(25, 25, 25))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cThread)
@@ -269,6 +273,86 @@ public final class UserGUI extends javax.swing.JFrame {
         );
 
         forum.addTab("Forum", jPanel1);
+
+        trackedStocks.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Symbol", "Open", "High", "Low", "Close", "Net Change", "Net Change %"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        trackedStocks.getTableHeader().setReorderingAllowed(false);
+        trackedStocks.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                trackedStocksMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(trackedStocks);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setText("Live Stock Tracker");
+
+        searchFieldTracked.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        searchFieldTracked.setText("Search...");
+        searchFieldTracked.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchFieldTrackedActionPerformed(evt);
+            }
+        });
+
+        searchFilterTracked.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchFilterTrackedActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 946, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(searchFieldTracked, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchFilterTracked, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(searchFieldTracked, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5))
+                    .addComponent(searchFilterTracked, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69))
+        );
+
+        forum.addTab("Tracked", jPanel2);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -301,14 +385,11 @@ public final class UserGUI extends javax.swing.JFrame {
                         .addComponent(logout)
                         .addGap(33, 33, 33))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)))
+                        .addContainerGap()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(forum, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -417,15 +498,16 @@ public final class UserGUI extends javax.swing.JFrame {
         if (!searchField.getText().equals("")) {
             //Extract filtration schema and recreate Table Model Obj
             String searchFilter = searchField.getText();
-            STFilter sTF = new STFilter(searchField.getText());
+            STFilter sTF = new STFilter(searchField.getText(), "\\stockDat\\stockData.txt");
             stockData.setModel(sTF.getTModel());
-            
+
             stockData.setDefaultEditor(Object.class, null);
             this.filtered = true;
         } else {
             //Detect if table has been filtered, if so reinstate default table.
             if (filtered) {
                 //Reinstate table
+                
                 stockData.setModel(dbS.getStockTable());
                 stockData.setDefaultEditor(Object.class, null);
                 stockData.getTableHeader().setResizingAllowed(false);
@@ -448,21 +530,55 @@ public final class UserGUI extends javax.swing.JFrame {
 
     private void rThreadsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rThreadsMouseClicked
         // TODO add your handling code here:
-        
+
         if (evt.getClickCount() == 2) {
             int row = rThreads.rowAtPoint(evt.getPoint());
             String[] forumDat = getRowData(row);
             String name = rThreads.getValueAt(row, 0).toString();
             String title = rThreads.getValueAt(row, 1).toString();
-            ThreadV tv = new ThreadV(name,title);
+            ThreadV tv = new ThreadV(name, title);
             tv.setVisible(true);
         }
     }//GEN-LAST:event_rThreadsMouseClicked
 
+    private void trackedStocksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_trackedStocksMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_trackedStocksMouseClicked
+
+    private void searchFieldTrackedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldTrackedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchFieldTrackedActionPerformed
+
+    private void searchFilterTrackedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFilterTrackedActionPerformed
+
+        // TODO add your handling code here:
+        if (!searchField.getText().equals("")) {
+            //Extract filtration schema and recreate Table Model Obj
+            STFilter sTF = new STFilter(searchFieldTracked.getText(), "\\dbs\\users\\" + name + ".txt");
+            trackedStocks.setModel(sTF.getTModel());
+            trackedStocks.setDefaultEditor(Object.class, null);
+            trackedStocks.getTableHeader().setResizingAllowed(false);
+
+            this.filtered = true;
+        } else {
+            //Detect if table has been filtered, if so reinstate default table.
+            if (filtered) {
+                //Reinstate table
+                trackedStocks.setModel(dbST.getStockTable());
+                trackedStocks.setDefaultEditor(Object.class, null);
+                trackedStocks.getTableHeader().setResizingAllowed(false);
+            } else {
+                //DO nothing
+
+            }
+
+        }
+
+    }//GEN-LAST:event_searchFilterTrackedActionPerformed
+
     public void setup() {
 
         try {
-            Icon Icon;
             String f = new File(".").getCanonicalPath() + "\\src\\resources\\searchIcon.bmp";
             File file = new File(f);
             Image img;
@@ -470,9 +586,14 @@ public final class UserGUI extends javax.swing.JFrame {
             focusListener fL = new focusListener(searchField, "Search...");
             searchField.addFocusListener(fL.getFocusListener());
             searchFilter.setIcon(new ImageIcon(img));
+            fL = new focusListener(searchFieldTracked, "Search...");
+            searchFieldTracked.addFocusListener(fL.getFocusListener());
+            searchFilterTracked.setIcon(new ImageIcon(img));
+            
+            
 
             //initialize jtable data
-            dbS = new DBStockReader();
+            dbS = new DBStockReader("\\stockDat\\stockData.txt");
             dbS.formatData(dbS.getStockDB(), dbS.getTSize());
             dbS.formatJTable(dbS.getStockData(), dbS.getTSize(), 8);
             stockData.setModel(dbS.getStockTable());
@@ -480,12 +601,20 @@ public final class UserGUI extends javax.swing.JFrame {
             stockData.getTableHeader().setResizingAllowed(false);
 
             //initialize jtable forum
-            DBForumReader dbf = new DBForumReader("threads.txt",0);
+            DBForumReader dbf = new DBForumReader("threads.txt", 0);
             dbf.formatData(dbf.getForumDB(), dbf.getTSize());
             dbf.formatJTable(dbf.getForumData(), dbf.getTSize(), 2);
             rThreads.setModel(dbf.getForumTable());
             rThreads.setDefaultEditor(Object.class, null);
             rThreads.getTableHeader().setResizingAllowed(false);
+
+            //initialize the tracked stock table
+            dbST = new DBStockReader("\\dbs\\users\\"+name+".txt");
+            dbST.formatData(dbST.getStockDB(), dbST.getTSize());
+            dbST.formatJTable(dbST.getStockData(), dbST.getTSize(), 8);
+            trackedStocks.setModel(dbST.getStockTable());
+            trackedStocks.setDefaultEditor(Object.class, null);
+            trackedStocks.getTableHeader().setResizingAllowed(false);
 
         } catch (IOException ex) {
             Logger.getLogger(GuestGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -499,10 +628,16 @@ public final class UserGUI extends javax.swing.JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     TableUpdateThread tut = new TableUpdateThread();
+                    tut.setLoc("\\stockDat\\stockData.txt");
                     tut.run();
                     stockData.setModel(tut.getStockTableUpdate());
                     stockData.setDefaultEditor(Object.class, null);
                     stockData.getTableHeader().setResizingAllowed(false);
+                    tut.setLoc("\\dbs\\users\\" + name + ".txt");
+                    tut.run();
+                    trackedStocks.setModel(tut.getStockTableUpdate());
+                    trackedStocks.setDefaultEditor(Object.class, null);
+                    trackedStocks.getTableHeader().setResizingAllowed(false);
                     ForumUpdateThread fut = new ForumUpdateThread();
                     fut.setTarget("threads.txt");
                     fut.run();
@@ -524,14 +659,20 @@ public final class UserGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton logout;
     private javax.swing.JTable rThreads;
     private javax.swing.JTextField searchField;
+    private javax.swing.JTextField searchFieldTracked;
     private javax.swing.JToggleButton searchFilter;
+    private javax.swing.JToggleButton searchFilterTracked;
     private javax.swing.JTable stockData;
+    private javax.swing.JTable trackedStocks;
     // End of variables declaration//GEN-END:variables
 }
