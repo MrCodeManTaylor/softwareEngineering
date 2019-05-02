@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import stocksnstuff.database.DBIO.DBReader;
 import stocksnstuff.database.DBIO.DBWriter;
 /**
  *
@@ -190,8 +191,10 @@ public class PostC extends javax.swing.JFrame {
             String pStock = stockCodes.getSelectedItem().toString();
             String pName = pTitle.getText();
             String path = "\\threads\\"+loc+"\\main.txt";
-            DBWriter dbw = new DBWriter(path);System.out.println(path);
-            dbw.writeLine(pStock +", "+ userid +", "+ pName +", "+ pData);
+            DBWriter dbw = new DBWriter(path);
+            DBReader dbr = new DBReader("\\stockDat\\stockData.txt");
+            dbw.writeLine(pStock +", "+ userid +", "+ pName +", "+ pData +", "+ dbr.getPost(pStock, pStock, false) +", 0");
+            
             dispose();
     }//GEN-LAST:event_pSubmitActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables

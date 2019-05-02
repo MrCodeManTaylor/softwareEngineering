@@ -55,8 +55,6 @@ public final class GuestGUI extends javax.swing.JFrame {
         register = new javax.swing.JButton();
         login = new javax.swing.JButton();
         userID = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         uPass = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -65,6 +63,8 @@ public final class GuestGUI extends javax.swing.JFrame {
         searchField = new javax.swing.JTextField();
         searchFilter = new javax.swing.JToggleButton();
         recoverUser = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Stocks N Stuff");
@@ -73,6 +73,7 @@ public final class GuestGUI extends javax.swing.JFrame {
         main.setBackground(new java.awt.Color(102, 153, 255));
         main.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         main.setForeground(new java.awt.Color(51, 153, 255));
+        main.setPreferredSize(new java.awt.Dimension(996, 558));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/StocksnStuffLogoCompact1.png"))); // NOI18N
@@ -98,12 +99,6 @@ public final class GuestGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel2.setText("Username/Email");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel3.setText("Password");
-
         uPass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         uPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +109,7 @@ public final class GuestGUI extends javax.swing.JFrame {
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("SNS' Live Tracker");
+        jLabel4.setText("Live Stock Tracker");
 
         stockData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -170,17 +165,18 @@ public final class GuestGUI extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2)))
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 756, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,6 +198,14 @@ public final class GuestGUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Username/Email");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Password");
+
         javax.swing.GroupLayout mainLayout = new javax.swing.GroupLayout(main);
         main.setLayout(mainLayout);
         mainLayout.setHorizontalGroup(
@@ -209,24 +213,24 @@ public final class GuestGUI extends javax.swing.JFrame {
             .addGroup(mainLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(mainLayout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(181, 181, 181)
-                        .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(mainLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 377, Short.MAX_VALUE)
+                        .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(userID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainLayout.createSequentialGroup()
                                 .addComponent(recoverUser)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(register, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2)
-                            .addComponent(userID, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(14, 14, 14)
                         .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(uPass, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(login, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(login, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addContainerGap())
         );
         mainLayout.setVerticalGroup(
             mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,17 +240,18 @@ public final class GuestGUI extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addGroup(mainLayout.createSequentialGroup()
                         .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(userID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(uPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(uPass, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(userID, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(login)
-                            .addComponent(register)
-                            .addComponent(recoverUser))))
+                            .addGroup(mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(register)
+                                .addComponent(recoverUser)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -265,6 +270,39 @@ public final class GuestGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void stockDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stockDataMouseClicked
+    }//GEN-LAST:event_stockDataMouseClicked
+
+    private void searchFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFilterActionPerformed
+        // TODO add your handling code here:
+
+        if (!searchField.getText().isEmpty()) {
+            //We need to rebuild the stock table now, utilizing the searchField as a basis
+            String searchFilter = searchField.getText();
+            STFilter sTF = new STFilter(searchField.getText());
+            stockData.setModel(sTF.getTModel());
+            stockData.setDefaultEditor(Object.class, null);
+            stockData.getTableHeader().setResizingAllowed(false);
+        } else {
+            //Revert to default table state.
+            stockData.setModel(dbS.getStockTable());
+            stockData.setDefaultEditor(Object.class, null);
+            stockData.getTableHeader().setResizingAllowed(false);
+        }
+
+    }//GEN-LAST:event_searchFilterActionPerformed
+
+    private void recoverUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recoverUserActionPerformed
+        // TODO add your handling code here:
+
+        RecoverUserGUI ruG = new RecoverUserGUI();
+        ruG.setVisible(true);
+    }//GEN-LAST:event_recoverUserActionPerformed
+
+    private void userIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userIDActionPerformed
 
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
         // TODO add your handling code here:
@@ -322,40 +360,9 @@ public final class GuestGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_loginActionPerformed
 
-    private void userIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userIDActionPerformed
-
     private void uPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uPassActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_uPassActionPerformed
-
-    private void recoverUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recoverUserActionPerformed
-        // TODO add your handling code here:
-
-        RecoverUserGUI ruG = new RecoverUserGUI();
-        ruG.setVisible(true);
-    }//GEN-LAST:event_recoverUserActionPerformed
-
-    private void stockDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stockDataMouseClicked
-    }//GEN-LAST:event_stockDataMouseClicked
-
-    private void searchFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFilterActionPerformed
-        // TODO add your handling code here:
-
-        if (!searchField.getText().isEmpty()) {
-            //We need to rebuild the stock table now, utilizing the searchField as a basis
-            String searchFilter = searchField.getText();
-            STFilter sTF = new STFilter(searchField.getText());
-            stockData.setModel(sTF.getTModel());
-            stockData.setDefaultEditor(Object.class, null);
-        } else {
-            //Revert to default table state.
-            stockData.setModel(dbS.getStockTable());
-            stockData.setDefaultEditor(Object.class, null);
-        }
-
-    }//GEN-LAST:event_searchFilterActionPerformed
 
     private void setup() {
 
@@ -384,6 +391,7 @@ public final class GuestGUI extends javax.swing.JFrame {
                 dbS.formatJTable(dbS.getStockData(), dbS.getTSize(), 8);
                 stockData.setModel(dbS.getStockTable());
                 stockData.setDefaultEditor(Object.class, null);
+                stockData.getTableHeader().setResizingAllowed(false);
 
             } catch (IOException ex) {
                 Logger.getLogger(GuestGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -402,6 +410,7 @@ public final class GuestGUI extends javax.swing.JFrame {
                     tut.run();
                     stockData.setModel(tut.getStockTableUpdate());
                     stockData.setDefaultEditor(Object.class, null);
+                    stockData.getTableHeader().setResizingAllowed(false);
                 }
             });
             timer.setRepeats(this.isEnabled());

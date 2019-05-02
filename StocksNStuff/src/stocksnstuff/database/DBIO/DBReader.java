@@ -29,14 +29,26 @@ public class DBReader {
     public DBReader(String loc) {
         try {
             this.path = new File(".").getCanonicalPath();
-            this.userDB = new File(path + "\\dbs\\"+ loc);
+            this.userDB = new File(path + loc);
         } catch (IOException ex) {
             Logger.getLogger(DBReader.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public String getPost(String param){
-        //Responsible for obtaining post data
+    public String getPost(String p1, String p2, Boolean flag){
+        StringFormatter sf = new StringFormatter();
+        
+        for(String dataLine : getDBData()){
+            String[] data = sf.segmentLine(dataLine);
+            if(flag){
+                if(data[1].equals(p1) && data[2].equals(p2))
+                    return data[3];
+            }
+            else{
+                if(data[0].equals(p1) && data[0].equals(p2))
+                    return dataLine;
+            }
+        }
         return null;
     }
     
@@ -239,4 +251,12 @@ public class DBReader {
         return this.banListSize;
     }
     
+    public void setDB(String db){
+        try {
+            String path = new File(".").getCanonicalPath()+db;
+            this.userDB = new File(path);
+        } catch (IOException ex) {
+            Logger.getLogger(DBReader.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

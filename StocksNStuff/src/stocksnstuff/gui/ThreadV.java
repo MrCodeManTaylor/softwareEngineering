@@ -45,7 +45,6 @@ public final class ThreadV extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         rPosts = new javax.swing.JTable();
         pCreate = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Create a Thread");
@@ -108,16 +107,12 @@ public final class ThreadV extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Report Thread");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pCreate)
                 .addContainerGap())
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,9 +125,7 @@ public final class ThreadV extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(384, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pCreate)
-                    .addComponent(jButton2))
+                .addComponent(pCreate)
                 .addGap(5, 5, 5))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
@@ -188,14 +181,15 @@ public final class ThreadV extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         if (evt.getClickCount() == 2) {
+            DBReader dbr = new DBReader("\\dbs\\threads\\"+this.title+"_"+name+"\\main.txt");
             int row = rPosts.rowAtPoint(evt.getPoint());
             String name = rPosts.getValueAt(row, 1).toString();
             String title = rPosts.getValueAt(row, 2).toString();
-            DBReader dbr = new DBReader("threads\\"+title+"_"+name+"\\main.txt");
-            
-            //TODO: Update dbr.getPost() for functionality.
-            dbr.getPost("parameter");
-            PostV post = new PostV(name,title, "Paraaameter");
+            String code = rPosts.getValueAt(row, 0).toString();
+            String postData = dbr.getPost(name, title, true);
+            dbr.setDB("\\stockDat\\stockData.txt");
+            String stock = dbr.getPost(code, code, false);
+            PostV post = new PostV(name,title, postData, stock, this.title);
             post.setVisible(true);
         }
     }//GEN-LAST:event_rPostsMouseClicked
@@ -211,7 +205,6 @@ public final class ThreadV extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -229,6 +222,7 @@ public final class ThreadV extends javax.swing.JFrame {
         dbf.formatJTable(dbf.getForumData(), dbf.getTSize(), 3);
         rPosts.setModel(dbf.getForumTable());
         rPosts.setDefaultEditor(Object.class, null);
+        rPosts.getTableHeader().setResizingAllowed(false);
     }
     
     private void liveUpdate(Boolean val) {
@@ -241,6 +235,7 @@ public final class ThreadV extends javax.swing.JFrame {
                     fut.run();
                     rPosts.setModel(fut.getForumTableUpdate());
                     rPosts.setDefaultEditor(Object.class, null);
+                    rPosts.getTableHeader().setResizingAllowed(false);
                 }
             });
             timer.setRepeats(this.isEnabled());

@@ -76,7 +76,26 @@ public class DBWriter {
             return true;
         }
     }
-    
+    public void updatePost(String poster, String title, String flag){
+        
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(DB));
+            StringFormatter sf = new StringFormatter();
+            for(String line : data){
+                String[] lineData = sf.segmentLine(line);
+                if(lineData[1].equals(poster)&&lineData[2].equals(title))
+                    lineData[11] = flag;
+                bw.write(sf.formatLine(lineData));
+                bw.newLine();
+            }
+            bw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(DBWriter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+    }
     public boolean updateField(String uID, String param, int fieldNum, ArrayList<String> dbData) {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(DB));
