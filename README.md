@@ -10,6 +10,7 @@ _Fitchburg State University | CSC 4400-01 Software Engineering |Spring 2019 |Dr.
 
 Update: 5/2/2019
  * Change to README.md
+ * Added tracked stock functionality (whoops forgot about that one) - Bug fixes
  * Added secret mode...
  * Added major functionality for forum! 
  * Added some functionality to the forum subfunctions **WIP**
