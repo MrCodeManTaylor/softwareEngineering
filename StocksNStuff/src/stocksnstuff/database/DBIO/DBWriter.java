@@ -59,7 +59,6 @@ public class DBWriter {
             StringFormatter sf = new StringFormatter();
             for(String line : data){
                 String[] lData = sf.segmentLine(line);
-                System.out.println(lData[1] + " " +lData[2] + " | " + nameParam + " " +postParam);
                 if(lData[1].equals(nameParam) && lData[2].equals(postParam)){
                     //basically skip it to delete it
                 }
@@ -106,8 +105,10 @@ public class DBWriter {
             StringFormatter sf = new StringFormatter();
             for(String line : data){
                 String[] lineData = sf.segmentLine(line);
-                if(lineData[1].equals(poster)&&lineData[2].equals(title))
+                if(lineData[1].equals(poster)&&lineData[2].equals(title)){
                     lineData[11] = flag;
+                    
+                }
                 bw.write(sf.formatLine(lineData));
                 bw.newLine();
             }
@@ -144,6 +145,10 @@ public class DBWriter {
             return false;
         }
         
+    }
+    
+    public String getPath(){
+        return this.path;
     }
     
 }

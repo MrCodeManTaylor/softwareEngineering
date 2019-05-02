@@ -130,7 +130,6 @@ public class Registration {
             if (!userDB.exists()) {
                 userDB.createNewFile();
                 BufferedWriter bw = new BufferedWriter(new FileWriter(userDB.getCanonicalPath()));
-                System.out.println(userDB.getCanonicalPath());
                 bw.write("Symbol, Open, High, Low, Close, Net Change, Net Change %");
                 bw.newLine();
                 bw.close();

@@ -599,13 +599,13 @@ public class AdminGUI extends javax.swing.JFrame {
     private void eaButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eaButton2ActionPerformed
         // Enforce action post button
         DBReader dbR = new DBReader("\\dbs\\threads\\" + pReportTable.getValueAt(pReportTable.getSelectedRow(), 2) + "\\main.txt");
-        DBWriter dbW = new DBWriter("\\threads\\" + pReportTable.getValueAt(pReportTable.getSelectedRow(), 2) + "\\main.txt");
+        DBWriter dbW = new DBWriter("threads\\" + pReportTable.getValueAt(pReportTable.getSelectedRow(), 2) + "\\main.txt");
         String poster = pReportTable.getValueAt(pReportTable.getSelectedRow(), 0).toString();
         String title = pReportTable.getValueAt(pReportTable.getSelectedRow(), 1).toString();
         String thread = pReportTable.getValueAt(pReportTable.getSelectedRow(), 2).toString();
         if (clearP.isSelected()) {
             if (pReportTable.getSelectedRow() != -1) {
-                dbW.updatePost(poster, thread, "0");
+                dbW.updatePost(poster, title, "0");
             }
         } else if (deleteP.isSelected()) {
             if (pReportTable.getSelectedRow() != -1) {

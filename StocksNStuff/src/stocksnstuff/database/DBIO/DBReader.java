@@ -112,9 +112,10 @@ public class DBReader {
             int count = 0;
             while(line != null){
                 String[] lineData = sf.segmentLine(line);
-                if(lineData[8].equals("1"))
+                if(lineData[8].equals("1")){
                     count++;
-                else if(lineData[9].equals(1)){
+                }
+                else if(lineData[9].equals("1")){
                     count++;
                 }else if(Integer.parseInt(lineData[10]) >= 1){
                     count++;

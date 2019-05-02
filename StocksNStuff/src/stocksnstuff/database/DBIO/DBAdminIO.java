@@ -105,7 +105,7 @@ public class DBAdminIO {
         for (String s : reportedList) {
 
             rowData[i] = sf.segmentLine(s);
-
+            i++;
         }
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
         for (i = 0; i <= rowData.length - 1; i++) {

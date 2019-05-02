@@ -1,2 +1,0 @@
-Stock Code, Post Creator, Post Title
-EGHT, test, new post, dsadasdas, EGHT, 23.98, 24.09, 23.09, 23.41, -0.51, -2.13, 0

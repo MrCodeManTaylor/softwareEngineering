@@ -160,14 +160,15 @@ public class ThreadC extends javax.swing.JFrame {
             DBWriter dbW = new DBWriter("threads.txt");
             dbW.writeLine(username + ", " + title.getText());
             String path = new File(".").getCanonicalPath()+"\\dbs\\threads\\"+title.getText()+"_"+username;
-            System.out.println(path);
             File dir = new File(path);
             if(!dir.exists()){
                 dir.mkdir();
             }
             dir = new File(path+"\\main.txt");
-            if(!dir.exists())
+            if(!dir.exists()){
                 dir.createNewFile();
+                
+            }
             BufferedWriter bw = new BufferedWriter(new FileWriter(dir.getCanonicalPath()));
             bw.write("Stock Code, Post Creator, Post Title");
             bw.close();
