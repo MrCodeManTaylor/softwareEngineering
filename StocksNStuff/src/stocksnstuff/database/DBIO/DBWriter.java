@@ -53,6 +53,29 @@ public class DBWriter {
         }
     }
 
+    public void deleteLine(String nameParam, String postParam){
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(path));
+            StringFormatter sf = new StringFormatter();
+            for(String line : data){
+                String[] lData = sf.segmentLine(line);
+                System.out.println(lData[1] + " " +lData[2] + " | " + nameParam + " " +postParam);
+                if(lData[1].equals(nameParam) && lData[2].equals(postParam)){
+                    //basically skip it to delete it
+                }
+                else{
+                    bw.write(line);
+                    bw.newLine();
+                }
+            }
+            bw.close();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(DBWriter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
     public void writeLine(String lineData){
         try{
             BufferedWriter bw = new BufferedWriter(new FileWriter(path));

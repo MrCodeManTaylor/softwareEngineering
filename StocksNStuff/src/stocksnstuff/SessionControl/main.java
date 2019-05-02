@@ -6,6 +6,7 @@
 package stocksnstuff.SessionControl;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import stocksnstuff.database.UpdateStockDB.Update;
@@ -19,8 +20,7 @@ public class main extends Thread{
  
     private File stockData;
     //Quite literally responsible for maintaining everything...
-    public static void main(String[] args){
-        
+    public static void main(String[] args) throws IOException{
         GuestGUI gG = new GuestGUI();
         gG.setVisible(true);
         updateDB();

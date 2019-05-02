@@ -6,6 +6,11 @@
 package stocksnstuff.SessionControl;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import stocksnstuff.database.DBIO.DBReader;
 import stocksnstuff.gui.UserGUI;
 import stocksnstuff.gui.AdminGUI;
@@ -26,6 +31,19 @@ public class Login {
     }
 
     public boolean loginEmail(String email, String password) {
+        
+        //friendly easter egg for the curious
+        if(email.equals("hotdog@picture.jpeg")&&password.equals("goddang")){
+            try {
+                URI url = new URI("https://www.youtube.com/watch?v=ZXVhOPiM4mk");
+                java.awt.Desktop.getDesktop().browse(url);
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
         DBReader dbR = new DBReader("\\dbs\\register.txt");
         if (!dbR.validatePerms()) {
             return false;
@@ -43,6 +61,19 @@ public class Login {
 
     public boolean loginUsername(String username, String password) {
         DBReader dbR = new DBReader("\\dbs\\register.txt");
+        
+        //Friendly easter egg for the curious
+        if(username.equals("hotdog")&&password.equals("goddang")){
+            try {
+                URI url = new URI("https://www.youtube.com/watch?v=ZXVhOPiM4mk");
+                java.awt.Desktop.getDesktop().browse(url);
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
         if (!dbR.validatePerms()) {
             return false;
         } else {

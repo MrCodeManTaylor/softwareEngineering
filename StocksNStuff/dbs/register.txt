@@ -1,4 +1,4 @@
-mitch@taylor.com, mtaylor, 123, What is your mother's maiden name?, j, What was your first pet's name?, a, 1, 1, 0, 0, 1
+mitch@taylor.com, mtaylor, 123, What is your mother's maiden name?, j, What was your first pet's name?, a, 1, 1, 1, 0, 1
 test@test.com, test, test, What is your mother's maiden name?, test, What was your first pet's name?, test, 1, 0, 0, 0, 0
 admin@admin.com, admin, admin, What is your mother's maiden name?, admin, What was your first pet's name?, admin, 0, 0, 0, 0, 0
 user@user.com, user, user, What is your mother's maiden name?, a, What was your first pet's name?, a, 1, 0, 0, 0, 1
