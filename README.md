@@ -8,7 +8,8 @@ _Developed by: @pfears - Paul F.,@fwfiricano - Frank F.,@MrCodeManTaylor - Mitch
 
 _Fitchburg State University | CSC 4400-01 Software Engineering |Spring 2019 |Dr. N. Mahadev_
 
-Update: 5/2/2019
+Update: 5/10/2019
+ * WSJ changed format for stock page, need to redesign scraping mechanism, for now using https://web.archive.org/web/20190502130452/http://www.wsj.com/mdc/public/page/2_3024-NYSE.html
  * Change to README.md
  * Added tracked stock functionality (whoops forgot about that one) - Bug fixes
  * Added secret mode...
